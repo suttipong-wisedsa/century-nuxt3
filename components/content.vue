@@ -4,7 +4,7 @@
       <v-col cols="12" sm="10">
         <h1
           :style="{
-            fontSize: sm || xs ? '15px' : '45px',
+            fontSize: sm || xs ? '25px' : '45px',
             textAlign: 'center',
             margin: '15px',
           }"
@@ -40,7 +40,7 @@
     <v-row no-gutters justify="center">
       <v-card
         style="margin-top: 150px; padding: 25px; background-color: #26264c"
-        width="1500px"
+        width="100%"
         elevation="12"
         class="rounded-xl"
       >
@@ -50,7 +50,7 @@
           /></v-col>
           <v-col cols="12" sm="6">
             <v-row>
-              <v-col style="padding: 25px">
+              <v-col style="margin-top: 70px">
                 <h1 class="text-surface">Why do we use it?</h1>
                 <p class="text-surface">
                   It is a long established fact that a reader will be distracted
@@ -72,12 +72,12 @@
     <h1 class="d-flex justify-center mb-6" style="margin-top: 150px">
       Why do we use it?
     </h1>
-    <v-row no-gutters>
+    <v-row>
       <v-col :cols="12" sm="6">
         <div class="d-flex flex-row">
           <v-card
             class="rounded-lg"
-            style="background-color: #26264c; padding: 15px"
+            style="background-color: #26264c; padding: 30px"
           >
             <img
               src="../assets/images/admin_panel_settings_black_24dp.svg"
@@ -97,7 +97,7 @@
         <div class="d-flex flex-row">
           <v-card
             class="rounded-lg"
-            style="background-color: #26264c; padding: 15px"
+            style="background-color: #26264c; padding: 30px"
           >
             <img
               src="../assets/images/credit_card_black_24dp.svg"
@@ -118,7 +118,7 @@
         <div class="d-flex flex-row">
           <v-card
             class="rounded-lg"
-            style="background-color: #26264c; padding: 20px"
+            style="background-color: #26264c; padding: 30px"
           >
             <img
               src="../assets/images/perm_identity_black_24dp.svg"
@@ -139,7 +139,7 @@
         <div class="d-flex flex-row">
           <v-card
             class="rounded-lg"
-            style="background-color: #26264c; padding: 15px"
+            style="background-color: #26264c; padding: 30px"
           >
             <img
               src="../assets/images/delivery_dining_black_24dp.svg"
@@ -156,7 +156,7 @@
         </div>
       </v-col>
     </v-row>
-    <v-row no-gutters style="margin-top: 150px">
+    <v-row no-gutters style="margin-top: 150px; margin-bottom: 150px">
       <v-col :cols="12" sm="6">
         <v-card-text>
           <h1>
@@ -178,7 +178,8 @@
         <img
           src="../assets/images/Group 5133.png"
           :style="{
-            width: xs || sm ? '100%' : null,
+            width: xs || sm ? '100%' : '624px',
+            height: '395px',
           }"
         />
       </v-col>
@@ -213,8 +214,9 @@ export default {
 </script>
 <style scoped>
 .mbdown {
+  margin-top: 100px;
 }
 .mbup {
-  padding: 250px;
+  margin-top: 200px;
 }
 </style>

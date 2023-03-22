@@ -10,7 +10,7 @@ export default {
   setup() {
     useHead({
       titleTemplate: (title) =>
-        title ? `Century-provider | ${title} ` : "Century-provider",
+        title ? `Century-Developer | ${title} ` : "Century-Developer",
     });
   },
 };

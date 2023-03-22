@@ -1,32 +1,54 @@
 <template>
   <div>
-    <v-app v-show="xs || sm == true">
+    <div v-if="xs || sm == true">
       <v-app-bar color="info">
-        <v-toolbar-title
+        <v-toolbar-title @click="deridect()"
           ><img
-            src="../assets/images/logo.png"
+            src="@/assets/images/logo.png"
             width="250px"
             height="40px"
             class="my-10"
         /></v-toolbar-title>
-        <v-app-bar-nav-icon @click="drawer = !drawer">Menu</v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click="drawer = !drawer"
+          ><div style="width: 20px">
+            <div class="ham"></div>
+            <div class="ham"></div>
+            <div class="ham"></div></div
+        ></v-app-bar-nav-icon>
       </v-app-bar>
 
-      <v-navigation-drawer v-model="drawer" location="top" temporary>
-        <v-list :items="items"></v-list>
+      <v-navigation-drawer
+        v-model="drawer"
+        location="top"
+        temporary
+        class="bg-info"
+      >
+        <v-list lines="one">
+          <v-list-item
+            v-for="(item, index) in items"
+            :key="index"
+            style="padding: 23px"
+            ><NuxtLink
+              :to="item.to"
+              style="text-decoration: none"
+              class="text-info"
+              ><h1 class="text-surface">{{ item.title }}</h1></NuxtLink
+            ><v-divider :thickness="2"></v-divider
+          ></v-list-item>
+        </v-list>
       </v-navigation-drawer>
-    </v-app>
+    </div>
     <v-app-bar
-      v-show="xs || sm == false"
+      v-if="xs || sm == false"
       app
       :color="showNav ? 'info' : 'transparent'"
       :elevation="0"
       @scroll="handleScroll"
     >
       <v-spacer></v-spacer>
-      <v-toolbar-title
+      <v-toolbar-title @click="deridect()" style="cursor: pointer"
         ><img
-          src="../assets/images/logo.png"
+          src="@/assets/images/logo.png"
           width="250px"
           height="40px"
           class="my-10"
@@ -35,14 +57,23 @@
       <v-spacer></v-spacer>
       <v-row>
         <v-toolbar-title>
-          <NuxtLink to="doc" class="text-surface">Docs</NuxtLink>
+          <NuxtLink to="doc" class="text-surface" style="text-decoration: none"
+            >Docs</NuxtLink
+          >
         </v-toolbar-title>
         <v-toolbar-title>
-          <NuxtLink class="text-surface">Get Start</NuxtLink>
+          <NuxtLink class="text-surface" style="text-decoration: none"
+            >Get Start</NuxtLink
+          >
         </v-toolbar-title>
         <v-btn variant="outlined">
           <v-toolbar-title>
-            <NuxtLink class="text-surface">Login</NuxtLink>
+            <NuxtLink
+              class="text-surface"
+              to="login"
+              style="text-decoration: none"
+              >Login</NuxtLink
+            >
           </v-toolbar-title>
         </v-btn>
       </v-row>
@@ -58,12 +89,28 @@ export default {
     const lastScrollPosition = ref(0);
     const showNav = ref(true);
     const drawer = ref(false);
-    const items =
-      ref[
-        ({ title: "Dashboard", icon: "mdi-view-dashboard" },
-        { title: "Account", icon: "mdi-account-box" },
-        { title: "Settings", icon: "mdi-cog" })
-      ];
+    // const items =
+    //   ref[
+    //     ({ title: "Dashboard" }, { title: "Account" }, { title: "Settings" })
+    //   ];
+    const items = [
+      {
+        title: "Docs",
+        to: "doc",
+      },
+      {
+        title: "Get Start",
+        to: "doc",
+      },
+      {
+        title: "Login",
+        to: "login",
+      },
+    ];
+    const router = useRouter();
+    function deridect() {
+      router.push({ path: "/" });
+    }
     function onScroll() {
       const currentScrollPosition =
         window.pageYOffset || document.documentElement.scrollTop;
@@ -85,6 +132,7 @@ export default {
       sm,
       items,
       drawer,
+      deridect,
     };
   },
   // data() {
@@ -120,3 +168,10 @@ export default {
   // },
 };
 </script>
+<style scoped>
+.ham {
+  border: 1px white solid;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+</style>

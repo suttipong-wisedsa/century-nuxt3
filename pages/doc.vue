@@ -112,4 +112,12 @@
     </h1>
   </div>
 </template>
-<script></script>
+<script>
+export default {
+  setup() {
+    useHead({
+      title: "Docs",
+    });
+  },
+};
+</script>

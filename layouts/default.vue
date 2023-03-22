@@ -23,6 +23,6 @@ export default {
 .mbdown {
 }
 .mbup {
-  padding: 250px;
+  padding: 200px;
 }
 </style>
