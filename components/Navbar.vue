@@ -43,10 +43,10 @@
       app
       :color="showNav ? 'info' : 'transparent'"
       :elevation="0"
-      @scroll="handleScroll"
+      @scroll="handleScroll()"
     >
       <v-spacer></v-spacer>
-      <v-toolbar-title @click="deridect()" style="cursor: pointer"
+      <v-toolbar-title @click="reditect()" style="cursor: pointer"
         ><img
           src="@/assets/images/logo.png"
           width="250px"
@@ -70,7 +70,7 @@
           <v-toolbar-title>
             <NuxtLink
               class="text-surface"
-              to="login"
+              to="/login"
               style="text-decoration: none"
               >Login</NuxtLink
             >
@@ -89,26 +89,22 @@ export default {
     const lastScrollPosition = ref(0);
     const showNav = ref(true);
     const drawer = ref(false);
-    // const items =
-    //   ref[
-    //     ({ title: "Dashboard" }, { title: "Account" }, { title: "Settings" })
-    //   ];
     const items = [
       {
         title: "Docs",
-        to: "doc",
+        to: "/doc",
       },
       {
         title: "Get Start",
-        to: "doc",
+        to: "/doc",
       },
       {
         title: "Login",
-        to: "login",
+        to: "/login",
       },
     ];
     const router = useRouter();
-    function deridect() {
+    function reditect() {
       router.push({ path: "/" });
     }
     function onScroll() {
@@ -132,7 +128,7 @@ export default {
       sm,
       items,
       drawer,
-      deridect,
+      reditect,
     };
   },
   // data() {
