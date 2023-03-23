@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-surface">
-    <v-row style="height: 100vh">
-      <v-col v-if="xs || sm == false">
+  <div class="bg-surface" style="height: 100vh; overflow: hidden">
+    <v-row>
+      <v-col v-if="xs || sm == false" sm="7">
         <div style="position: relative">
           <div
             style="
@@ -32,15 +32,18 @@
             style="width: 350px; position: absolute; top: 0; padding: 25px"
           />
         </div>
-        <div style="z-index: 999; position: fixed; bottom: -200px; left: -60px">
-          <img src="../assets/images/Group 5687.png" style="width: 1200px" />
+        <div style="z-index: 999; position: fixed; bottom: -200px; left: -80px">
+          <img src="../assets/images/Untitled-2.png" style="width: 1120px" />
         </div>
       </v-col>
-      <v-col>
-        <v-toolbar class="bg-info" style="padding: 5px" v-if="xs || sm"
+      <v-col :cols="12" sm="5">
+        <v-toolbar class="bg-info" v-if="xs || sm"
           ><img src="../assets/images/logo.png"
         /></v-toolbar>
-        <div class="d-flex align-center" style="height: 100vh">
+        <div
+          class="d-flex align-center"
+          style="height: 100vh; position: absolute; top: 0px"
+        >
           <v-card
             class="mx-auto"
             :style="{ padding: xs || sm ? '30px' : xl ? '90px' : null }"
