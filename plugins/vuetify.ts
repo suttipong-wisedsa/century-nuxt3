@@ -18,7 +18,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       info: "#05358D",
       success: "#4CAF50",
       warning: "#FB8C00",
-      text: "#707070",
+      text: "#FFFFFF",
     },
   };
   const vuetify = createVuetify({

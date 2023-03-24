@@ -37,9 +37,36 @@
         </div>
       </v-col>
       <v-col :cols="12" sm="5">
-        <v-toolbar class="bg-info" v-if="xs || sm"
-          ><img src="../assets/images/logo.png"
-        /></v-toolbar>
+        <div style="position: relative" v-if="xs || sm">
+          <div
+            style="
+              position: absolute;
+              left: -700px;
+              top: -900px;
+              z-index: 0;
+              transform: rotate(7deg);
+            "
+          >
+            <img
+              src="../assets/images/Path 2152.svg"
+              style="
+                width: 1720px;
+                position: absolute;
+                top: 50px;
+                padding: 25px;
+                transform: rotate(-2deg);
+              "
+            />
+            <img
+              src="../assets/images/Path 2151.png"
+              style="width: 1700px; position: absolute; top: 0; padding: 25px"
+            />
+          </div>
+          <img
+            src="../assets/images/logo.png"
+            style="width: 350px; position: absolute; top: 0; padding: 25px"
+          />
+        </div>
         <div
           class="d-flex align-center"
           style="height: 100vh; position: absolute; top: 0px"
@@ -56,7 +83,7 @@
               <p class="text-text">Enter Your Mobile Number</p>
             </v-card-text>
             <div class="input-container">
-              <div class="select-input">
+              <div class="select-input" v-click-outside="clickoutside">
                 <img src="../assets/images/thailand.png" />
                 <select
                   style="cursor: pointer"
@@ -64,7 +91,7 @@
                   id="pet-select"
                   v-model="phoneNumber"
                   @click="icon()"
-                  v-click-outside="clickoutside"
+                  
                 >
                   <option value="66" class="option-input">+66 TH</option>
                   <option value="66" class="option-input">+66 TH</option>
@@ -72,8 +99,7 @@
                   <option value="66" class="option-input">+66 TH</option>
                   <option value="66" class="option-input">+66 TH</option>
                 </select>
-              </div>
-              <img
+                <img
                 src="../assets/images/iconmenu.png"
                 class="icon-menu"
                 :style="{
@@ -81,6 +107,8 @@
                     iconToggle == true ? 'rotate(180deg)' : 'rotate(0deg)',
                 }"
               />
+              </div>
+              
               <input
                 type="tel"
                 name="number"
@@ -106,38 +134,7 @@
           </v-card>
         </div>
       </v-col>
-      <!-- <div>
-        <div>
-          <v-card class="mx-auto" max-width="344">
-            <v-card-text>
-              <p class="text-h4 text--primary">Log in</p>
-            </v-card-text>
-            <p>Enter Your Mobile Number</p>
-            <v-expand-transition>
-              <v-card v-if="reveal" class="v-card--reveal" style="height: 100%">
-                <v-card-text class="pb-0">
-                  <p class="text-h4 text--primary">Origin</p>
-                  <p>
-                    late 16th century (as a noun denoting a place where alms
-                    were distributed): from medieval Latin eleemosynarius, from
-                    late Latin eleemosyna ‘alms’, from Greek eleēmosunē
-                    ‘compassion’
-                  </p>
-                </v-card-text>
-                <v-card-actions class="pt-0">
-                  <v-btn
-                    variant="text"
-                    color="teal-accent-4"
-                    @click="reveal = false"
-                  >
-                    Close
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-expand-transition>
-          </v-card>
-        </div>
-      </div> -->
+      
     </v-row>
   </div>
 </template>
@@ -212,5 +209,6 @@ select {
   width: 15px;
   height: 10px;
   margin-top: 23px;
+  margin-left: 5px;
 }
 </style>
