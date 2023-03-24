@@ -8,28 +8,38 @@
         <v-toolbar-title>Documentation</v-toolbar-title>
         <!-- <v-btn @click="scrolling()">ddddddd</v-btn> -->
         <v-card class="mx-auto" width="300" flat>
-          <v-list v-for="(item, index) in menu" key="index">
-            <v-list-group>
+          <v-list>
+            <v-list-group value="Admin">
               <template v-slot:activator="{ props }">
-                <v-list-item v-bind="props" :title="item.title"></v-list-item>
+                <v-list-item v-bind="props" title="Admin"></v-list-item>
               </template>
 
-              <v-list-group v-for="(itemSub, index) in menu" key="index">
-                <template v-slot:activator="{ props }">
-                  <v-list-item v-bind="props" :title="itemSub.sub"></v-list-item>
-                </template>
-              </v-list-group>
-
-              <!-- <v-list-group>
-                <template v-slot:activator="{ props }">
-                  <v-list-item v-bind="props" title="Actions"></v-list-item>
-                </template>
-              </v-list-group> -->
+              <v-list-item
+                v-for="([title, icon], i) in delivery"
+                :key="i"
+                :title="title"
+                :prepend-icon="icon"
+                :value="title"
+              ></v-list-item>
+            </v-list-group>
+            <v-list-group value="Payment" @click="scrolling('Payment')">
+              <template v-slot:activator="{ props }">
+                <v-list-item v-bind="props" title="Payment"></v-list-item>
+              </template>
+            </v-list-group>
+            <v-list-group value="Identity" @click="scrolling('Identity')">
+              <template v-slot:activator="{ props }">
+                <v-list-item v-bind="props" title="Identity"></v-list-item>
+              </template>
+            </v-list-group>
+            <v-list-group value="Century defence" @click="scrolling('Century')">
+              <template v-slot:activator="{ props }">
+                <v-list-item v-bind="props" title="Century defence"></v-list-item>
+              </template>
             </v-list-group>
           </v-list>
         </v-card>
       </v-navigation-drawer>
-
       <v-main style="height: 100vh">
         <v-toolbar color="info">
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
@@ -63,24 +73,40 @@ export default {
     const { xs, sm } = useDisplay();
     const loaded = ref(false);
     const loading = ref(false);
-  
-    const menu = ref([
-      { title: "Delivery API",sub:['Overview','uu','tt'] },
-      { title: "Payment" ,sub:['Overview','ee','tt']},
-      { title: "Identity",sub:['Overview','ww','ww'] },
-      { title: "Century defence",sub:['uu','rr','ee'] },
-    ]);
-    const subtitle = ref([])
+
+    const delivery= ref([
+        ['-Getting started'],
+        ['-Overview'],
+        ['-Authentication'],
+    ])
+    const subtitle = ref([]);
     async function onClick() {
       loading.value = true;
     }
-    function scrolling() {
-      let e = document.getElementById("el2");
+    function scrolling($event) {
+      let menu = $event
+      if(menu == 'Payment'){
+        let e = document.getElementById("el2");
       e.scrollIntoView({
         block: "end",
         behavior: "smooth",
         inline: "center",
       });
+      } else if(menu == 'Identity'){
+        let e = document.getElementById("el1");
+      e.scrollIntoView({
+        block: "end",
+        behavior: "smooth",
+        inline: "center",
+      });
+      } else {
+        let e = document.getElementById("el0");
+      e.scrollIntoView({
+        block: "end",
+        behavior: "smooth",
+        inline: "center",
+      });
+      }
     }
     return {
       xs,
@@ -89,7 +115,7 @@ export default {
       loading,
       onClick,
       scrolling,
-      menu,
+      delivery,
     };
   },
 };
