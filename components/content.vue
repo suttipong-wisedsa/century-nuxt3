@@ -2,13 +2,7 @@
   <v-container :class="[sm || xs ? 'mbdown' : 'mbup']">
     <v-row no-gutters justify="center">
       <v-col cols="12" sm="10">
-        <h1
-          :style="{
-            fontSize: sm || xs ? '25px' : '45px',
-            textAlign: 'center',
-            margin: '15px',
-          }"
-        >
+        <h1 :style="style()">
           Built for your business,<br />
           powered by Century
         </h1>
@@ -195,17 +189,16 @@ export default {
       const ip = await this.$axios.$get("http://icanhazip.com");
       console.log(ip);
     }
-    function handleScroll(event) {
-      let scrollTop = 0;
-      // scrollTop = event.currentTarget.scrollTop;
-      // if (process.client) {
-      //   scrollTop = event.currentTarget.scrollTop;
-      // }
-      console.log("555");
+    function style() {
+      if (xs.value || sm.value) {
+        return { fontSize: "25px", textAlign: "center" };
+      } else {
+        return { fontSize: "35px", textAlign: "center" };
+      }
     }
     return {
       fetchSomething,
-      handleScroll,
+      style,
       xs,
       sm,
     };

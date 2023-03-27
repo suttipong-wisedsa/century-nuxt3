@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="xs || sm == true">
-      <v-app-bar color="info">
+      <v-app-bar color="navbardocs">
         <v-toolbar-title @click="deridect()"
           ><img
             src="@/assets/images/logo.png"
@@ -42,7 +42,7 @@
       v-if="xs || sm == false"
       app
       :color="showNav ? 'text' : 'text'"
-      :elevation="2"
+      :elevation="1"
       @scroll="handleScroll()"
     >
       <v-spacer></v-spacer>
@@ -84,9 +84,7 @@
       </v-row>
       <v-spacer></v-spacer>
     </v-app-bar>
-    <v-card>
-   
-  </v-card>
+    <v-card> </v-card>
   </div>
 </template>
 <script>

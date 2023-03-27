@@ -11,7 +11,7 @@
           <v-list>
             <v-list-group value="Admin">
               <template v-slot:activator="{ props }">
-                <v-list-item v-bind="props" title="Admin"></v-list-item>
+                <v-list-item v-bind="props" title="Delivery API"></v-list-item>
               </template>
 
               <v-list-item
@@ -34,7 +34,10 @@
             </v-list-group>
             <v-list-group value="Century defence" @click="scrolling('Century')">
               <template v-slot:activator="{ props }">
-                <v-list-item v-bind="props" title="Century defence"></v-list-item>
+                <v-list-item
+                  v-bind="props"
+                  title="Century defence"
+                ></v-list-item>
               </template>
             </v-list-group>
           </v-list>
@@ -74,38 +77,38 @@ export default {
     const loaded = ref(false);
     const loading = ref(false);
 
-    const delivery= ref([
-        ['-Getting started'],
-        ['-Overview'],
-        ['-Authentication'],
-    ])
+    const delivery = ref([
+      ["-Getting started"],
+      ["-Overview"],
+      ["-Authentication"],
+    ]);
     const subtitle = ref([]);
     async function onClick() {
       loading.value = true;
     }
     function scrolling($event) {
-      let menu = $event
-      if(menu == 'Payment'){
+      let menu = $event;
+      if (menu == "Payment") {
         let e = document.getElementById("el2");
-      e.scrollIntoView({
-        block: "end",
-        behavior: "smooth",
-        inline: "center",
-      });
-      } else if(menu == 'Identity'){
+        e.scrollIntoView({
+          block: "end",
+          behavior: "smooth",
+          inline: "center",
+        });
+      } else if (menu == "Identity") {
         let e = document.getElementById("el1");
-      e.scrollIntoView({
-        block: "end",
-        behavior: "smooth",
-        inline: "center",
-      });
+        e.scrollIntoView({
+          block: "end",
+          behavior: "smooth",
+          inline: "center",
+        });
       } else {
         let e = document.getElementById("el0");
-      e.scrollIntoView({
-        block: "end",
-        behavior: "smooth",
-        inline: "center",
-      });
+        e.scrollIntoView({
+          block: "end",
+          behavior: "smooth",
+          inline: "center",
+        });
       }
     }
     return {

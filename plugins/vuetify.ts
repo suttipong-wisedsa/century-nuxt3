@@ -4,6 +4,7 @@ import { createVuetify } from "vuetify";
 import { aliases, fa } from "vuetify/iconsets/fa";
 import { mdi } from "vuetify/iconsets/mdi";
 import "@mdi/font/css/materialdesignicons.css";
+import "material-design-icons-iconfont/dist/material-design-icons.css";
 export default defineNuxtPlugin((nuxtApp) => {
   const myAllBlackTheme: ThemeDefinition = {
     dark: false,
@@ -19,6 +20,8 @@ export default defineNuxtPlugin((nuxtApp) => {
       success: "#4CAF50",
       warning: "#FB8C00",
       text: "#FFFFFF",
+      navbardocs: "#F7F7F7",
+      card: "#26264c",
     },
   };
   const vuetify = createVuetify({

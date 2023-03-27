@@ -48,10 +48,11 @@
       <v-spacer></v-spacer>
       <v-toolbar-title @click="reditect()" style="cursor: pointer"
         ><img
-          src="@/assets/images/logo.png"
+          src="~/assets/images/logo.png"
           width="250px"
           height="40px"
           class="my-10"
+          alt="Discover Nuxt 3"
       /></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-spacer></v-spacer>
@@ -62,7 +63,10 @@
           >
         </v-toolbar-title>
         <v-toolbar-title>
-          <NuxtLink class="text-surface" style="text-decoration: none"
+          <NuxtLink
+            class="text-surface"
+            style="text-decoration: none"
+            to="/getstart"
             >Get Start</NuxtLink
           >
         </v-toolbar-title>
@@ -85,7 +89,7 @@
 import { useDisplay } from "vuetify";
 export default {
   setup() {
-    const { xs, sm } = useDisplay();
+    const { xs, sm, lg } = useDisplay();
     const lastScrollPosition = ref(0);
     const showNav = ref(true);
     const drawer = ref(false);
@@ -126,6 +130,7 @@ export default {
       onScroll,
       xs,
       sm,
+      lg,
       items,
       drawer,
       reditect,
