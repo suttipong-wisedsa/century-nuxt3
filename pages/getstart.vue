@@ -199,6 +199,6 @@ label:before {
 
 :checked + label:before {
   content: "\2713";
-  color: rgb(0, 0, 0);
+  color: white;
 }
 </style>

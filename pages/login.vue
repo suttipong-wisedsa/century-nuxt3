@@ -91,7 +91,6 @@
                   id="pet-select"
                   v-model="phoneNumber"
                   @click="icon()"
-                  
                 >
                   <option value="66" class="option-input">+66 TH</option>
                   <option value="66" class="option-input">+66 TH</option>
@@ -100,15 +99,15 @@
                   <option value="66" class="option-input">+66 TH</option>
                 </select>
                 <img
-                src="../assets/images/iconmenu.png"
-                class="icon-menu"
-                :style="{
-                  transform:
-                    iconToggle == true ? 'rotate(180deg)' : 'rotate(0deg)',
-                }"
-              />
+                  src="../assets/images/iconmenu.png"
+                  class="icon-menu"
+                  :style="{
+                    transform:
+                      iconToggle == true ? 'rotate(180deg)' : 'rotate(0deg)',
+                  }"
+                />
               </div>
-              
+
               <input
                 type="tel"
                 name="number"
@@ -134,7 +133,6 @@
           </v-card>
         </div>
       </v-col>
-      
     </v-row>
   </div>
 </template>
