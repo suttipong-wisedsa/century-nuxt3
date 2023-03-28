@@ -1,6 +1,9 @@
 <template>
   <v-app>
-    <v-row style="height: 100%; overflow: hidden">
+    <v-row
+      style="height: 100%; overflow: hidden"
+      :class="xs || sm ? 'mx-2 my-5' : 'mx-5'"
+    >
       <v-col :cols="12" sm="6">
         <!-- <img
           src="@/assets/images/Ellipse 361.png"
@@ -12,8 +15,16 @@
           v-if="xs || sm == false"
         >
           <div style="padding: 150px">
-            <h1 class="text-start">Get Start</h1>
-            <p class="text-start">
+            <h1
+              class="text-start"
+              style="font-size: normal normal medium 50px/76px Prompt"
+            >
+              Get Start
+            </h1>
+            <p
+              class="text-start"
+              style="font-size: normal normal normal 20px/27px Segoe UI ;"
+            >
               It is a long established fact that a reader will be distracted by
               the readable content of a page when looking at its layout.
             </p>
@@ -21,9 +32,16 @@
         </div>
       </v-col>
       <v-col :cols="12" sm="6">
-        <div style="height: 100vh" class="d-flex align-center">
-          <div>
-            <v-card class="overflow-auto rounded-lg">
+        <div style="height: 100%" class="d-flex align-center justify-start">
+          <div :style="mbCard()">
+            <div v-if="xs || sm" class="pa-6">
+              <h1 class="text-center">Get Start</h1>
+              <p class="text-start">
+                It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+              </p>
+            </div>
+            <v-card class="overflow-auto rounded-xl">
               <v-card-text class="bg-card">
                 <v-form>
                   <v-container>
@@ -91,49 +109,35 @@
                         ></v-select>
                       </v-col>
                     </v-row>
-                    <!-- <div class="checkbox check-transparent">
-                      <div>
-                        <input type="checkbox" id="checkbox" />
-                        <label for="checkbox"
-                          >It is a long established fact that a reader will be
-                          distracted by the readable content of a page when
-                          looking at its layout.</label
-                        >
-                      </div>
-                    </div> -->
-                    <!-- <v-checkbox
-                      v-model="ex4"
-                      label="red"
-                      color="red"
-                      value="red"
-                      hide-details
-                    ></v-checkbox>
-                    <v-btn block="100%" min-height="50px" color="info"
+                    <div class="pb-6">
+                      <input
+                        type="checkbox"
+                        id="vehicle1"
+                        name="vehicle1"
+                        value="Bike"
+                      />
+                      <label for="vehicle1">
+                        It is a long established fact that a reader will be
+                        distracted by the readable content of a page when
+                        looking at its layout.</label
+                      ><br />
+                    </div>
+                    <div class="pb-6">
+                      <input
+                        type="checkbox"
+                        id="vehicle2"
+                        name="vehicle2"
+                        value="Car"
+                      />
+                      <label for="vehicle2">
+                        It is a long established fact that a reader will be
+                        distracted by the readable content of a page when
+                        looking at its layout.</label
+                      ><br />
+                    </div>
+                    <v-btn block="true" color="info" size="x-large"
                       >CONFIRM</v-btn
-                    > -->
-                    <input
-                      type="checkbox"
-                      id="vehicle1"
-                      name="vehicle1"
-                      value="Bike"
-                    />
-                    <label for="vehicle1">
-                      It is a long established fact that a reader will be
-                      distracted by the readable content of a page when looking
-                      at its layout.</label
-                    ><br />
-                    <input
-                      type="checkbox"
-                      id="vehicle2"
-                      name="vehicle2"
-                      value="Car"
-                    />
-                    <label for="vehicle2">
-                      It is a long established fact that a reader will be
-                      distracted by the readable content of a page when looking
-                      at its layout.</label
-                    ><br />
-                    <v-btn block="true" color="info">CONFIRM</v-btn>
+                    >
                   </v-container>
                 </v-form>
               </v-card-text>
@@ -150,6 +154,13 @@ export default {
   setup() {
     const { xs, sm, lg } = useDisplay();
     const route = useRoute();
+    function mbCard() {
+      if (xs.value || sm.value) {
+        return { marginTop: "50px" };
+      } else {
+        // return { fontSize: "35px", textAlign: "center" };
+      }
+    }
     definePageMeta({
       layout: "getstart",
     });
@@ -157,6 +168,7 @@ export default {
       title: "Get Start",
     });
     return {
+      mbCard,
       xs,
       sm,
       lg,
