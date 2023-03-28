@@ -43,7 +43,7 @@
             </div>
             <v-card class="overflow-auto rounded-xl">
               <v-card-text class="bg-card">
-                <v-form @submit.prevent="confirm">
+                <v-form ref="form" v-model="valid" lazy-validation>
                   <v-container>
                     <v-row>
                       <v-col cols="12" sm="6">
@@ -156,7 +156,7 @@
                       :block="true"
                       color="info"
                       size="x-large"
-                      type="submit"
+                      @click="confirm()"
                       >CONFIRM</v-btn
                     >
                   </v-container>
@@ -171,10 +171,11 @@
 </template>
 <script>
 import { useDisplay } from "vuetify";
-
+import { ref } from "@vue/composition-api";
 export default {
   setup() {
     const { xs, sm, lg } = useDisplay();
+    const form = ref(null);
     const route = useRoute();
     const submit = ref(false);
     const checkbox2 = ref(false);
@@ -211,7 +212,9 @@ export default {
       }
     }
     async function confirm() {
-      router.push({ path: "/" });
+      form.value.validate();
+
+      // router.push({ path: "/" });
       // if (valid) {
       //   submit.value = true;
       //   router.push({ path: "/" });
@@ -225,6 +228,8 @@ export default {
       title: "Get Start",
     });
     return {
+      valid: true,
+      form,
       submit,
       nameRules,
       mbCard,
@@ -235,6 +240,7 @@ export default {
       checkbox1,
       checkbox2,
       lock,
+      form,
     };
   },
 };

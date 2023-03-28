@@ -2,7 +2,7 @@
   <div>
     <div v-if="xs || sm == true">
       <v-app-bar color="navbardocs">
-        <v-toolbar-title @click="deridect()"
+        <v-toolbar-title @click="reditect()"
           ><v-img
             cover
             src="https://drive.google.com/uc?export=view&id=1lDHg5gunNdCJXZ2fOQxRhQzg3zhImvdB"
@@ -22,7 +22,7 @@
         v-model="drawer"
         location="top"
         temporary
-        class="bg-info"
+        class="bg-navbardocs"
       >
         <v-list lines="one">
           <v-list-item
@@ -142,7 +142,7 @@ export default {
 </script>
 <style scoped>
 .ham {
-  border: 1px white solid;
+  border: 1px rgb(7, 7, 7) solid;
   margin-top: 5px;
   margin-bottom: 5px;
 }
