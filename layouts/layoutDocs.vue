@@ -4,7 +4,10 @@
     <v-layout>
       <v-app-bar title=""></v-app-bar>
       <v-navigation-drawer v-if="xs || sm == false">
-        <v-toolbar-title style="font-size: 35px">Documentation</v-toolbar-title>
+        <v-toolbar-title
+          style="font-size: 25px; padding: 5px; font-weight: bold"
+          >Documentation</v-toolbar-title
+        >
         <v-card class="mx-auto" width="300" flat>
           <v-list v-model:opened="open">
             <v-list-group value="Users">
@@ -48,7 +51,7 @@
           <v-app-bar-nav-icon @click="drawerMB = !drawerMB" v-if="xs || sm"
             ><v-icon>mdi-menu </v-icon></v-app-bar-nav-icon
           >
-          <v-toolbar-title v-if="xs || sm == false"
+          <v-toolbar-title v-if="xs || sm == false" style="padding: 15px"
             >Documentation</v-toolbar-title
           >
           <v-spacer></v-spacer>

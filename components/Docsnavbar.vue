@@ -3,38 +3,20 @@
     <div v-if="xs || sm == true">
       <v-app-bar color="navbardocs">
         <v-toolbar-title @click="reditect()"
-          ><v-img
-            cover
-            :src="data.logo"
-            width="250px"
-            height="40px"
-            class="my-10"
+          ><v-img :src="data.logo" width="150px" height="40px" class="my-10"
         /></v-toolbar-title>
-        <v-app-bar-nav-icon @click="drawer = !drawer"
-          ><v-icon>mdi-menu </v-icon></v-app-bar-nav-icon
+        <v-list-item-title
+          v-for="(item, index) in items"
+          :key="index"
+          class="pa-5 text-info"
+          ><NuxtLink
+            :to="item.to"
+            style="text-decoration: none"
+            class="text-info"
+            >{{ item.title }}</NuxtLink
+          ></v-list-item-title
         >
       </v-app-bar>
-
-      <v-navigation-drawer
-        v-model="drawer"
-        location="top"
-        temporary
-        class="bg-navbardocs"
-      >
-        <v-list lines="one">
-          <v-list-item
-            v-for="(item, index) in items"
-            :key="index"
-            style="padding: 23px"
-            ><NuxtLink
-              :to="item.to"
-              style="text-decoration: none"
-              class="text-info"
-              ><h1 class="text-info">{{ item.title }}</h1></NuxtLink
-            ><v-divider :thickness="2"></v-divider
-          ></v-list-item>
-        </v-list>
-      </v-navigation-drawer>
     </div>
     <v-app-bar
       v-if="xs || sm == false"
@@ -56,7 +38,10 @@
           >
         </v-toolbar-title>
         <v-toolbar-title>
-          <NuxtLink class="text-info" style="text-decoration: none"
+          <NuxtLink
+            class="text-info"
+            style="text-decoration: none"
+            to="/getstart"
             >Get Start</NuxtLink
           >
         </v-toolbar-title>
@@ -92,10 +77,6 @@ export default {
     const drawer = ref(false);
     const items = [
       {
-        title: "Docs",
-        to: "/doc",
-      },
-      {
         title: "Get Start",
         to: "/getstart",
       },
@@ -104,6 +85,7 @@ export default {
         to: "/login",
       },
     ];
+    const iconToggle = ref(false);
     const router = useRouter();
     function reditect() {
       router.push({ path: "/" });
@@ -118,6 +100,9 @@ export default {
         showNav.value = true;
       }
     }
+    function iconToggleClick() {
+      iconToggle.value = !iconToggle.value;
+    }
     onMounted(() => {
       window.addEventListener("scroll", onScroll);
     });
@@ -131,6 +116,8 @@ export default {
       drawer,
       reditect,
       data,
+      iconToggleClick,
+      iconToggle,
     };
   },
 };
