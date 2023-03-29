@@ -5,17 +5,14 @@
         <v-toolbar-title @click="reditect()"
           ><v-img
             cover
-            src="https://drive.google.com/uc?export=view&id=1lDHg5gunNdCJXZ2fOQxRhQzg3zhImvdB"
+            :src="data.logo"
             width="250px"
             height="40px"
             class="my-10"
         /></v-toolbar-title>
         <v-app-bar-nav-icon @click="drawer = !drawer"
-          ><div style="width: 20px">
-            <div class="ham"></div>
-            <div class="ham"></div>
-            <div class="ham"></div></div
-        ></v-app-bar-nav-icon>
+          ><v-icon>mdi-menu </v-icon></v-app-bar-nav-icon
+        >
       </v-app-bar>
 
       <v-navigation-drawer
@@ -48,11 +45,7 @@
     >
       <v-spacer></v-spacer>
       <v-toolbar-title @click="reditect()" style="cursor: pointer"
-        ><v-img
-          width="300"
-          src="https://drive.google.com/uc?export=view&id=1lDHg5gunNdCJXZ2fOQxRhQzg3zhImvdB"
-          cover
-        ></v-img
+        ><v-img width="300" :src="data.logo" cover></v-img
       ></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-spacer></v-spacer>
@@ -89,6 +82,7 @@
   </div>
 </template>
 <script>
+import data from "../data/data";
 import { useDisplay } from "vuetify";
 export default {
   setup() {
@@ -103,7 +97,7 @@ export default {
       },
       {
         title: "Get Start",
-        to: "/doc",
+        to: "/getstart",
       },
       {
         title: "Login",
@@ -136,6 +130,7 @@ export default {
       items,
       drawer,
       reditect,
+      data,
     };
   },
 };

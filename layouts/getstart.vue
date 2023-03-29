@@ -6,7 +6,7 @@
           <v-toolbar-title @click="deridect()"
             ><v-img
               cover
-              src="https://drive.google.com/uc?export=view&id=1lDHg5gunNdCJXZ2fOQxRhQzg3zhImvdB"
+              :src="data.logo"
               width="250px"
               height="40px"
               class="my-10"
@@ -49,11 +49,7 @@
       >
         <v-spacer></v-spacer>
         <v-toolbar-title @click="reditect()" style="cursor: pointer"
-          ><v-img
-            width="300"
-            src="https://drive.google.com/uc?export=view&id=1lDHg5gunNdCJXZ2fOQxRhQzg3zhImvdB"
-            cover
-          ></v-img
+          ><v-img width="300" :src="data.logo" cover></v-img
         ></v-toolbar-title>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
@@ -94,6 +90,7 @@
   </v-app>
 </template>
 <script>
+import data from "../data/data";
 import { useDisplay } from "vuetify";
 export default {
   setup() {
@@ -128,6 +125,7 @@ export default {
       items,
       drawer,
       reditect,
+      data,
     };
   },
   // data() {

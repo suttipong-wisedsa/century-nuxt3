@@ -5,10 +5,7 @@
       :class="xs || sm ? 'mx-2 my-5' : 'mx-5'"
     >
       <v-col :cols="12" sm="6">
-        <!-- <img
-          src="@/assets/images/Ellipse 361.png"
-          style="z-index: -5; position: absolute"
-        /> -->
+        <v-img :src="data.logo2" style="position: absolute" />
         <div
           style="height: 100vh"
           class="d-flex align-center justify-center"
@@ -60,6 +57,7 @@
                       <v-col cols="12" sm="6">
                         <h3 class="text-text">Contact Number</h3>
                         <v-text-field
+                          :rules="numberRules"
                           :loading="submit"
                           color="white"
                           type="text"
@@ -70,6 +68,7 @@
                       <v-col cols="12" sm="6">
                         <h3 class="text-text">Company Name</h3>
                         <v-text-field
+                          :rules="textRules"
                           :loading="submit"
                           color="white"
                           type="text"
@@ -80,6 +79,7 @@
                       <v-col cols="12" sm="6">
                         <h3 class="text-text">Company Email Address</h3>
                         <v-text-field
+                          :rules="emailRules"
                           :loading="submit"
                           color="white"
                           type="email"
@@ -90,6 +90,7 @@
                       <v-col cols="12" sm="6">
                         <h3 class="text-text">Company Website</h3>
                         <v-text-field
+                          :rules="textRules"
                           :loading="submit"
                           color="white"
                           type="text"
@@ -100,6 +101,7 @@
                       <v-col cols="12" sm="6">
                         <h3 class="text-text">Job Title and Department</h3>
                         <v-text-field
+                          :rules="textRules"
                           :loading="submit"
                           color="white"
                           type="text"
@@ -110,6 +112,7 @@
                       <v-col cols="12" sm="6">
                         <h3 class="text-text">Country of partnership</h3>
                         <v-select
+                          :rules="textRules"
                           label="Select Country"
                           :items="[
                             'California',
@@ -172,6 +175,7 @@
 <script>
 import { useDisplay } from "vuetify";
 import { ref } from "@vue/composition-api";
+import data from "../data/data";
 export default {
   setup() {
     const { xs, sm, lg } = useDisplay();
@@ -180,16 +184,29 @@ export default {
     const submit = ref(false);
     const checkbox2 = ref(false);
     const checkbox1 = ref(false);
+    const valid = ref(true);
     const lock = ref(true);
     const router = useRouter();
     const nameRules = ref([
-      (value) => !!value || "Required.",
-      // (value) => (value || "").length <= 20 || "Max 20 characters",
-      // (value) => {
-      //   const pattern =
-      //     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      //   return pattern.test(value) || "Invalid e-mail.";
-      // },
+      (v) => !!v || "required",
+      (v) => (v && v.length <= 50) || "Name must be less than 50 characters",
+      (v) => /^([^0-9]*)$/.test(v) || "Can't use number",
+    ]);
+    const emailRules = ref([
+      (v) => !!v || "E-mail is required",
+      (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+    ]);
+    const numberRules = ref([
+      (v) => !!v || "required",
+      (v) => (v && v.length <= 12) || "Number must be less than 12 characters",
+      (v) =>
+        /((\+66|0)(\d{1,2}\-?\d{3}\-?\d{3,4}))|((\+๖๖|๐)([๐-๙]{1,2}\-?[๐-๙]{3}\-?[๐-๙]{3,4}))/.test(
+          v
+        ) || "Tel required",
+    ]);
+    const textRules = ref([
+      (v) => !!v || "required",
+      (v) => (v && v.length <= 50) || "Number must be less than 50 characters",
     ]);
     watch(checkbox1, () => {
       botton();
@@ -208,18 +225,18 @@ export default {
       if (xs.value || sm.value) {
         return { marginTop: "50px" };
       } else {
-        // return { fontSize: "35px", textAlign: "center" };
+        null;
       }
     }
     async function confirm() {
       form.value.validate();
-
-      // router.push({ path: "/" });
-      // if (valid) {
-      //   submit.value = true;
-      //   router.push({ path: "/" });
-      //   submit.value = false;
-      // }
+      if (valid.value) {
+        submit.value = true;
+        router.push({ path: "/" });
+        form.value.resetValidation();
+        form.value.reset();
+        submit.value = false;
+      }
     }
     definePageMeta({
       layout: "getstart",
@@ -228,7 +245,7 @@ export default {
       title: "Get Start",
     });
     return {
-      valid: true,
+      valid,
       form,
       submit,
       nameRules,
@@ -241,6 +258,10 @@ export default {
       checkbox2,
       lock,
       form,
+      emailRules,
+      numberRules,
+      textRules,
+      data,
     };
   },
 };

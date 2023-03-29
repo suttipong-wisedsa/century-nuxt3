@@ -6,11 +6,7 @@
           <v-row class="px-3 py-5">
             <v-col cols="12" sm="6">
               <div>
-                <v-img
-                  src="https://drive.google.com/uc?export=view&id=1lDHg5gunNdCJXZ2fOQxRhQzg3zhImvdB"
-                  width="200px"
-                  height="40px"
-                />
+                <v-img :src="data.logo" width="200px" height="40px" />
               </div>
               <div
                 class="white--text mt-3"
@@ -68,4 +64,14 @@
     </div>
   </div>
 </template>
+<script>
+import data from "../data/data";
+export default {
+  setup() {
+    return {
+      data,
+    };
+  },
+};
+</script>
 <style></style>
