@@ -1,11 +1,14 @@
 <template>
   <v-app>
     <v-row
-      style="height: 100%; overflow: hidden"
+      style="height: 100%; overflow: hidden; position: relative"
       :class="xs || sm ? 'mx-2 my-5' : 'mx-5'"
     >
+      <v-img
+        :src="data.logo2"
+        style="position: absolute; width: 500px; top: 20px; left: -80px"
+      />
       <v-col :cols="12" sm="6">
-        <v-img :src="data.logo2" style="position: absolute" />
         <div
           style="height: 100vh"
           class="d-flex align-center justify-center"
@@ -27,6 +30,14 @@
             </p>
           </div>
         </div>
+        <v-img
+          :src="data.logo2"
+          style="position: absolute; width: 500px; top: 80px; left: 680px"
+        />
+        <v-img
+          :src="data.logo2"
+          style="position: absolute; width: 500px; top: 550px; left: 980px"
+        />
       </v-col>
       <v-col :cols="12" sm="6">
         <div style="height: 100%" class="d-flex align-center justify-start">
@@ -38,11 +49,39 @@
                 by the readable content of a page when looking at its layout.
               </p>
             </div>
-            <v-card class="overflow-auto rounded-xl">
+            <!-- <v-img
+              :src="data.logo2"
+              style="
+                position: absolute;
+                width: 600px;
+                top: 0px;
+                left: 1380px;
+                z-index: 5;
+              "
+            /> -->
+            <v-img
+              :src="data.logo2"
+              style="
+                position: absolute;
+                width: 600px;
+                top: 450px;
+                left: 1380px;
+                z-index: 5;
+              "
+            />
+            <v-card
+              class="overflow-auto rounded-xl"
+              :max-height="xxl ? '800px' : '600px'"
+              max-width="650px"
+            >
               <v-card-text class="bg-card">
                 <v-form ref="form" v-model="valid" lazy-validation>
                   <v-container>
-                    <v-row>
+                    <v-row style="position: relative">
+                      <v-img
+                        :src="data.logo2"
+                        style="position: absolute; top: 50px"
+                      />
                       <v-col cols="12" sm="6">
                         <h3 class="text-text">Your Full Name</h3>
                         <v-text-field
@@ -155,6 +194,7 @@
                       ><br />
                     </div>
                     <v-btn
+                      class=""
                       :disabled="lock"
                       :block="true"
                       color="info"
@@ -178,7 +218,7 @@ import { ref } from "@vue/composition-api";
 import data from "../data/data";
 export default {
   setup() {
-    const { xs, sm, lg } = useDisplay();
+    const { xs, sm, lg, md, xl, xxl } = useDisplay();
     const form = ref(null);
     const route = useRoute();
     const submit = ref(false);
@@ -262,6 +302,9 @@ export default {
       numberRules,
       textRules,
       data,
+      md,
+      xl,
+      xxl,
     };
   },
 };

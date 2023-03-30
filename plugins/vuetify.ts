@@ -47,6 +47,7 @@ export default defineNuxtPlugin((nuxtApp) => {
         md: 540,
         lg: 800,
         xl: 1280,
+        xxl: 1904,
       },
     },
   });

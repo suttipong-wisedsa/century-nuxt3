@@ -1,7 +1,7 @@
 <template>
   <div style="font-family: sarabun; color: #ffffff">
     <div>
-      <div class="bg-info">
+      <div class="bg-info font">
         <v-container>
           <v-row class="px-3 py-5">
             <v-col cols="12" sm="6">
@@ -9,7 +9,7 @@
                 <v-img :src="data.logo" width="200px" height="40px" />
               </div>
               <div
-                class="white--text mt-3"
+                class="white--text mt-3 font"
                 why
                 style="width: 250px; line-height: 2rem"
               >
@@ -74,4 +74,8 @@ export default {
   },
 };
 </script>
-<style></style>
+<style scoped>
+.font {
+  font-family: "Sarabun", sans-serif;
+}
+</style>

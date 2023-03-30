@@ -2,7 +2,7 @@
   <v-container :class="[sm || xs ? 'mbdown' : 'mbup']">
     <v-row no-gutters justify="center">
       <v-col cols="12" sm="10">
-        <h1 :style="style()">
+        <h1 :style="style()" style="font-family: 'Prompt', sans-serif">
           Built for your business,<br />
           powered by Century
         </h1>
@@ -12,6 +12,7 @@
             fontSize: sm || xs ? '' : '20px',
             textAlign: 'center',
           }"
+          style="font-family: 'Prompt', sans-serif"
         >
           It is a long established fact that a reader will be distracted by the
           readable content of a page when looking at its layout. The point of
@@ -24,7 +25,9 @@
         </p>
         <v-row no-gutters justify="center" style="margin-top: 35px">
           <v-btn variant="flat" color="info" size="x-large"
-            ><NuxtLink class="text-surface" style="font-weight: bolder"
+            ><NuxtLink
+              class="text-surface"
+              style="font-weight: bolder; font-family: 'Prompt', sans-serif"
               >Get Start</NuxtLink
             >
           </v-btn>
@@ -45,8 +48,8 @@
           <v-col cols="12" sm="6">
             <v-row>
               <v-col style="margin-top: 70px">
-                <h1 class="text-surface">Why do we use it?</h1>
-                <p class="text-surface">
+                <h1 class="text-surface font">Why do we use it?</h1>
+                <p class="text-surface font">
                   It is a long established fact that a reader will be distracted
                   by the readable content of a page when looking at its layout.
                   The point of using Lorem Ipsum is that it has a more-or-less
@@ -63,7 +66,7 @@
         </v-row>
       </v-card>
     </v-row>
-    <h1 class="d-flex justify-center mb-6" style="margin-top: 150px">
+    <h1 class="d-flex justify-center mb-6 font" style="margin-top: 150px">
       Why do we use it?
     </h1>
     <v-row>
@@ -78,7 +81,7 @@
               style="width: 100%; height: 100%"
             />
           </v-card>
-          <v-card-text
+          <v-card-text class="font"
             ><h1>Century Defence</h1>
             <p>
               It is a long established fact that a reader will be distracted by
@@ -98,7 +101,7 @@
               style="width: 100%; height: 100%"
             />
           </v-card>
-          <v-card-text
+          <v-card-text class="font"
             ><h1>Payment</h1>
             <p>
               It is a long established fact that a reader will be distracted by
@@ -119,7 +122,7 @@
               style="width: 100%; height: 100%"
             />
           </v-card>
-          <v-card-text
+          <v-card-text class="font"
             ><h1>Identity</h1>
             <p>
               It is a long established fact that a reader will be distracted by
@@ -140,7 +143,7 @@
               style="width: 100%; height: 100%"
             />
           </v-card>
-          <v-card-text
+          <v-card-text class="font"
             ><h1>Delivery</h1>
             <p>
               It is a long established fact that a reader will be distracted by
@@ -152,8 +155,8 @@
     </v-row>
     <v-row no-gutters style="margin-top: 150px; margin-bottom: 150px">
       <v-col :cols="12" sm="6">
-        <v-card-text>
-          <h1>
+        <v-card-text class="font">
+          <h1 style="font-weight: bold; font-size: 30px">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry.
           </h1>
@@ -193,7 +196,7 @@ export default {
       if (xs.value || sm.value) {
         return { fontSize: "25px", textAlign: "center" };
       } else {
-        return { fontSize: "35px", textAlign: "center" };
+        return { fontSize: "60px", textAlign: "center" };
       }
     }
     return {
@@ -211,5 +214,8 @@ export default {
 }
 .mbup {
   margin-top: 200px;
+}
+.font {
+  font-family: "Prompt", sans-serif;
 }
 </style>

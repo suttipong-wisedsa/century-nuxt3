@@ -33,7 +33,7 @@
           />
         </div>
         <div style="z-index: 999; position: fixed; bottom: -200px; left: -80px">
-          <img src="../assets/images/Untitled-2.png" style="width: 1120px" />
+          <img src="../assets/images/Untitled-2.png" style="width: 1000px" />
         </div>
       </v-col>
       <v-col :cols="12" sm="5">
@@ -73,7 +73,9 @@
         >
           <v-card
             class="mx-auto"
-            :style="{ padding: xs || sm ? '30px' : xl ? '90px' : null }"
+            :style="{
+              padding: xs || sm ? '30px' : xl ? '60px' : xxl ? '100px' : null,
+            }"
             elevation="5"
           >
             <v-card-text>
@@ -140,7 +142,7 @@
 import { useDisplay } from "vuetify";
 export default {
   setup() {
-    const { xs, sm, md, lg, xl } = useDisplay();
+    const { xs, sm, md, lg, xl, xxl } = useDisplay();
     const phoneNumber = ref("66");
     const iconToggle = ref(false);
     const userNumber = ref("");
@@ -174,6 +176,7 @@ export default {
       md,
       lg,
       xl,
+      xxl,
     };
   },
 };

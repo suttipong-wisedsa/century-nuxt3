@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     pageTransition: { name: "page", mode: "out-in" },
     head: {
       link: [
-        { rel: "icon", type: "image/x-icon", href: "public/favicon.ico" },
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         {
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500&display=swap",
@@ -27,6 +27,14 @@ export default defineNuxtConfig({
         {
           rel: "stylesheet",
           href: "https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css",
+        },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Prompt:ital,wght@1,600&display=swap",
+        },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@1,100&display=swap",
         },
       ],
     },

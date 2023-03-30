@@ -27,7 +27,7 @@
             style="padding: 23px"
             ><NuxtLink
               :to="item.to"
-              style="text-decoration: none"
+              style="text-decoration: none; font-family: 'Prompt', sans-serif"
               class="text-info"
               ><h1 class="text-surface">{{ item.title }}</h1></NuxtLink
             ><v-divider :thickness="2"></v-divider
@@ -93,7 +93,7 @@ export default {
       },
       {
         title: "Get Start",
-        to: "/doc",
+        to: "/getstart",
       },
       {
         title: "Login",
