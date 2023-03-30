@@ -131,67 +131,6 @@
     <Footer></Footer>
   </v-app>
 </template>
-<!-- <script>
-import { useDisplay } from "vuetify";
-export default {
-  setup() {
-    const { xs, sm } = useDisplay();
-    const loaded = ref(false);
-    const loading = ref(false);
-    const drawerMB = ref(false);
-    const delivery = ref([
-      ["-Getting started"],
-      ["-Overview"],
-      ["-Authentication"],
-    ]);
-    const open = ref(["Users"]);
-    const subtitle = ref([]);
-    async function onClick() {
-      loading.value = true;
-    }
-    function clickoutside() {
-      drawerMB.value = false;
-    }
-    function scrolling($event) {
-      let menu = $event;
-      if (menu == "Payment") {
-        let e = document.getElementById("el2");
-        e.scrollIntoView({
-          block: "end",
-          behavior: "smooth",
-          inline: "center",
-        });
-      } else if (menu == "Identity") {
-        let e = document.getElementById("el1");
-        e.scrollIntoView({
-          block: "end",
-          behavior: "smooth",
-          inline: "center",
-        });
-      } else {
-        let e = document.getElementById("el0");
-        e.scrollIntoView({
-          block: "end",
-          behavior: "smooth",
-          inline: "center",
-        });
-      }
-    }
-    return {
-      xs,
-      sm,
-      open,
-      loaded,
-      loading,
-      onClick,
-      scrolling,
-      delivery,
-      drawerMB,
-      clickoutside,
-    };
-  },
-};
-</script> -->
 
 <style scoped>
 .mbdown {
@@ -205,41 +144,19 @@ export default {
   margin-bottom: 5px;
 }
 </style>
-<!-- <template>
-  <v-card class="mx-auto" width="300">
-    <v-list v-model:opened="open">
-      <v-list-group value="Users">
-        <template v-slot:activator="{ props }">
-          <v-list-item
-            v-bind="props"
-            prepend-icon="mdi-account-circle"
-            title="Delivery API"
-          ></v-list-item>
-        </template>
-
-        <v-list-group value="Admin">
-          <template v-slot:activator="{ props }">
-            <v-list-item v-bind="props" title="Admin"></v-list-item>
-          </template>
-        </v-list-group>
-
-        <v-list-group value="Actions">
-          <template v-slot:activator="{ props }">
-            <v-list-item v-bind="props" title="Actions"></v-list-item>
-          </template>
-        </v-list-group>
-      </v-list-group>
-    </v-list>
-  </v-card>
-</template> -->
 <script>
+import { useStore } from "vuex";
 import { useDisplay } from "vuetify";
 export default {
   setup() {
+    const store = useStore();
     const { xs, sm } = useDisplay();
     const loaded = ref(false);
     const loading = ref(false);
     const drawerMB = ref(false);
+    const search = computed(() => {
+      return store.state.century.getData;
+    });
     const delivery = ref([
       ["-Getting started"],
       ["-Overview"],
@@ -266,21 +183,21 @@ export default {
     function scrolling($event) {
       let menu = $event;
       if (menu == "Payment") {
-        let e = document.getElementById("el2");
+        let e = document.getElementById("Payment");
         e.scrollIntoView({
           block: "end",
           behavior: "smooth",
           inline: "center",
         });
       } else if (menu == "Identity") {
-        let e = document.getElementById("el1");
+        let e = document.getElementById("Identity");
         e.scrollIntoView({
           block: "end",
           behavior: "smooth",
           inline: "center",
         });
       } else {
-        let e = document.getElementById("el0");
+        let e = document.getElementById("Authentication");
         e.scrollIntoView({
           block: "end",
           behavior: "smooth",
@@ -301,6 +218,7 @@ export default {
       clickoutside,
       admins,
       cruds,
+      search,
     };
   },
 };

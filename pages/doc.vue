@@ -4,97 +4,18 @@
       <div style="max-width: 1200px; padding: 25px">
         <v-card-text style="font-size: 25px; text-indent: 50px">
           <p>
-            The main and sub navigation also help developers zero in on the
-            reason they’re there–whether to solve a problem, get started, or
-            explore more about Heroku. If the major categories don’t grab the
-            developer’s attention, perhaps that list of common tasks will have
-            what they need. Gather feedback from developers if you aren’t sure
-            what to include. Figure out what your readers need most and make
-            sure your developer home page answers it right from the start.
+            {{ title }}
           </p>
         </v-card-text>
-        <v-card-text style="font-size: 25px">
-          <h3>Delivery API</h3>
+        <v-card-text
+          style="font-size: 25px"
+          v-for="(item, index) in docs"
+          :key="index"
+          :id="item.title"
+        >
+          <h3>{{ item.title }}</h3>
           <p>
-            The main and sub navigation also help developers zero in on the
-            reason they’re there–whether to solve a problem, get started, or
-            explore more about Heroku. If the major categories don’t grab the
-            developer’s attention, perhaps that list of common tasks will have
-            what they need. Gather feedback from developers if you aren’t sure
-            what to include. Figure out what your readers need most and make
-            sure your developer home page answers it right from the start.
-          </p>
-        </v-card-text>
-        <v-card-text style="font-size: 25px">
-          <h3>Getting started</h3>
-          <p>
-            The main and sub navigation also help developers zero in on the
-            reason they’re there–whether to solve a problem, get started, or
-            explore more about Heroku. If the major categories don’t grab the
-            developer’s attention, perhaps that list of common tasks will have
-            what they need. Gather feedback from developers if you aren’t sure
-            what to include. Figure out what your readers need most and make
-            sure your developer home page answers it right from the start.
-          </p>
-        </v-card-text>
-        <v-card-text style="font-size: 25px">
-          <h3>Overview</h3>
-          <p>
-            The main and sub navigation also help developers zero in on the
-            reason they’re there–whether to solve a problem, get started, or
-            explore more about Heroku. If the major categories don’t grab the
-            developer’s attention, perhaps that list of common tasks will have
-            what they need. Gather feedback from developers if you aren’t sure
-            what to include. Figure out what your readers need most and make
-            sure your developer home page answers it right from the start.
-          </p>
-        </v-card-text>
-        <v-card-text style="font-size: 25px">
-          <h3>Authentication</h3>
-          <p>
-            The main and sub navigation also help developers zero in on the
-            reason they’re there–whether to solve a problem, get started, or
-            explore more about Heroku. If the major categories don’t grab the
-            developer’s attention, perhaps that list of common tasks will have
-            what they need. Gather feedback from developers if you aren’t sure
-            what to include. Figure out what your readers need most and make
-            sure your developer home page answers it right from the start.
-          </p>
-        </v-card-text>
-        <v-card-text style="font-size: 25px" id="el2">
-          <h3>Payment</h3>
-          <p>
-            The main and sub navigation also help developers zero in on the
-            reason they’re there–whether to solve a problem, get started, or
-            explore more about Heroku. If the major categories don’t grab the
-            developer’s attention, perhaps that list of common tasks will have
-            what they need. Gather feedback from developers if you aren’t sure
-            what to include. Figure out what your readers need most and make
-            sure your developer home page answers it right from the start.
-          </p>
-        </v-card-text>
-        <v-card-text style="font-size: 25px" id="el1">
-          <h3>Identity</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-            facilis dicta esse molestias vero hic laudantium provident nisi eos
-            quasi iusto alias sequi, aut aliquid voluptatibus commodi! Minima,
-            eum voluptates? Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Officiis facilis dicta esse molestias vero hic laudantium
-            provident nisi eos quasi iusto alias sequi, aut aliquid voluptatibus
-            commodi! Minima, eum voluptates?
-          </p>
-        </v-card-text>
-        <v-card-text style="font-size: 25px" id="el0">
-          <h3>Identity</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-            facilis dicta esse molestias vero hic laudantium provident nisi eos
-            quasi iusto alias sequi, aut aliquid voluptatibus commodi! Minima,
-            eum voluptates? Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Officiis facilis dicta esse molestias vero hic laudantium
-            provident nisi eos quasi iusto alias sequi, aut aliquid voluptatibus
-            commodi! Minima, eum voluptates?
+            {{ item.content }}
           </p>
         </v-card-text>
       </div>
@@ -104,9 +25,14 @@
 
 <script>
 import docs from "../data/docs";
+import { useStore } from "vuex";
 export default {
   setup() {
+    const store = useStore();
     const route = useRoute();
+    const title = computed(() => {
+      return store.state.century.getData;
+    });
     definePageMeta({
       layout: "layout-docs",
       title: "Docs",
@@ -116,6 +42,7 @@ export default {
     });
     return {
       docs,
+      title,
     };
   },
 };
