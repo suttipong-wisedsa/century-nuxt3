@@ -36,6 +36,10 @@ export default defineNuxtConfig({
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@1,100&display=swap",
         },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Prompt&display=swap",
+        },
       ],
     },
   },

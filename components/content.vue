@@ -26,8 +26,13 @@
         <v-row no-gutters justify="center" style="margin-top: 35px">
           <v-btn variant="flat" color="info" size="x-large"
             ><NuxtLink
+              to="getstart"
               class="text-surface"
-              style="font-weight: bolder; font-family: 'Prompt', sans-serif"
+              style="
+                font-weight: bolder;
+                font-family: 'Prompt', sans-serif;
+                text-decoration: none;
+              "
               >Get Start</NuxtLink
             >
           </v-btn>
@@ -188,19 +193,19 @@ import { useDisplay } from "vuetify";
 export default {
   setup() {
     const { xs, sm } = useDisplay();
-    async function fetchSomething() {
-      const ip = await this.$axios.$get("http://icanhazip.com");
-      console.log(ip);
-    }
+    // async function fetchSomething() {
+    //   const ip = await this.$axios.$get("http://icanhazip.com");
+    //   console.log(ip);
+    // }
     function style() {
       if (xs.value || sm.value) {
         return { fontSize: "25px", textAlign: "center" };
       } else {
-        return { fontSize: "60px", textAlign: "center" };
+        return { fontSize: "55px", textAlign: "center" };
       }
     }
     return {
-      fetchSomething,
+      //fetchSomething,
       style,
       xs,
       sm,
@@ -213,7 +218,7 @@ export default {
   margin-top: 100px;
 }
 .mbup {
-  margin-top: 200px;
+  margin-top: 160px;
 }
 .font {
   font-family: "Prompt", sans-serif;

@@ -78,7 +78,7 @@
             }"
             elevation="5"
           >
-            <v-card-text>
+            <v-card-text class="font">
               <p class="text-h4 text--primary">Log in</p>
             </v-card-text>
             <v-card-text>
@@ -211,5 +211,8 @@ select {
   height: 10px;
   margin-top: 23px;
   margin-left: 5px;
+}
+.font {
+  font-family: "Prompt", sans-serif;
 }
 </style>

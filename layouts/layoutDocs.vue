@@ -5,7 +5,8 @@
       <v-app-bar title=""></v-app-bar>
       <v-navigation-drawer v-if="xs || sm == false">
         <v-toolbar-title
-          style="font-size: 25px; padding: 5px; font-weight: bold"
+          class="font"
+          style="font-size: 25px; padding: 15px; font-weight: bold"
           >Documentation</v-toolbar-title
         >
         <v-card class="mx-auto" width="300" flat>
@@ -304,3 +305,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.font {
+  font-family: "Prompt", sans-serif;
+}
+</style>

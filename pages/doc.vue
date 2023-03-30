@@ -3,13 +3,15 @@
     <v-card flat class="overflow-auto" style="width: 100vw; height: 82vh">
       <div style="max-width: 1200px; padding: 25px">
         <v-card-text style="font-size: 25px; text-indent: 50px">
-          The main and sub navigation also help developers zero in on the reason
-          they’re there–whether to solve a problem, get started, or explore more
-          about Heroku. If the major categories don’t grab the developer’s
-          attention, perhaps that list of common tasks will have what they need.
-          Gather feedback from developers if you aren’t sure what to include.
-          Figure out what your readers need most and make sure your developer
-          home page answers it right from the start.
+          <p>
+            The main and sub navigation also help developers zero in on the
+            reason they’re there–whether to solve a problem, get started, or
+            explore more about Heroku. If the major categories don’t grab the
+            developer’s attention, perhaps that list of common tasks will have
+            what they need. Gather feedback from developers if you aren’t sure
+            what to include. Figure out what your readers need most and make
+            sure your developer home page answers it right from the start.
+          </p>
         </v-card-text>
         <v-card-text style="font-size: 25px">
           <h3>Delivery API</h3>
@@ -101,6 +103,7 @@
 </template>
 
 <script>
+import docs from "../data/docs";
 export default {
   setup() {
     const route = useRoute();
@@ -111,11 +114,21 @@ export default {
     useHead({
       title: "Docs",
     });
+    return {
+      docs,
+    };
   },
 };
 </script>
 <style scoped>
 p {
   text-indent: 50px;
+  font-family: "Prompt", sans-serif;
+  font-size: 18px;
+}
+
+h3 {
+  font-family: "Prompt", sans-serif;
+  padding: 15px;
 }
 </style>

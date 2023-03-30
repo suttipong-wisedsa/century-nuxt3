@@ -16,7 +16,7 @@
         >
           <div style="padding: 150px">
             <h1
-              class="text-start"
+              class="text-start font"
               style="font-size: normal normal medium 50px/76px Prompt"
             >
               Get Start
@@ -83,7 +83,7 @@
                         style="position: absolute; top: 50px"
                       />
                       <v-col cols="12" sm="6">
-                        <h3 class="text-text">Your Full Name</h3>
+                        <h3 class="text-text font">Your Full Name</h3>
                         <v-text-field
                           :rules="nameRules"
                           :loading="submit"
@@ -94,7 +94,7 @@
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6">
-                        <h3 class="text-text">Contact Number</h3>
+                        <h3 class="text-text font">Contact Number</h3>
                         <v-text-field
                           :rules="numberRules"
                           :loading="submit"
@@ -105,7 +105,7 @@
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6">
-                        <h3 class="text-text">Company Name</h3>
+                        <h3 class="text-text font">Company Name</h3>
                         <v-text-field
                           :rules="textRules"
                           :loading="submit"
@@ -116,7 +116,7 @@
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6">
-                        <h3 class="text-text">Company Email Address</h3>
+                        <h3 class="text-text font">Company Email Address</h3>
                         <v-text-field
                           :rules="emailRules"
                           :loading="submit"
@@ -127,7 +127,7 @@
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6">
-                        <h3 class="text-text">Company Website</h3>
+                        <h3 class="text-text font">Company Website</h3>
                         <v-text-field
                           :rules="textRules"
                           :loading="submit"
@@ -138,7 +138,7 @@
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6">
-                        <h3 class="text-text">Job Title and Department</h3>
+                        <h3 class="text-text font">Job Title and Department</h3>
                         <v-text-field
                           :rules="textRules"
                           :loading="submit"
@@ -149,7 +149,7 @@
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6">
-                        <h3 class="text-text">Country of partnership</h3>
+                        <h3 class="text-text font">Country of partnership</h3>
                         <v-select
                           :rules="textRules"
                           label="Select Country"
@@ -194,7 +194,7 @@
                       ><br />
                     </div>
                     <v-btn
-                      class=""
+                      class="font"
                       :disabled="lock"
                       :block="true"
                       color="info"
@@ -345,5 +345,8 @@ label:before {
 :checked + label:before {
   content: "\2713";
   color: white;
+}
+.font {
+  font-family: "Prompt", sans-serif;
 }
 </style>
