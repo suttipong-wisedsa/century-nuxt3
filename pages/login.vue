@@ -95,8 +95,8 @@
                   @click="icon()"
                 >
                   <option value="66" class="option-input">+66 TH</option>
-                  <option value="66" class="option-input">+66 TH</option>
-                  <option value="66" class="option-input">+66 TH</option>
+                  <option value="77" class="option-input">+77 TH</option>
+                  <option value="88" class="option-input">+88 TH</option>
                   <option value="66" class="option-input">+66 TH</option>
                   <option value="66" class="option-input">+66 TH</option>
                 </select>
@@ -109,7 +109,6 @@
                   }"
                 />
               </div>
-
               <input
                 type="tel"
                 name="number"
@@ -118,6 +117,7 @@
               />
             </div>
             <v-btn
+              @click="login()"
               size="x-large"
               class="bg-info"
               :style="{
@@ -125,13 +125,13 @@
                 marginTop: xs || sm ? '10px' : '25px',
               }"
             >
-              <NuxtLink
-                to="/"
-                class="text-surface"
-                style="text-decoration: none"
+              <NuxtLink class="text-surface" style="text-decoration: none"
                 >Continue</NuxtLink
               >
             </v-btn>
+            <small class="text-red text-center my-5" style="display: block">{{
+              Errormsg
+            }}</small>
           </v-card>
         </div>
       </v-col>
@@ -147,6 +147,8 @@ export default {
     const iconToggle = ref(false);
     const userNumber = ref("");
     const tel = ref(null);
+    const Errormsg = ref("");
+    const router = useRouter();
     function inputTel(e) {
       const data = e.target.value;
       userNumber.value = phoneNumber.value + data;
@@ -157,6 +159,16 @@ export default {
     function clickoutside() {
       iconToggle.value = false;
     }
+    async function login() {
+      Errormsg.value = "";
+      // if (!userNumber.value.match(/^[0-9]{4}-[0-9]{3}-[0-9]{4}/)) {
+        if (!userNumber.value.match(/^[0-9]{11}/)) {
+        Errormsg.value = "Phone Number is incorrect";
+      } else {
+        router.push({ path: "/" });
+        userNumber.value = "";
+      }
+    }
     definePageMeta({
       layout: false,
     });
@@ -165,6 +177,7 @@ export default {
     });
     return {
       tel,
+      Errormsg,
       inputTel,
       phoneNumber,
       icon,
@@ -177,6 +190,7 @@ export default {
       lg,
       xl,
       xxl,
+      login,
     };
   },
 };
