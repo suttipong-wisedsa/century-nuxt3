@@ -84,7 +84,9 @@
             <v-card-text>
               <p class="text-text">Enter Your Mobile Number</p>
             </v-card-text>
-            <div class="input-container">
+            <div
+              :class="[isActive ? 'input-container_action' : 'input-container']"
+            >
               <div class="select-input" v-click-outside="clickoutside">
                 <img src="../assets/images/thailand.png" />
                 <select
@@ -113,10 +115,14 @@
                 type="tel"
                 name="number"
                 @change="inputTel($event)"
-                style="border-left: 1px solid rgba(219, 214, 214, 0.63)"
+                style="
+                  border-left: 1px solid rgba(219, 214, 214, 0.63);
+                  width: 100%;
+                "
               />
             </div>
             <v-btn
+              :loading="loading"
               @click="login()"
               size="x-large"
               class="bg-info"
@@ -129,7 +135,7 @@
                 >Continue</NuxtLink
               >
             </v-btn>
-            <small class="text-red text-center my-5" style="display: block">{{
+            <small class="text-red text-center my-2" style="display: block;">{{
               Errormsg
             }}</small>
           </v-card>
@@ -149,6 +155,8 @@ export default {
     const tel = ref(null);
     const Errormsg = ref("");
     const router = useRouter();
+    const isActive = ref(false);
+    const loading = ref(false);
     function inputTel(e) {
       const data = e.target.value;
       userNumber.value = phoneNumber.value + data;
@@ -162,11 +170,15 @@ export default {
     async function login() {
       Errormsg.value = "";
       // if (!userNumber.value.match(/^[0-9]{4}-[0-9]{3}-[0-9]{4}/)) {
-        if (!userNumber.value.match(/^[0-9]{11}/)) {
+      if (!userNumber.value.match(/^[0-9]{11}/)) {
         Errormsg.value = "Phone Number is incorrect";
+        isActive.value = true;
       } else {
+        loading.value = true;
         router.push({ path: "/" });
         userNumber.value = "";
+        loading.value = false;
+        isActive.value = false;
       }
     }
     definePageMeta({
@@ -191,6 +203,8 @@ export default {
       xl,
       xxl,
       login,
+      isActive,
+      loading,
     };
   },
 };
@@ -208,6 +222,14 @@ export default {
   width: 100%;
   margin-bottom: 15px;
   border: 1px solid rgba(219, 214, 214, 0.63);
+  box-shadow: -2px 2px 8px 4px rgba(0, 0, 0, 0.1);
+}
+.input-container_action {
+  border-radius: 10px;
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+  border: 2px solid rgba(252, 0, 0, 0.63);
   box-shadow: -2px 2px 8px 4px rgba(0, 0, 0, 0.1);
 }
 .select-input {
