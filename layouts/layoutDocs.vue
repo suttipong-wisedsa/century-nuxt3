@@ -138,11 +138,6 @@
 .mbup {
   padding: 200px;
 }
-.ham {
-  border: 1px rgb(7, 7, 7) solid;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
 </style>
 <script>
 import { useStore } from "vuex";

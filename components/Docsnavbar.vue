@@ -122,10 +122,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.ham {
-  border: 1px rgb(7, 7, 7) solid;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-</style>
