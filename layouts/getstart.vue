@@ -102,7 +102,7 @@ export default {
       },
       {
         title: "Get Start",
-        to: "/doc",
+        to: "/getstart",
       },
       {
         title: "Login",
