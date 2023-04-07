@@ -3,7 +3,7 @@
     <div>
       <div v-if="xs || sm == true">
         <v-app-bar color="info">
-          <v-toolbar-title @click="deridect()"
+          <v-toolbar-title @click="reditect()"
             ><v-img
               cover
               :src="data.logo"
@@ -12,11 +12,8 @@
               class="my-10"
           /></v-toolbar-title>
           <v-app-bar-nav-icon @click="drawer = !drawer"
-            ><div style="width: 20px">
-              <div class="ham"></div>
-              <div class="ham"></div>
-              <div class="ham"></div></div
-          ></v-app-bar-nav-icon>
+            ><v-icon>mdi-menu </v-icon></v-app-bar-nav-icon
+          >
         </v-app-bar>
 
         <v-navigation-drawer
@@ -105,7 +102,7 @@ export default {
       },
       {
         title: "Get Start",
-        to: "/doc",
+        to: "/getstart",
       },
       {
         title: "Login",
@@ -128,43 +125,5 @@ export default {
       data,
     };
   },
-  // data() {
-  //   return {
-  //     showNavbar: true,
-  //     lastScrollPosition: 0,
-  //     showNav: true,
-  //     items: [
-  //       { title: "Dashboard", icon: "mdi-view-dashboard" },
-  //       { title: "Account", icon: "mdi-account-box" },
-  //       { title: "Settings", icon: "mdi-cog" },
-  //     ],
-  //   };
-  // },
-  // mounted() {
-  //   const { xs, sm } = useDisplay();
-  //   window.addEventListener("scroll", this.onScroll);
-  // },
-  // beforeDestroy() {
-  //   window.removeEventListener("scroll", this.onScroll);
-  // },
-  // methods: {
-  //   onScroll() {
-  //     const currentScrollPosition =
-  //       window.pageYOffset || document.documentElement.scrollTop;
-  //     if (currentScrollPosition <= 20) {
-  //       this.showNav = false;
-  //     }
-  //     if (currentScrollPosition > 200) {
-  //       this.showNav = true;
-  //     }
-  //   },
-  // },
 };
 </script>
-<style scoped>
-.ham {
-  border: 1px white solid;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-</style>
