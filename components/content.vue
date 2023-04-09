@@ -41,18 +41,19 @@
     </v-row>
     <v-row no-gutters justify="center">
       <v-card
-        style="margin-top: 150px; padding: 25px; background-color: #26264c"
+        style="margin-top: 150px; padding: 25px; position: relative;"
         width="100%"
         elevation="12"
-        class="rounded-xl"
+        class="rounded-xl bg-card"
       >
         <v-row>
           <v-col cols="12" sm="6"
-            ><img src="../assets/images/card.png" style="width: 90%"
+            ><img src="../assets/images/card.png" style="width: 90%;"
           /></v-col>
           <v-col cols="12" sm="6">
             <v-row>
-              <v-col style="margin-top: 70px">
+            
+              <v-col style="margin-top: 70px; position: relative;">
                 <h1 class="text-surface font">Why do we use it?</h1>
                 <p class="text-surface font">
                   It is a long established fact that a reader will be distracted
@@ -65,6 +66,9 @@
                   'lorem ipsum' will uncover many web sites still in their
                   infancy.
                 </p>
+                <v-img :src="data.logo2" style="width: 30%;"/>
+                <v-img :src="data.logo2" style="width: 50%; position: absolute; top: -150px; right: 50px;"/>
+                <v-img :src="data.logo2" style="width: 50%; position: absolute; top: 300px; right: 30px;"/>
               </v-col>
             </v-row>
           </v-col>
@@ -190,6 +194,7 @@
 </template>
 <script>
 import { useDisplay } from "vuetify";
+import data from "../data/data";
 export default {
   setup() {
     const { xs, sm } = useDisplay();
@@ -209,6 +214,7 @@ export default {
       style,
       xs,
       sm,
+      data,
     };
   },
 };
