@@ -4,7 +4,7 @@
       <v-col cols="12" sm="10">
         <h1 :style="style()" style="font-family: 'Prompt', sans-serif">
           Built for your business,<br />
-          powered by Century{{ loginTest }}
+          powered by Century
         </h1>
         <p
           :style="{

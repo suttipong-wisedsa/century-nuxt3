@@ -1,3 +1,4 @@
+import axios from "axios";
 const user = {
   state() {
     return {
@@ -5,13 +6,17 @@ const user = {
     };
   },
   mutations: {
-    setLogin(state, payload) {
-      state.user = payload;
+    setLogin(state, data) {
+      state.user = data;
     },
   },
   actions: {
-    login(context, payload) {
-      context.commit("setLogin", payload);
+    async login(context, payload) {
+      let { data } = await axios.get(
+        "https://jsonplaceholder.typicode.com/todos"
+      );
+      if (!data) return;
+      context.commit("setLogin", data);
     },
   },
 };
