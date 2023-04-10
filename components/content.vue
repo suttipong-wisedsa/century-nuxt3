@@ -4,7 +4,7 @@
       <v-col cols="12" sm="10">
         <h1 :style="style()" style="font-family: 'Prompt', sans-serif">
           Built for your business,<br />
-          powered by Century
+          powered by Century{{ loginTest }}
         </h1>
         <p
           :style="{
@@ -41,19 +41,25 @@
     </v-row>
     <v-row no-gutters justify="center">
       <v-card
-        style="margin-top: 150px; padding: 25px; position: relative;"
+        style="margin-top: 150px; padding: 25px; position: relative"
         width="100%"
         elevation="12"
         class="rounded-xl bg-card"
       >
         <v-row>
-          <v-col cols="12" sm="6"
-            ><img src="../assets/images/card.png" style="width: 90%;"
+          <v-col cols="12" sm="6" style="position: relative"
+            ><img
+              src="../assets/images/card.png"
+              :style="{
+                width: '100%',
+                objectFit: xs || sm ? 'contain' : 'fill',
+              }" /><v-img
+              :src="data.logo2"
+              style="width: 50%; position: absolute; top: 300px; left: 30px"
           /></v-col>
           <v-col cols="12" sm="6">
             <v-row>
-            
-              <v-col style="margin-top: 70px; position: relative;">
+              <v-col style="margin-top: 70px; position: relative">
                 <h1 class="text-surface font">Why do we use it?</h1>
                 <p class="text-surface font">
                   It is a long established fact that a reader will be distracted
@@ -66,9 +72,34 @@
                   'lorem ipsum' will uncover many web sites still in their
                   infancy.
                 </p>
-                <v-img :src="data.logo2" style="width: 30%;"/>
-                <v-img :src="data.logo2" style="width: 50%; position: absolute; top: -150px; right: 50px;"/>
-                <v-img :src="data.logo2" style="width: 50%; position: absolute; top: 300px; right: 30px;"/>
+                <v-img :src="data.logo2" style="width: 30%" />
+                <v-img
+                  :src="data.logo2"
+                  style="
+                    width: 50%;
+                    position: absolute;
+                    top: -150px;
+                    right: 50px;
+                  "
+                />
+                <v-img
+                  :src="data.logo2"
+                  style="
+                    width: 50%;
+                    position: absolute;
+                    top: 300px;
+                    right: 30px;
+                  "
+                />
+                <v-img
+                  :src="data.logo2"
+                  style="
+                    width: 50%;
+                    position: absolute;
+                    top: 20px;
+                    right: 500px;
+                  "
+                />
               </v-col>
             </v-row>
           </v-col>
@@ -81,13 +112,10 @@
     <v-row>
       <v-col :cols="12" sm="6">
         <div class="d-flex flex-row">
-          <v-card
-            class="rounded-lg"
-            style="background-color: #26264c; padding: 30px"
-          >
+          <v-card class="rounded-lg bg-card d-flex justify-center pa-8">
             <img
               src="../assets/images/admin_panel_settings_black_24dp.svg"
-              style="width: 100%; height: 100%"
+              style="width: 80px; height: 100%"
             />
           </v-card>
           <v-card-text class="font"
@@ -101,13 +129,10 @@
       </v-col>
       <v-col :cols="12" sm="6">
         <div class="d-flex flex-row">
-          <v-card
-            class="rounded-lg"
-            style="background-color: #26264c; padding: 30px"
-          >
+          <v-card class="rounded-lg bg-card d-flex justify-center pa-8">
             <img
               src="../assets/images/credit_card_black_24dp.svg"
-              style="width: 100%; height: 100%"
+              style="width: 80px; height: 100%"
             />
           </v-card>
           <v-card-text class="font"
@@ -122,13 +147,10 @@
       <v-responsive width="100%"></v-responsive>
       <v-col :cols="12" sm="6">
         <div class="d-flex flex-row">
-          <v-card
-            class="rounded-lg"
-            style="background-color: #26264c; padding: 30px"
-          >
+          <v-card class="rounded-lg bg-card d-flex justify-center pa-8">
             <img
               src="../assets/images/perm_identity_black_24dp.svg"
-              style="width: 100%; height: 100%"
+              style="width: 80px; height: 100%"
             />
           </v-card>
           <v-card-text class="font"
@@ -143,13 +165,10 @@
 
       <v-col :cols="12" sm="6">
         <div class="d-flex flex-row">
-          <v-card
-            class="rounded-lg"
-            style="background-color: #26264c; padding: 30px"
-          >
+          <v-card class="rounded-lg bg-card d-flex justify-center pa-8">
             <img
               src="../assets/images/delivery_dining_black_24dp.svg"
-              style="width: 100%; height: 100%"
+              style="width: 80px; height: 100%"
             />
           </v-card>
           <v-card-text class="font"
@@ -186,6 +205,7 @@
           :style="{
             width: xs || sm ? '100%' : '624px',
             height: '395px',
+            objectFit: xs || sm ? 'contain' : 'fill',
           }"
         />
       </v-col>
@@ -194,14 +214,14 @@
 </template>
 <script>
 import { useDisplay } from "vuetify";
+import { useStore } from "vuex";
+import axios from "axios";
 import data from "../data/data";
 export default {
   setup() {
     const { xs, sm } = useDisplay();
-    // async function fetchSomething() {
-    //   const ip = await this.$axios.$get("http://icanhazip.com");
-    //   console.log(ip);
-    // }
+    const store = useStore();
+    const img = ref("../assets/images/admin_panel_settings_black_24dp.svg");
     function style() {
       if (xs.value || sm.value) {
         return { fontSize: "25px", textAlign: "center" };
@@ -209,12 +229,23 @@ export default {
         return { fontSize: "55px", textAlign: "center" };
       }
     }
+    const loginTest = computed(() => {
+      return store.state.user.user;
+    });
+    // async function asyncData() {
+    //   let { data } = await axios.get(
+    //     "https://jsonplaceholder.typicode.com/todos"
+    //   );
+    //   return { posts: data };
+    // }
     return {
-      //fetchSomething,
       style,
       xs,
       sm,
       data,
+      img,
+      //asyncData,
+      loginTest,
     };
   },
 };

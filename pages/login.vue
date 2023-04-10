@@ -135,7 +135,7 @@
                 >Continue</NuxtLink
               >
             </v-btn>
-            <small class="text-red text-center my-2" style="display: block;">{{
+            <small class="text-red text-center my-2" style="display: block">{{
               Errormsg
             }}</small>
           </v-card>
@@ -146,6 +146,8 @@
 </template>
 <script>
 import { useDisplay } from "vuetify";
+import { useStore } from "vuex";
+import { mapActions } from "vuex";
 export default {
   setup() {
     const { xs, sm, md, lg, xl, xxl } = useDisplay();
@@ -157,6 +159,7 @@ export default {
     const router = useRouter();
     const isActive = ref(false);
     const loading = ref(false);
+    const store = useStore();
     function inputTel(e) {
       const data = e.target.value;
       userNumber.value = phoneNumber.value + data;
@@ -175,6 +178,8 @@ export default {
         isActive.value = true;
       } else {
         loading.value = true;
+
+        await store.dispatch("login", "Suttipong");
         router.push({ path: "/" });
         userNumber.value = "";
         loading.value = false;
