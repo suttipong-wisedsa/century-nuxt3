@@ -15,15 +15,38 @@
               <template v-slot:activator="{ props }">
                 <v-list-item v-bind="props" title="Delivery API"></v-list-item>
               </template>
+              <v-list-group>
+                <template v-slot:activator="{ props }">
+                  <v-list-item
+                    v-bind="props"
+                    title="API1"
+                    @click="scrolling('API1')"
+                  ></v-list-item>
+                </template>
 
-              <v-list-item
-                rounded="shaped"
-                v-for="([title, icon], i) in delivery"
-                :key="i"
-                :title="title"
-                :prepend-icon="icon"
-                :value="title"
-              ></v-list-item>
+                <v-list-item
+                  v-for="([title, icon], i) in admins"
+                  :key="i"
+                  :title="title"
+                  :value="title"
+                ></v-list-item>
+              </v-list-group>
+              <v-list-group>
+                <template v-slot:activator="{ props }">
+                  <v-list-item
+                    v-bind="props"
+                    title="API2"
+                    @click="scrolling('API2')"
+                  ></v-list-item>
+                </template>
+
+                <v-list-item
+                  v-for="([title, icon], i) in admins"
+                  :key="i"
+                  :title="title"
+                  :value="title"
+                ></v-list-item>
+              </v-list-group>
             </v-list-group>
             <v-list-group value="Payment" @click="scrolling('Payment')">
               <template v-slot:activator="{ props }">
@@ -47,7 +70,7 @@
         </v-card>
       </v-navigation-drawer>
 
-      <v-main style="height: 100vh">
+      <v-main style="height: 100vh; overflow: hidden">
         <v-app-bar color="info">
           <v-app-bar-nav-icon @click="drawerMB = !drawerMB" v-if="xs || sm"
             ><v-icon>mdi-menu </v-icon></v-app-bar-nav-icon
@@ -65,6 +88,7 @@
               append-inner-icon="mdi-magnify"
               single-line
               hide-details
+              v-model="search"
               @click:append-inner="onClick"
             ></v-text-field>
           </v-card-text>
@@ -90,14 +114,38 @@
                     title="Delivery API"
                   ></v-list-item>
                 </template>
+                <v-list-group>
+                  <template v-slot:activator="{ props }">
+                    <v-list-item
+                      v-bind="props"
+                      title="API1"
+                      @click="scrolling('API1')"
+                    ></v-list-item>
+                  </template>
 
-                <v-list-item
-                  v-for="([title, icon], i) in delivery"
-                  :key="i"
-                  :title="title"
-                  :prepend-icon="icon"
-                  :value="title"
-                ></v-list-item>
+                  <v-list-item
+                    v-for="([title, icon], i) in admins"
+                    :key="i"
+                    :title="title"
+                    :value="title"
+                  ></v-list-item>
+                </v-list-group>
+                <v-list-group>
+                  <template v-slot:activator="{ props }">
+                    <v-list-item
+                      v-bind="props"
+                      title="API2"
+                      @click="scrolling('API2')"
+                    ></v-list-item>
+                  </template>
+
+                  <v-list-item
+                    v-for="([title, icon], i) in admins"
+                    :key="i"
+                    :title="title"
+                    :value="title"
+                  ></v-list-item>
+                </v-list-group>
               </v-list-group>
               <v-list-group value="Payment" @click="scrolling('Payment')">
                 <template v-slot:activator="{ props }">
@@ -149,17 +197,11 @@ export default {
     const loaded = ref(false);
     const loading = ref(false);
     const drawerMB = ref(false);
-    const search = computed(() => {
-      return store.state.century.getData;
-    });
-    const delivery = ref([
-      ["-Getting started"],
-      ["-Overview"],
-      ["-Authentication"],
-    ]);
+    const search = ref("");
+    const delivery = ref([["API1"], ["API2"]]);
     const admins = ref([
-      ["Management", "mdi-account-multiple-outline"],
-      ["Settings", "mdi-cog-outline"],
+      ["Headers", "mdi-account-multiple-outline"],
+      ["Headers2", "mdi-cog-outline"],
     ]);
     const cruds = ref([
       ["Create", "mdi-plus-outline"],
@@ -171,6 +213,8 @@ export default {
     const subtitle = ref([]);
     async function onClick() {
       loading.value = true;
+      store.commit("setSreach", search.value);
+      loading.value = false;
     }
     function clickoutside() {
       drawerMB.value = false;
@@ -180,21 +224,35 @@ export default {
       if (menu == "Payment") {
         let e = document.getElementById("Payment");
         e.scrollIntoView({
-          block: "end",
+          block: "center",
           behavior: "smooth",
           inline: "center",
         });
       } else if (menu == "Identity") {
         let e = document.getElementById("Identity");
         e.scrollIntoView({
-          block: "end",
+          block: "center",
+          behavior: "smooth",
+          inline: "center",
+        });
+      } else if (menu == "API1") {
+        let e = document.getElementById("api1");
+        e.scrollIntoView({
+          block: "center",
+          behavior: "smooth",
+          inline: "center",
+        });
+      } else if (menu == "API2") {
+        let e = document.getElementById("api2");
+        e.scrollIntoView({
+          block: "center",
           behavior: "smooth",
           inline: "center",
         });
       } else {
         let e = document.getElementById("Authentication");
         e.scrollIntoView({
-          block: "end",
+          block: "center",
           behavior: "smooth",
           inline: "center",
         });

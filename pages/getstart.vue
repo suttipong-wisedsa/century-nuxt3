@@ -349,4 +349,19 @@ label:before {
 .font {
   font-family: "Prompt", sans-serif;
 }
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: #26264c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: navy;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3d3d7c;
+}
 </style>

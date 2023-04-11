@@ -96,11 +96,11 @@
                   v-model="phoneNumber"
                   @click="icon()"
                 >
-                  <option value="66" class="option-input">+66 TH</option>
-                  <option value="77" class="option-input">+77 TH</option>
-                  <option value="88" class="option-input">+88 TH</option>
-                  <option value="66" class="option-input">+66 TH</option>
-                  <option value="66" class="option-input">+66 TH</option>
+                  <option value="+66" class="option-input">+66 TH</option>
+                  <option value="+77" class="option-input">+77 TH</option>
+                  <option value="+88" class="option-input">+88 TH</option>
+                  <option value="+66" class="option-input">+66 TH</option>
+                  <option value="+66" class="option-input">+66 TH</option>
                 </select>
                 <img
                   src="../assets/images/iconmenu.png"
@@ -114,7 +114,7 @@
               <input
                 type="tel"
                 name="number"
-                @change="inputTel($event)"
+                v-model="inputNumber"
                 style="
                   border-left: 1px solid rgba(219, 214, 214, 0.63);
                   width: 100%;
@@ -147,11 +147,11 @@
 <script>
 import { useDisplay } from "vuetify";
 import { useStore } from "vuex";
-import { mapActions } from "vuex";
 export default {
   setup() {
     const { xs, sm, md, lg, xl, xxl } = useDisplay();
-    const phoneNumber = ref("66");
+    const phoneNumber = ref("+66");
+    const inputNumber = ref("");
     const iconToggle = ref(false);
     const userNumber = ref("");
     const tel = ref(null);
@@ -160,10 +160,7 @@ export default {
     const isActive = ref(false);
     const loading = ref(false);
     const store = useStore();
-    function inputTel(e) {
-      const data = e.target.value;
-      userNumber.value = phoneNumber.value + data;
-    }
+
     function icon() {
       iconToggle.value = !iconToggle.value;
     }
@@ -171,17 +168,21 @@ export default {
       iconToggle.value = false;
     }
     async function login() {
+      console.log(inputNumber.value);
       Errormsg.value = "";
       // if (!userNumber.value.match(/^[0-9]{4}-[0-9]{3}-[0-9]{4}/)) {
-      if (!userNumber.value.match(/^[0-9]{11}/)) {
+      if (!inputNumber.value.match(/^[0-9]{9}/)) {
         Errormsg.value = "Phone Number is incorrect";
         isActive.value = true;
       } else {
         loading.value = true;
-
-        await store.dispatch("login", "Suttipong");
+        let payload = {
+          tel: phoneNumber.value,
+          country: inputNumber.value,
+        };
+        await store.dispatch("login", payload);
         router.push({ path: "/" });
-        userNumber.value = "";
+        inputNumber.value = "";
         loading.value = false;
         isActive.value = false;
       }
@@ -195,7 +196,6 @@ export default {
     return {
       tel,
       Errormsg,
-      inputTel,
       phoneNumber,
       icon,
       iconToggle,
@@ -210,6 +210,7 @@ export default {
       login,
       isActive,
       loading,
+      inputNumber,
     };
   },
 };

@@ -1,7 +1,13 @@
 <template>
   <v-container :class="[sm || xs ? 'mbdown' : 'mbup']">
     <v-row no-gutters justify="center">
-      <v-col cols="12" sm="10">
+      <v-col cols="12" sm="10" style="position: relative">
+        <div v-if="xs || sm == false">
+          <v-img
+            :src="data.logo2"
+            style="width: 50%; position: absolute; top: -150px; left: -50px"
+          />
+        </div>
         <h1 :style="style()" style="font-family: 'Prompt', sans-serif">
           Built for your business,<br />
           powered by Century
@@ -37,6 +43,16 @@
             >
           </v-btn>
         </v-row>
+        <div v-if="xs || sm == false">
+          <v-img
+            :src="data.logo2"
+            style="width: 50%; position: absolute; top: 200px; right: 640px"
+          />
+          <v-img
+            :src="data.logo2"
+            style="width: 50%; position: absolute; top: 0px; right: -200px"
+          />
+        </div>
       </v-col>
     </v-row>
     <v-row no-gutters justify="center">
