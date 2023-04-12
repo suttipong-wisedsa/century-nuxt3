@@ -85,6 +85,7 @@
                       <v-col cols="12" sm="6">
                         <h3 class="text-text font">Your Full Name</h3>
                         <v-text-field
+                          v-model="register.name"
                           :rules="nameRules"
                           :loading="submit"
                           color="white"
@@ -96,6 +97,7 @@
                       <v-col cols="12" sm="6">
                         <h3 class="text-text font">Contact Number</h3>
                         <v-text-field
+                          v-model="register.number"
                           :rules="numberRules"
                           :loading="submit"
                           color="white"
@@ -107,6 +109,7 @@
                       <v-col cols="12" sm="6">
                         <h3 class="text-text font">Company Name</h3>
                         <v-text-field
+                          v-model="register.company"
                           :rules="textRules"
                           :loading="submit"
                           color="white"
@@ -118,6 +121,7 @@
                       <v-col cols="12" sm="6">
                         <h3 class="text-text font">Company Email Address</h3>
                         <v-text-field
+                          v-model="register.email"
                           :rules="emailRules"
                           :loading="submit"
                           color="white"
@@ -129,6 +133,7 @@
                       <v-col cols="12" sm="6">
                         <h3 class="text-text font">Company Website</h3>
                         <v-text-field
+                          v-model="register.website"
                           :rules="textRules"
                           :loading="submit"
                           color="white"
@@ -140,6 +145,7 @@
                       <v-col cols="12" sm="6">
                         <h3 class="text-text font">Job Title and Department</h3>
                         <v-text-field
+                          v-model="register.job"
                           :rules="textRules"
                           :loading="submit"
                           color="white"
@@ -151,6 +157,7 @@
                       <v-col cols="12" sm="6">
                         <h3 class="text-text font">Country of partnership</h3>
                         <v-select
+                          v-model="register.country"
                           :rules="textRules"
                           label="Select Country"
                           :items="[
@@ -216,6 +223,7 @@
 import { useDisplay } from "vuetify";
 import { ref } from "@vue/composition-api";
 import data from "../data/data";
+import { useStore } from "vuex";
 export default {
   setup() {
     const { xs, sm, lg, md, xl, xxl } = useDisplay();
@@ -223,9 +231,19 @@ export default {
     const route = useRoute();
     const submit = ref(false);
     const checkbox2 = ref(false);
+    const store = useStore();
     const checkbox1 = ref(false);
     const valid = ref(true);
     const lock = ref(true);
+    const register = reactive({
+      name: "",
+      number: "",
+      company: "",
+      email: "",
+      website: "",
+      job: "",
+      country: "",
+    });
     const router = useRouter();
     const nameRules = ref([
       (v) => !!v || "required",
@@ -272,7 +290,16 @@ export default {
       form.value.validate();
       if (valid.value) {
         submit.value = true;
+        let payload = {
+          user_provider_wesmart_first_name: register.name,
+          user_provider_wesmart_last_name: register.number,
+          user_provider_wesmart_email: register.email,
+          user_provider_wesmart_tel: register.number,
+          user_provider_wesmart_password: register.job,
+        };
+        await store.dispatch("register", payload);
         router.push({ path: "/" });
+        // router.push({ path: "/" });
         form.value.resetValidation();
         form.value.reset();
         submit.value = false;
@@ -305,6 +332,7 @@ export default {
       md,
       xl,
       xxl,
+      register,
     };
   },
 };

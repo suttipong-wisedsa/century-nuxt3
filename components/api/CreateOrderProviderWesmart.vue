@@ -58,6 +58,14 @@
           </pre
     >
   </v-card>
+  <v-alert
+    :dismissible="true"
+    prominent
+    type="success"
+    :class="[copy ? 'v-alert' : 'v-alert_active']"
+  >
+    Copy.
+  </v-alert>
 </template>
 <script>
 import docs from "~~/data/docs";
@@ -66,6 +74,7 @@ import { useStore } from "vuex";
 export default {
   setup() {
     const store = useStore();
+    const copy = ref(false);
     const body = ref([
       {
         parameter: "secret_key",
@@ -233,13 +242,18 @@ export default {
     "place_end": str()
 }'`);
     const myInput = ref(null);
-    function copyFunction($event) {
+    async function setFalse() {
+      copy.value = false;
+    }
+    async function copyFunction($event) {
+      copy.value = true;
       let click = $event;
       if (click === 1) {
         navigator.clipboard.writeText(Request.value);
       } else if (click === 2) {
         navigator.clipboard.writeText(Response.value);
       }
+      await setTimeout(setFalse, 1000);
     }
     return {
       docs,
@@ -249,6 +263,7 @@ export default {
       Request,
       Response,
       body,
+      copy,
       curl,
     };
   },
@@ -283,5 +298,31 @@ h3 {
   text-align: left;
   background-color: #e6e6e6;
   color: black;
+}
+.v-alert {
+  position: fixed;
+  left: 50%;
+  bottom: 50px;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  animation: fadeIn;
+}
+.v-alert_active {
+  position: fixed;
+  left: 50%;
+  bottom: 100%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 </style>

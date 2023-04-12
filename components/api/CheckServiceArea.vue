@@ -49,14 +49,14 @@
           </pre
     >
   </v-card>
-  <!-- <v-alert
+  <v-alert
     :dismissible="true"
     prominent
     type="success"
     :class="[copy ? 'v-alert' : 'v-alert_active']"
   >
     Copy.
-  </v-alert> -->
+  </v-alert>
 </template>
 <script>
 import docs from "~~/data/docs";
@@ -105,11 +105,11 @@ export default {
     "lat" : "7.906909401897036",
     "lng" : "98.37304703514336"
 }'`);
-    function setFalse() {
+    async function setFalse() {
       copy.value = false;
     }
     const myInput = ref(null);
-    function copyFunction($event) {
+    async function copyFunction($event) {
       copy.value = true;
       let click = $event;
       if (click === 1) {
@@ -117,7 +117,7 @@ export default {
       } else if (click === 2) {
         navigator.clipboard.writeText(Response.value);
       }
-      setInterval(setFalse, 3000);
+      await setTimeout(setFalse, 1000);
     }
     return {
       docs,
@@ -169,7 +169,7 @@ h3 {
   bottom: 50px;
   transform: translate(-50%, -50%);
   margin: 0 auto;
-  animation: fadeIn 5s;
+  animation: fadeIn;
 }
 .v-alert_active {
   position: fixed;
@@ -183,7 +183,7 @@ h3 {
     opacity: 0;
   }
   50% {
-    opacity: 999;
+    opacity: 1;
   }
   100% {
     opacity: 0;
