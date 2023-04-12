@@ -1,5 +1,5 @@
 <template>
-  <div id="CheckServiceArea">
+  <div id="Request">
     <div>
       <h3>Request</h3>
       <v-card class="pa-2" color="blue-grey-lighten-5" style="overflow: auto">
@@ -35,15 +35,11 @@
   </table>
   <v-card class="pa-5" color="blue-grey-lighten-5">
     <pre>
-            curl --location -g '{{
-        url_instance
-      }}/api/v1/providerwesmart/check_province_service' \ --header
-            'Content-Type: application/json' \ --data '{ "lat" :
-            "7.906909401897036", "lng" : "98.37304703514336" }'
+          {{ curl }}
           </pre
     >
   </v-card>
-  <h3>Response</h3>
+  <h3 id="Response">Response</h3>
   <v-card class="pa-5" color="blue-grey-lighten-5">
     <div class="d-flex justify-end">
       <v-icon icon="mdi-content-copy" @click="copyFunction(2)"></v-icon>
@@ -53,14 +49,23 @@
           </pre
     >
   </v-card>
+  <!-- <v-alert
+    :dismissible="true"
+    prominent
+    type="success"
+    :class="[copy ? 'v-alert' : 'v-alert_active']"
+  >
+    Copy.
+  </v-alert> -->
 </template>
 <script>
-import docs from "../data/docs";
-import api from "../data/apiData";
+import docs from "~~/data/docs";
+import api from "~~/data/apiData";
 import { useStore } from "vuex";
 export default {
   setup() {
     const store = useStore();
+    const copy = ref(false);
     const body = ref([
       {
         parameter: "lat",
@@ -93,14 +98,26 @@ export default {
 }
       `
     );
+    const curl =
+      ref(`curl --location -g '{{url_instance}}/api/v1/providerwesmart/check_province_service' \
+--header 'Content-Type: application/json' \
+--data '{
+    "lat" : "7.906909401897036",
+    "lng" : "98.37304703514336"
+}'`);
+    function setFalse() {
+      copy.value = false;
+    }
     const myInput = ref(null);
     function copyFunction($event) {
+      copy.value = true;
       let click = $event;
       if (click === 1) {
         navigator.clipboard.writeText(Request.value);
       } else if (click === 2) {
         navigator.clipboard.writeText(Response.value);
       }
+      setInterval(setFalse, 3000);
     }
     return {
       docs,
@@ -110,6 +127,8 @@ export default {
       Request,
       Response,
       body,
+      curl,
+      copy,
     };
   },
 };
@@ -143,5 +162,31 @@ h3 {
   text-align: left;
   background-color: #e6e6e6;
   color: black;
+}
+.v-alert {
+  position: fixed;
+  left: 50%;
+  bottom: 50px;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  animation: fadeIn 5s;
+}
+.v-alert_active {
+  position: fixed;
+  left: 50%;
+  bottom: 100%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 999;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 </style>

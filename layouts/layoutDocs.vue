@@ -19,13 +19,13 @@
                 <template v-slot:activator="{ props }">
                   <v-list-item
                     v-bind="props"
-                    title="API1"
+                    title="CheckServiceArea"
                     @click="scrolling('API1')"
                   ></v-list-item>
                 </template>
 
                 <v-list-item
-                  v-for="([title, icon], i) in admins"
+                  v-for="([title, icon], i) in CheckServiceArea"
                   :key="i"
                   :title="title"
                   :value="title"
@@ -36,13 +36,14 @@
                 <template v-slot:activator="{ props }">
                   <v-list-item
                     v-bind="props"
-                    title="API2"
+                    title="CreateOrderProvider"
                     @click="scrolling('API2')"
                   ></v-list-item>
                 </template>
 
                 <v-list-item
-                  v-for="([title, icon], i) in admins"
+                  v-for="([title, icon], i) in CreateOrderProvider"
+                  @click="scrollingCreateOrder(title)"
                   :key="i"
                   :title="title"
                   :value="title"
@@ -119,29 +120,30 @@
                   <template v-slot:activator="{ props }">
                     <v-list-item
                       v-bind="props"
-                      title="API1"
+                      title="CheckServiceArea"
                       @click="scrolling('API1')"
                     ></v-list-item>
                   </template>
 
                   <v-list-item
-                    v-for="([title, icon], i) in admins"
+                    v-for="([title, icon], i) in CheckServiceArea"
                     :key="i"
-                    :title="title"
-                    :value="title"
+                    :title="title.title"
+                    :value="title.title"
                   ></v-list-item>
                 </v-list-group>
                 <v-list-group>
                   <template v-slot:activator="{ props }">
                     <v-list-item
                       v-bind="props"
-                      title="API2"
+                      title="CreateOrderProvider"
                       @click="scrolling('API2')"
                     ></v-list-item>
                   </template>
 
                   <v-list-item
-                    v-for="([title, icon], i) in admins"
+                    v-for="([title, icon], i) in CreateOrderProvider"
+                    @click="scrolling(title)"
                     :key="i"
                     :title="title"
                     :value="title"
@@ -200,7 +202,8 @@ export default {
     const drawerMB = ref(false);
     const search = ref("");
     const delivery = ref([["API1"], ["API2"]]);
-    const admins = ref([["CheckServiceArea"], ["CreateOrderProvider"]]);
+    const CheckServiceArea = ref([["Request"], ["Response"]]);
+    const CreateOrderProvider = ref([["Request"], ["Response"]]);
     const cruds = ref([
       ["Create", "mdi-plus-outline"],
       ["Read", "mdi-file-outline"],
@@ -217,6 +220,24 @@ export default {
     function clickoutside() {
       drawerMB.value = false;
     }
+    function scrollingCreateOrder($event) {
+      let menu = $event;
+      if (menu == "Request") {
+        let e = document.getElementById("RequestCreate");
+        e.scrollIntoView({
+          block: "center",
+          behavior: "smooth",
+          inline: "center",
+        });
+      } else if (menu == "Response") {
+        let e = document.getElementById("ResponseCreate");
+        e.scrollIntoView({
+          block: "center",
+          behavior: "smooth",
+          inline: "center",
+        });
+      }
+    }
     function scrolling($event) {
       let menu = $event;
       if (menu == "Payment") {
@@ -228,6 +249,34 @@ export default {
         });
       } else if (menu == "Identity") {
         let e = document.getElementById("Identity");
+        e.scrollIntoView({
+          block: "center",
+          behavior: "smooth",
+          inline: "center",
+        });
+      } else if (menu == "Identity") {
+        let e = document.getElementById("Identity");
+        e.scrollIntoView({
+          block: "center",
+          behavior: "smooth",
+          inline: "center",
+        });
+      } else if (menu == "Identity") {
+        let e = document.getElementById("Identity");
+        e.scrollIntoView({
+          block: "center",
+          behavior: "smooth",
+          inline: "center",
+        });
+      } else if (menu == "Request") {
+        let e = document.getElementById("Request");
+        e.scrollIntoView({
+          block: "center",
+          behavior: "smooth",
+          inline: "center",
+        });
+      } else if (menu == "Response") {
+        let e = document.getElementById("Response");
         e.scrollIntoView({
           block: "center",
           behavior: "smooth",
@@ -274,9 +323,11 @@ export default {
       delivery,
       drawerMB,
       clickoutside,
-      admins,
+      CheckServiceArea,
       cruds,
       search,
+      CreateOrderProvider,
+      scrollingCreateOrder,
     };
   },
 };

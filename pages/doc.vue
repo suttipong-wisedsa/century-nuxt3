@@ -95,7 +95,8 @@
           </v-card-text>
         </v-card-text>
 
-        <CheckServiceArea></CheckServiceArea>
+        <apiCheckServiceArea></apiCheckServiceArea>
+        <apiCreateOrderProviderWesmart></apiCreateOrderProviderWesmart>
         <!-- <v-alert type="success" title="Copy"></v-alert> -->
       </div>
     </v-card>
