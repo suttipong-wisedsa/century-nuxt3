@@ -16,9 +16,9 @@ const user = {
   },
   actions: {
     async login(context, payload) {
-      let { data } = await axios.get(
-        "https://jsonplaceholder.typicode.com/todos"
-      );
+      const runtimeConfig = useRuntimeConfig();
+      let api = `${runtimeConfig.public.apiBase}/api/v1/providerwesmart/sent_otp_provider_wesmart`;
+      let { data } = await axios.post(api, payload);
       if (!data) return;
       context.commit("setLogin", data);
     },

@@ -55,6 +55,11 @@ export default defineNuxtConfig({
       noExternal: ["vuetify"],
     },
   },
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.VUE_APP_API_URL,
+    },
+  },
   modules: [
     async (options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) =>

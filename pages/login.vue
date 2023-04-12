@@ -168,7 +168,6 @@ export default {
       iconToggle.value = false;
     }
     async function login() {
-      console.log(inputNumber.value);
       Errormsg.value = "";
       // if (!userNumber.value.match(/^[0-9]{4}-[0-9]{3}-[0-9]{4}/)) {
       if (!inputNumber.value.match(/^[0-9]{9}/)) {
@@ -177,8 +176,8 @@ export default {
       } else {
         loading.value = true;
         let payload = {
-          tel: phoneNumber.value,
-          country: inputNumber.value,
+          country_tel: phoneNumber.value,
+          tel: inputNumber.value,
         };
         await store.dispatch("login", payload);
         router.push({ path: "/" });
