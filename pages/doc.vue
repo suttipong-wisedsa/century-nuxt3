@@ -94,27 +94,9 @@
             <p>{{ item.content }}</p>
           </v-card-text>
         </v-card-text>
-        <div>
-          <div>
-            <h3>Request</h3>
-            <v-card
-              height="50vh"
-              class="pa-2"
-              color="blue-grey-lighten-5"
-              style="overflow: auto"
-            >
-              <div class="d-flex justify-end">
-                <v-icon
-                  icon="mdi-content-copy"
-                  @click="copyFunction()"
-                ></v-icon>
-              </div>
-              <div style="height: 450px; width: 100%">
-                <pre>{{ message }}</pre>
-              </div>
-            </v-card>
-          </div>
-        </div>
+
+        <CheckServiceArea></CheckServiceArea>
+        <!-- <v-alert type="success" title="Copy"></v-alert> -->
       </div>
     </v-card>
   </v-app>
@@ -128,24 +110,28 @@ export default {
   setup() {
     const store = useStore();
     const route = useRoute();
+    const body = ref([
+      {
+        parameter: "lat",
+        type: "String",
+        required: "yes",
+        description:
+          "The client identifier issued to the client to obtain the OAuth 2.0 access_token",
+      },
+      {
+        parameter: "lng",
+        type: "String",
+        required: "yes",
+        description:
+          "The client identifier issued to the client to obtain the OAuth 2.0 access_token",
+      },
+    ]);
     const message = ref(
       `
-  {
-        "name":" bass",
-        "age": "23",
-        "name":" bass",
-        "age": "23",
-        "name":" bass",
-        "age": "23",
-        "name":" bass",
-        "age": "23",
-        "name":" bass",
-        "age": "23",
-        "name":" bass",
-        "age": "23",
-        "name":" bass",
-        "age": "23",
-  }
+ {
+    "lat" : "7.906909401897036",
+    "lng" : "98.37304703514336"
+}
       `
     );
     const title = computed(() => {
@@ -177,6 +163,7 @@ export default {
       copyFunction,
       myInput,
       message,
+      body,
     };
   },
 };

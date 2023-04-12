@@ -29,6 +29,7 @@
                   :key="i"
                   :title="title"
                   :value="title"
+                  @click="scrolling(title)"
                 ></v-list-item>
               </v-list-group>
               <v-list-group>
@@ -199,10 +200,7 @@ export default {
     const drawerMB = ref(false);
     const search = ref("");
     const delivery = ref([["API1"], ["API2"]]);
-    const admins = ref([
-      ["Headers", "mdi-account-multiple-outline"],
-      ["Headers2", "mdi-cog-outline"],
-    ]);
+    const admins = ref([["CheckServiceArea"], ["CreateOrderProvider"]]);
     const cruds = ref([
       ["Create", "mdi-plus-outline"],
       ["Read", "mdi-file-outline"],
@@ -230,6 +228,13 @@ export default {
         });
       } else if (menu == "Identity") {
         let e = document.getElementById("Identity");
+        e.scrollIntoView({
+          block: "center",
+          behavior: "smooth",
+          inline: "center",
+        });
+      } else if (menu == "CheckServiceArea") {
+        let e = document.getElementById("CheckServiceArea");
         e.scrollIntoView({
           block: "center",
           behavior: "smooth",
