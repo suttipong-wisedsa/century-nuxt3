@@ -22,6 +22,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       text: "#FFFFFF",
       navbardocs: "#F7F7F7",
       card: "#26264c",
+      font: "#B2B2B2",
     },
   };
   const vuetify = createVuetify({
