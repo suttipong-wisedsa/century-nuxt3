@@ -9,7 +9,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   const myAllBlackTheme: ThemeDefinition = {
     dark: false,
     colors: {
-      background: "#030026",
+      background: "#FFFFFF",
       surface: "#FFFFFF",
       primary: "#6200EE",
       "primary-darken-1": "#3700B3",
@@ -23,6 +23,11 @@ export default defineNuxtPlugin((nuxtApp) => {
       navbardocs: "#F7F7F7",
       card: "#26264c",
       font: "#B2B2B2",
+      getstart: "#F7F7F7",
+      getstartFont: "#7B7B7B",
+      footer: "#121212",
+      textyellow: "#FDCA00",
+      cardyellow: "#FFF6B2",
     },
   };
   const vuetify = createVuetify({

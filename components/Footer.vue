@@ -1,12 +1,16 @@
 <template>
   <div style="font-family: sarabun; color: #ffffff">
     <div>
-      <div class="bg-info font">
+      <div class="bg-footer font">
         <v-container>
           <v-row class="px-3 py-5">
             <v-col cols="12" sm="6">
               <div>
-                <v-img :src="data.logo" width="200px" height="40px" />
+                <!-- <v-img :src="data.logo" width="200px" height="40px" /> -->
+                <img
+                  src="../assets/images/Group 5725.png"
+                  style="width: 150px"
+                />
               </div>
               <div
                 class="white--text mt-3 font"
@@ -53,7 +57,7 @@
       </div>
     </div>
     <v-divider class="border-opacity-75" color="surface"></v-divider>
-    <div class="bg-info">
+    <div class="bg-footer">
       <v-card-text class="white--text d-flex align-self-center justify-center"
         >&copy; Copyright 2021. All Rights Reserved.
       </v-card-text>

@@ -44,28 +44,28 @@
     >
       <v-spacer></v-spacer>
       <v-toolbar-title @click="reditect()" style="cursor: pointer"
-        ><v-img width="300" :src="data.logo" cover></v-img
-      ></v-toolbar-title>
+        ><img src="../assets/images/Group 5723.png" style="width: 170px"
+      /></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-spacer></v-spacer>
       <v-row>
         <v-toolbar-title>
-          <NuxtLink to="doc" class="text-surface" style="text-decoration: none"
+          <NuxtLink to="doc" class="text-black" style="text-decoration: none"
             >Docs</NuxtLink
           >
         </v-toolbar-title>
         <v-toolbar-title>
           <NuxtLink
-            class="text-surface"
+            class="text-black"
             style="text-decoration: none"
             to="/getstart"
             >Get Start</NuxtLink
           >
         </v-toolbar-title>
-        <v-btn variant="outlined">
+        <v-btn class="bg-black">
           <v-toolbar-title>
             <NuxtLink
-              class="text-surface"
+              class="text-white"
               to="/login"
               style="text-decoration: none"
               >Login</NuxtLink

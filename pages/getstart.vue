@@ -1,14 +1,16 @@
 <template>
   <v-app>
     <v-row
-      style="height: 100%; overflow: hidden; position: relative"
-      :class="xs || sm ? 'mx-2 my-5' : 'mx-5'"
+      class="bg-getstart"
+      justify="center"
+      align="center"
+      style="height: 1000px"
     >
-      <v-img
+      <!-- <v-img
         :src="data.logo2"
         style="position: absolute; width: 500px; top: 20px; left: -80px"
-      />
-      <v-col :cols="12" sm="6">
+      /> -->
+      <!-- <v-col :cols="12" sm="6">
         <div
           style="height: 100vh"
           class="d-flex align-center justify-center"
@@ -38,124 +40,132 @@
           :src="data.logo2"
           style="position: absolute; width: 500px; top: 550px; left: 980px"
         />
-      </v-col>
-      <v-col :cols="12" sm="6">
-        <div style="height: 100%" class="d-flex align-center justify-start">
-          <div :style="mbCard()">
-            <div v-if="xs || sm" class="pa-6">
-              <h1 class="text-center">Get Start</h1>
-              <p class="text-start">
-                It is a long established fact that a reader will be distracted
-                by the readable content of a page when looking at its layout.
-              </p>
-            </div>
-            <!-- <v-img
-              :src="data.logo2"
-              style="
-                position: absolute;
-                width: 600px;
-                top: 0px;
-                left: 1380px;
-                z-index: 5;
-              "
-            /> -->
-            <v-img
-              :src="data.logo2"
-              style="
-                position: absolute;
-                width: 600px;
-                top: 450px;
-                left: 1380px;
-                z-index: 5;
-              "
-            />
-            <v-card
-              class="overflow-auto rounded-xl"
-              :max-height="xxl ? '800px' : '600px'"
-              max-width="650px"
+      </v-col> -->
+      <v-col>
+        <img
+          src="../assets/images/Ellipse 364.png"
+          style="position: absolute; width: 300px; left: 20px; top: 20%"
+        />
+        <img
+          src="../assets/images/Ellipse 364.png"
+          style="position: absolute; width: 300px; left: 20px; top: 20%"
+        />
+        <img
+          src="../assets/images/Ellipse 364.png"
+          style="position: absolute; width: 500px; left: 500px; top: 10%"
+        />
+        <img
+          src="../assets/images/Ellipse 364.png"
+          style="position: absolute; width: 300px; right: -100px; top: 400px"
+        />
+        <img
+          src="../assets/images/Ellipse 364.png"
+          style="position: absolute; width: 300px; right: 800px; bottom: -150px"
+        />
+
+        <div class="d-flex justify-center pa-16" v-if="xs || sm == false">
+          <div>
+            <h3
+              class="text-center text-black font"
+              style="font-size: 30px; font-weight: bolder"
             >
-              <v-card-text class="bg-card">
+              Get Start
+            </h3>
+            <p
+              class="text-center text-getstartFont font"
+              style="width: 600px; font-size: 18px"
+            >
+              It is a long established fact that a reader will be distracted by
+              the readable content of a page when looking at its layout.
+            </p>
+          </div>
+        </div>
+        <div class="d-flex align-center justify-center">
+          <div>
+            <v-card class="rounded-xl" max-width="650px">
+              <v-card-text class="bg-surface">
                 <v-form ref="form" v-model="valid" lazy-validation>
                   <v-container>
                     <v-row style="position: relative">
-                      <v-img
-                        :src="data.logo2"
-                        style="position: absolute; top: 50px"
+                      <img
+                        src="../assets/images/Ellipse 364.png"
+                        style="
+                          position: absolute;
+                          width: 300px;
+                          right: 10px;
+                          top: -50px;
+                        "
                       />
                       <v-col cols="12" sm="6">
-                        <h3 class="text-text font">Your Full Name</h3>
+                        <h3 class="text-black font">Your Full Name</h3>
                         <v-text-field
                           v-model="register.name"
                           :rules="nameRules"
                           :loading="submit"
-                          color="white"
                           type="text"
                           label="Your Name"
                           variant="outlined"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6">
-                        <h3 class="text-text font">Contact Number</h3>
+                        <h3 class="text-black font">Contact Number</h3>
                         <v-text-field
                           v-model="register.number"
                           :rules="numberRules"
                           :loading="submit"
-                          color="white"
                           type="text"
                           label="Your Number"
                           variant="outlined"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6">
-                        <h3 class="text-text font">Company Name</h3>
+                        <h3 class="text-black font">Company Name</h3>
                         <v-text-field
                           v-model="register.company"
                           :rules="textRules"
                           :loading="submit"
-                          color="white"
                           type="text"
                           label="Company Name"
                           variant="outlined"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6">
-                        <h3 class="text-text font">Company Email Address</h3>
+                        <h3 class="text-black font">Company Email Address</h3>
                         <v-text-field
                           v-model="register.email"
                           :rules="emailRules"
                           :loading="submit"
-                          color="white"
                           type="email"
                           label="Company@email.com"
                           variant="outlined"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6">
-                        <h3 class="text-text font">Company Website</h3>
+                        <h3 class="text-black font">Company Website</h3>
                         <v-text-field
                           v-model="register.website"
                           :rules="textRules"
                           :loading="submit"
-                          color="white"
                           type="text"
                           label="Company Website"
                           variant="outlined"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6">
-                        <h3 class="text-text font">Job Title and Department</h3>
+                        <h3 class="text-black font">
+                          Job Title and Department
+                        </h3>
                         <v-text-field
                           v-model="register.job"
                           :rules="textRules"
                           :loading="submit"
-                          color="white"
                           type="text"
                           label="Country of partnership"
                           variant="outlined"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6">
-                        <h3 class="text-text font">Country of partnership</h3>
+                        <h3 class="text-black font">Country of partnership</h3>
                         <v-select
                           v-model="register.country"
                           :rules="textRules"
@@ -171,44 +181,17 @@
                           variant="outlined"
                         ></v-select>
                       </v-col>
+
+                      <v-btn
+                        elevation="12"
+                        class="font"
+                        :block="true"
+                        color="black"
+                        size="x-large"
+                        @click="confirm()"
+                        >CONFIRM</v-btn
+                      >
                     </v-row>
-                    <div class="pb-6">
-                      <input
-                        v-model="checkbox1"
-                        type="checkbox"
-                        id="vehicle1"
-                        name="vehicle1"
-                        value="Bike"
-                      />
-                      <label for="vehicle1">
-                        It is a long established fact that a reader will be
-                        distracted by the readable content of a page when
-                        looking at its layout.</label
-                      ><br />
-                    </div>
-                    <div class="pb-6">
-                      <input
-                        v-model="checkbox2"
-                        type="checkbox"
-                        id="vehicle2"
-                        name="vehicle2"
-                        value="Car"
-                      />
-                      <label for="vehicle2">
-                        It is a long established fact that a reader will be
-                        distracted by the readable content of a page when
-                        looking at its layout.</label
-                      ><br />
-                    </div>
-                    <v-btn
-                      class="font"
-                      :disabled="lock"
-                      :block="true"
-                      color="info"
-                      size="x-large"
-                      @click="confirm()"
-                      >CONFIRM</v-btn
-                    >
                   </v-container>
                 </v-form>
               </v-card-text>
@@ -234,7 +217,6 @@ export default {
     const store = useStore();
     const checkbox1 = ref(false);
     const valid = ref(true);
-    const lock = ref(true);
     const register = reactive({
       name: "",
       number: "",
@@ -272,13 +254,13 @@ export default {
     watch(checkbox2, () => {
       botton();
     });
-    async function botton() {
-      if (checkbox1.value == true && checkbox2.value == true) {
-        lock.value = false;
-      } else {
-        lock.value = true;
-      }
-    }
+    // async function botton() {
+    //   if (checkbox1.value == true && checkbox2.value == true) {
+    //     lock.value = false;
+    //   } else {
+    //     lock.value = true;
+    //   }
+    // }
     function mbCard() {
       if (xs.value || sm.value) {
         return { marginTop: "50px" };
@@ -299,7 +281,6 @@ export default {
         };
         await store.dispatch("register", payload);
         router.push({ path: "/" });
-        // router.push({ path: "/" });
         form.value.resetValidation();
         form.value.reset();
         submit.value = false;
@@ -323,7 +304,7 @@ export default {
       lg,
       checkbox1,
       checkbox2,
-      lock,
+
       form,
       emailRules,
       numberRules,
@@ -391,5 +372,9 @@ label:before {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #3d3d7c;
+}
+
+.font {
+  font-family: "Prompt", sans-serif;
 }
 </style>

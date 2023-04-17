@@ -3,16 +3,19 @@
     <v-row no-gutters justify="center">
       <v-col cols="12" sm="10" style="position: relative">
         <div v-if="xs || sm == false">
-          <v-img
-            :src="data.logo2"
-            style="width: 50%; position: absolute; top: -150px; left: -50px"
-          />
+          <!-- <img
+            src="../assets/images/Ellipse 364.png"
+            style="width: 50%; position: absolute; top: -150px; left: -200px"
+          /> -->
         </div>
         <h1 :style="style()" style="font-family: 'Prompt', sans-serif">
-          Built for your business,<br />
+          Built for your
+          <span class="text-textyellow">business,</span>
+          <br />
           powered by Century
         </h1>
         <p
+          class="text-getstartFont"
           :style="{
             fontWeight: sm || xs ? 'bold' : '',
             fontSize: sm || xs ? '' : '20px',
@@ -30,7 +33,7 @@
           infancy.
         </p>
         <v-row no-gutters justify="center" style="margin-top: 35px">
-          <v-btn variant="flat" color="info" size="x-large"
+          <v-btn variant="flat" color="black" size="x-large"
             ><NuxtLink
               to="getstart"
               class="text-surface"
@@ -44,14 +47,14 @@
           </v-btn>
         </v-row>
         <div v-if="xs || sm == false">
-          <v-img
-            :src="data.logo2"
+          <img
+            src="../assets/images/Ellipse 364.png"
             style="width: 50%; position: absolute; top: 200px; right: 640px"
           />
-          <v-img
-            :src="data.logo2"
+          <!-- <img
+            src="../assets/images/Ellipse 364.png"
             style="width: 50%; position: absolute; top: 0px; right: -200px"
-          />
+          /> -->
         </div>
       </v-col>
     </v-row>
@@ -60,7 +63,7 @@
         style="margin-top: 150px; padding: 25px; position: relative"
         width="100%"
         elevation="12"
-        class="rounded-xl bg-card"
+        class="rounded-xl bg-surface"
       >
         <v-row>
           <v-col cols="12" sm="6" style="position: relative"
@@ -69,15 +72,15 @@
               :style="{
                 width: '100%',
                 objectFit: xs || sm ? 'contain' : 'fill',
-              }" /><v-img
-              :src="data.logo2"
+              }" /><img
+              src="../assets/images/Ellipse 364.png"
               style="width: 50%; position: absolute; top: 300px; left: 30px"
           /></v-col>
           <v-col cols="12" sm="6">
             <v-row>
               <v-col style="margin-top: 70px; position: relative">
-                <h1 class="text-surface font">Why do we use it?</h1>
-                <p class="text-surface font">
+                <h1 class="text-black font">Why do we use it?</h1>
+                <p class="text-black font">
                   It is a long established fact that a reader will be distracted
                   by the readable content of a page when looking at its layout.
                   The point of using Lorem Ipsum is that it has a more-or-less
@@ -88,9 +91,12 @@
                   'lorem ipsum' will uncover many web sites still in their
                   infancy.
                 </p>
-                <v-img :src="data.logo2" style="width: 30%" />
-                <v-img
-                  :src="data.logo2"
+                <img
+                  src="../assets/images/Ellipse 364.png"
+                  style="width: 30%"
+                />
+                <img
+                  src="../assets/images/Ellipse 364.png"
                   style="
                     width: 50%;
                     position: absolute;
@@ -98,8 +104,8 @@
                     right: 50px;
                   "
                 />
-                <v-img
-                  :src="data.logo2"
+                <img
+                  src="../assets/images/Ellipse 364.png"
                   style="
                     width: 50%;
                     position: absolute;
@@ -107,8 +113,8 @@
                     right: 30px;
                   "
                 />
-                <v-img
-                  :src="data.logo2"
+                <img
+                  src="../assets/images/Ellipse 364.png"
                   style="
                     width: 50%;
                     position: absolute;
@@ -128,7 +134,7 @@
     <v-row>
       <v-col :cols="12" sm="6">
         <div class="d-flex flex-row">
-          <v-card class="rounded-lg bg-card d-flex justify-center pa-8">
+          <v-card class="rounded-lg bg-cardyellow d-flex justify-center pa-8">
             <img
               src="../assets/images/admin_panel_settings_black_24dp.svg"
               style="width: 80px; height: 100%"
@@ -145,7 +151,7 @@
       </v-col>
       <v-col :cols="12" sm="6">
         <div class="d-flex flex-row">
-          <v-card class="rounded-lg bg-card d-flex justify-center pa-8">
+          <v-card class="rounded-lg bg-cardyellow d-flex justify-center pa-8">
             <img
               src="../assets/images/credit_card_black_24dp.svg"
               style="width: 80px; height: 100%"
@@ -163,7 +169,7 @@
       <v-responsive width="100%"></v-responsive>
       <v-col :cols="12" sm="6">
         <div class="d-flex flex-row">
-          <v-card class="rounded-lg bg-card d-flex justify-center pa-8">
+          <v-card class="rounded-lg bg-cardyellow d-flex justify-center pa-8">
             <img
               src="../assets/images/perm_identity_black_24dp.svg"
               style="width: 80px; height: 100%"
@@ -181,7 +187,7 @@
 
       <v-col :cols="12" sm="6">
         <div class="d-flex flex-row">
-          <v-card class="rounded-lg bg-card d-flex justify-center pa-8">
+          <v-card class="rounded-lg bg-cardyellow d-flex justify-center pa-8">
             <img
               src="../assets/images/delivery_dining_black_24dp.svg"
               style="width: 80px; height: 100%"
