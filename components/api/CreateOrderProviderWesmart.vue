@@ -17,7 +17,7 @@
     </div>
   </div>
   <h3>Request Body Parameters</h3>
-  <table id="customers" class="my-5">
+  <!-- <table id="customers" class="my-5" style="width: 62vw; overflow-x: auto">
     <tr>
       <th>Parameter</th>
       <th>Type</th>
@@ -36,11 +36,31 @@
         {{ item.description }}
       </td>
     </tr>
+  </table> -->
+  <table id="customers" class="my-5">
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Required</th>
+      <th>Description</th>
+    </tr>
+    <tr v-for="(item, index) in body" :key="index">
+      <td style="width: 15%">
+        <v-card width="80px" color="blue-grey-lighten-5" class="text-center">{{
+          item.parameter
+        }}</v-card>
+      </td>
+      <td style="width: 15%">{{ item.type }}</td>
+      <td style="width: 15%">{{ item.required }}</td>
+      <td style="width: 50%">
+        {{ item.description }}
+      </td>
+    </tr>
   </table>
   <v-card
     class="pa-5"
     color="blue-grey-lighten-5"
-    width="75vw"
+    width="62vw"
     style="overflow-x: auto"
   >
     <pre>

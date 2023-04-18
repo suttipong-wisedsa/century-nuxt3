@@ -98,10 +98,10 @@
                     <div>
                       <div class="otp-container">
                         <input
-                          class="inputOPT"
+                          :class="[sm || xs ? 'inputOPTMB' : 'inputOPT']"
                           v-for="(value, index) in otpValues"
                           :key="index"
-                          type="text"
+                          type="password"
                           maxlength="1"
                           :value="value"
                           @input="handleInput(index, $event.target.value)"
@@ -115,7 +115,7 @@
               </div>
             </v-card>
           </div>
-          <div v-if="slide">
+          <div v-if="slide" style="position: relative">
             <div class="d-flex justify-center">
               <v-btn
                 :disabled="lock == false"
@@ -132,9 +132,11 @@
                   >Continue</NuxtLink
                 >
               </v-btn>
-              <p class="text-red">{{ errormsg }}</p>
             </div>
-            <p class="text-center pa-5">
+            <p class="text-red text-center">
+              {{ errormsg }}
+            </p>
+            <p class="text-center pa-5 mt-5">
               <v-btn
                 :loading="loading"
                 flat
@@ -157,6 +159,7 @@
         </v-col>
         <v-col :cols="12" sm="6">
           <img
+            v-if="xs || sm === false"
             src="../assets/images/Group 1.png"
             style="height: 100vh; width: 100%; object-fit: cover"
           />
@@ -182,7 +185,7 @@ export default {
     const loading = ref(false);
     const store = useStore();
     const slide = ref(false);
-    const lock = ref(true);
+    const lock = ref(false);
     const otp = ref("");
     const time = ref(60);
     const errormsg = ref("");
@@ -244,14 +247,17 @@ export default {
       }
     }
     async function login() {
+      console.log(inputNumber.value.length);
       Errormsg.value = "";
       // if (!userNumber.value.match(/^[0-9]{4}-[0-9]{3}-[0-9]{4}/)) {
-      if (!inputNumber.value.match(/^[0-9]{9}/)) {
+      if (
+        !inputNumber.value.match(/^[0-9]{9}/) ||
+        !inputNumber.value.length === 9
+      ) {
         Errormsg.value = "Phone Number is incorrect";
         isActive.value = true;
       } else {
         loading.value = true;
-
         let payload = {
           country_tel: phoneNumber.value,
           tel: inputNumber.value,
@@ -267,8 +273,15 @@ export default {
     }
     watch(otpValues.value, () => {
       let pin = `${otpValues.value[0]}${otpValues.value[1]}${otpValues.value[2]}${otpValues.value[3]}${otpValues.value[4]}${otpValues.value[5]}`;
-      if (pin.length == 6) {
+      if (pin.length == 6 && /^[0-9]+$/.test(pin)) {
+        errormsg.value = "";
         lock.value = true;
+      } else if (pin.length == 6) {
+        errormsg.value = "* OTP incorrect, please try again";
+        lock.value = false;
+      } else {
+        errormsg.value = "";
+        lock.value = false;
       }
     });
     definePageMeta({
@@ -373,6 +386,17 @@ select {
   margin: 10px;
   height: 55px;
   width: 70px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  font-family: arimo;
+  font-size: 1.2rem;
+  border: 3px solid #e5e5e5;
+}
+.inputOPTMB {
+  margin: 5px;
+  height: 55px;
+  width: 50px;
   border: none;
   border-radius: 5px;
   text-align: center;

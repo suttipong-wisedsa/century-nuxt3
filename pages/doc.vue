@@ -1,16 +1,21 @@
 <template>
   <v-app class="bg-surface">
-    <v-card flat class="overflow-auto" style="width: 100vw; height: 82vh">
+    <v-card
+      flat
+      class="overflow-auto"
+      style="height: 82vh"
+      :style="{
+        width: xs || sm ? '100vw' : '78vw',
+      }"
+    >
       <div
         :style="{
           padding: xs || sm ? '0px' : '25px',
-          maxWidth: '1200px',
+          maxWidth: '1000px',
         }"
       >
-        <v-card-text style="font-size: 25px; text-indent: 50px">
-          <p>
-            {{ title }}
-          </p>
+        <v-card-text style="font-size: 25px">
+          <h3>Documentation</h3>
         </v-card-text>
         <v-card-text
           style="font-size: 25px"
@@ -106,9 +111,11 @@
 <script>
 import docs from "../data/docs";
 import api from "../data/apiData";
+import { useDisplay } from "vuetify";
 import { useStore } from "vuex";
 export default {
   setup() {
+    const { xs, sm, md, lg, xl, xxl } = useDisplay();
     const store = useStore();
     const route = useRoute();
     const body = ref([
@@ -165,6 +172,8 @@ export default {
       myInput,
       message,
       body,
+      xs,
+      sm,
     };
   },
 };
@@ -198,5 +207,24 @@ h3 {
   text-align: left;
   background-color: #e6e6e6;
   color: black;
+}
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f6f6f6;
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fddf00 0% 0% no-repeat padding-box;
+  height: 199px;
+  border-radius: 9px;
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #fddf0085 0% 0% no-repeat padding-box;
 }
 </style>

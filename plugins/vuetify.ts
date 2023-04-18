@@ -28,6 +28,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       footer: "#121212",
       textyellow: "#FDCA00",
       cardyellow: "#FFF6B2",
+      scoll: "#FDDF00",
     },
   };
   const vuetify = createVuetify({

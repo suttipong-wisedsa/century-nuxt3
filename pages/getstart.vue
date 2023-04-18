@@ -273,11 +273,19 @@ export default {
       if (valid.value) {
         submit.value = true;
         let payload = {
-          user_provider_wesmart_first_name: register.name,
-          user_provider_wesmart_last_name: register.number,
-          user_provider_wesmart_email: register.email,
-          user_provider_wesmart_tel: register.number,
-          user_provider_wesmart_password: register.job,
+          // user_provider_wesmart_first_name: register.name,
+          // user_provider_wesmart_last_name: register.number,
+          // user_provider_wesmart_email: register.email,
+          // user_provider_wesmart_tel: register.number,
+          // user_provider_wesmart_password: register.job,
+          contact_provider_wesmart_first_name: register.name,
+          contact_provider_wesmart_last_name: register.name,
+          contact_provider_wesmart_country_tel: register.number,
+          contact_provider_wesmart_tel: register.number,
+          contact_provider_wesmart_company_email: register.email,
+          contact_provider_wesmart_company_name: register.company,
+          contact_provider_wesmart_company_title: register.job,
+          contact_provider_wesmart_company_website: register.website,
         };
         await store.dispatch("register", payload);
         router.push({ path: "/" });

@@ -18,7 +18,7 @@
         >
       </v-app-bar>
     </div>
-    <v-app-bar
+    <!-- <v-app-bar
       v-if="xs || sm == false"
       app
       :color="showNav ? 'text' : 'text'"
@@ -54,6 +54,55 @@
           <v-toolbar-title>
             <NuxtLink
               class="text-surface"
+              to="/login"
+              style="text-decoration: none"
+              >Login</NuxtLink
+            >
+          </v-toolbar-title>
+        </v-btn>
+      </v-row>
+      <v-spacer></v-spacer>
+    </v-app-bar> -->
+    <v-app-bar
+      v-if="xs || sm == false"
+      app
+      color="transparent"
+      :elevation="0"
+      @scroll="handleScroll()"
+    >
+      <v-spacer></v-spacer>
+      <v-toolbar-title @click="reditect()" style="cursor: pointer"
+        ><img src="../assets/images/Group 5723.png" style="width: 150px"
+      /></v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
+      <v-row>
+        <v-toolbar-title>
+          <NuxtLink
+            to="doc"
+            class="text-black"
+            style="text-decoration: none; font-weight: bold"
+            >Docs</NuxtLink
+          >
+          <v-divider
+            :thickness="3"
+            class="border-opacity-100"
+            color="scoll"
+            length="45"
+          ></v-divider>
+        </v-toolbar-title>
+        <v-toolbar-title>
+          <NuxtLink
+            class="text-black"
+            style="text-decoration: none"
+            to="/getstart"
+            >Get Start</NuxtLink
+          >
+        </v-toolbar-title>
+        <v-btn class="bg-black">
+          <v-toolbar-title>
+            <NuxtLink
+              class="text-white"
               to="/login"
               style="text-decoration: none"
               >Login</NuxtLink

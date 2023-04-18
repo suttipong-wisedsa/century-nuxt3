@@ -4,17 +4,13 @@
     <v-layout>
       <v-app-bar title=""></v-app-bar>
       <v-navigation-drawer v-if="xs || sm == false">
-        <v-toolbar-title
-          class="font"
-          style="font-size: 25px; padding: 15px; font-weight: bold"
-          >Documentation</v-toolbar-title
-        >
-        <v-card class="mx-auto" width="300" flat>
-          <v-list v-model:opened="open">
+        <!-- <v-card class="mx-auto" width="300" flat>
+          <v-list v-model:opened="open" density="compact">
             <v-list-group value="Users">
               <template v-slot:activator="{ props }">
                 <v-list-item v-bind="props" title="Delivery API"></v-list-item>
               </template>
+
               <v-list-group>
                 <template v-slot:activator="{ props }">
                   <v-list-item
@@ -69,32 +65,31 @@
               </template>
             </v-list-group>
           </v-list>
+        </v-card> -->
+        <v-card flat>
+          <v-layout>
+            <v-navigation-drawer floating permanent>
+              <v-list density="compact" active-color="scoll">
+                <v-list-item
+                  @click="scrolling(item)"
+                  v-for="(item, index) in menu"
+                  class="font"
+                  :key="index"
+                  :value="index"
+                  :style="{
+                    fontSize:
+                      index == 0 || index == 4 || index == 8 ? '20px' : '16px',
+                  }"
+                  >{{ item }}</v-list-item
+                >
+              </v-list>
+            </v-navigation-drawer>
+            <v-main style="height: 90vh"></v-main>
+          </v-layout>
         </v-card>
       </v-navigation-drawer>
 
       <v-main style="height: 100vh; overflow: hidden">
-        <v-app-bar color="info">
-          <v-app-bar-nav-icon @click="drawerMB = !drawerMB" v-if="xs || sm"
-            ><v-icon>mdi-menu </v-icon></v-app-bar-nav-icon
-          >
-          <v-toolbar-title v-if="xs || sm == false" style="padding: 15px"
-            >Documentation</v-toolbar-title
-          >
-          <v-spacer></v-spacer>
-          <v-card-text>
-            <v-text-field
-              :loading="loading"
-              density="compact"
-              variant="solo"
-              label="Search"
-              append-inner-icon="mdi-magnify"
-              single-line
-              hide-details
-              v-model="search"
-              @click:append-inner="onClick"
-            ></v-text-field>
-          </v-card-text>
-        </v-app-bar>
         <div>
           <v-navigation-drawer
             v-model="drawerMB"
@@ -209,6 +204,20 @@ export default {
       ["Read", "mdi-file-outline"],
       ["Update", "mdi-update"],
       ["Delete", "mdi-delete"],
+    ]);
+    const menu = ref([
+      "Introduction",
+      "Introduction",
+      "Delivery API",
+      "Payment",
+      "Delivery API",
+      "Introduction",
+      "Delivery API",
+      "Payment",
+      "Getting started",
+      "Introduction",
+      "Delivery API",
+      "Payment",
     ]);
     const open = ref(["Users"]);
     const subtitle = ref([]);
@@ -328,12 +337,13 @@ export default {
       search,
       CreateOrderProvider,
       scrollingCreateOrder,
+      menu,
     };
   },
 };
 </script>
 <style scoped>
 .font {
-  font-family: "Prompt", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 </style>

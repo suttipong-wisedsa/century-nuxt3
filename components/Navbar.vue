@@ -44,7 +44,7 @@
     >
       <v-spacer></v-spacer>
       <v-toolbar-title @click="reditect()" style="cursor: pointer"
-        ><img src="../assets/images/Group 5723.png" style="width: 170px"
+        ><img src="../assets/images/Group 5723.png" style="width: 150px"
       /></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-spacer></v-spacer>
@@ -85,7 +85,10 @@ export default {
     const { xs, sm, lg } = useDisplay();
     const lastScrollPosition = ref(0);
     const showNav = ref(true);
+    const route = useRoute();
     const drawer = ref(false);
+    const path = ref(null);
+    const pathClick = ref(false);
     const items = [
       {
         title: "Docs",
@@ -114,6 +117,7 @@ export default {
         showNav.value = true;
       }
     }
+
     onMounted(() => {
       window.addEventListener("scroll", onScroll);
       onScroll();
