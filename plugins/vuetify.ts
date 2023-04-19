@@ -4,6 +4,7 @@ import { createVuetify } from "vuetify";
 import { fa } from "vuetify/iconsets/fa";
 import { aliases, mdi } from "vuetify/iconsets/mdi";
 import "@mdi/font/css/materialdesignicons.css";
+import { VDataTable } from "vuetify/labs/VDataTable";
 //import "material-design-icons-iconfont/dist/material-design-icons.css";
 export default defineNuxtPlugin((nuxtApp) => {
   const myAllBlackTheme: ThemeDefinition = {
@@ -39,6 +40,9 @@ export default defineNuxtPlugin((nuxtApp) => {
         fa,
         mdi,
       },
+    },
+    components: {
+      VDataTable,
     },
     theme: {
       defaultTheme: "myAllBlackTheme",

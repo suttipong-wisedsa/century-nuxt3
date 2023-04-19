@@ -225,8 +225,8 @@
         <img
           src="../assets/images/Group 5133.png"
           :style="{
-            width: xs || sm ? '100%' : '624px',
-            height: '395px',
+            width: xs || sm ? '100%' : '500px',
+            height: '355px',
             objectFit: xs || sm ? 'contain' : 'fill',
           }"
         />

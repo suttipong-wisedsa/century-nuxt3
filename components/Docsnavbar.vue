@@ -3,7 +3,7 @@
     <div v-if="xs || sm == true">
       <v-app-bar color="navbardocs">
         <v-toolbar-title @click="reditect()"
-          ><v-img :src="data.logo" width="150px" height="40px" class="my-10"
+          ><img src="../assets/images/Group 5723.png" style="width: 150px"
         /></v-toolbar-title>
         <v-list-item-title
           v-for="(item, index) in items"
@@ -12,12 +12,13 @@
           ><NuxtLink
             :to="item.to"
             style="text-decoration: none"
-            class="text-info"
+            class="text-black"
             >{{ item.title }}</NuxtLink
           ></v-list-item-title
         >
       </v-app-bar>
     </div>
+
     <!-- <v-app-bar
       v-if="xs || sm == false"
       app
@@ -88,7 +89,7 @@
             :thickness="3"
             class="border-opacity-100"
             color="scoll"
-            length="45"
+            length="48"
           ></v-divider>
         </v-toolbar-title>
         <v-toolbar-title>

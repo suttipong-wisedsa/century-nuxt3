@@ -60,7 +60,7 @@
   <v-card
     class="pa-5"
     color="blue-grey-lighten-5"
-    width="62vw"
+    :width="sm || xs ? '100%' : '62vw'"
     style="overflow-x: auto"
   >
     <pre>
@@ -88,11 +88,13 @@
   </v-alert>
 </template>
 <script>
+import { useDisplay } from "vuetify";
 import docs from "~~/data/docs";
 import api from "~~/data/apiData";
 import { useStore } from "vuex";
 export default {
   setup() {
+    const { xs, sm, lg } = useDisplay();
     const store = useStore();
     const copy = ref(false);
     const body = ref([
@@ -285,6 +287,8 @@ export default {
       body,
       copy,
       curl,
+      sm,
+      xs,
     };
   },
 };

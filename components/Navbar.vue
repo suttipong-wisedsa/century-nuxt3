@@ -1,14 +1,9 @@
 <template>
   <div>
     <div v-if="xs || sm == true">
-      <v-app-bar color="info">
+      <v-app-bar them="transparent">
         <v-toolbar-title @click="deridect()"
-          ><v-img
-            cover
-            :src="data.logo"
-            width="250px"
-            height="40px"
-            class="my-10"
+          ><img src="../assets/images/Group 5723.png" style="width: 150px"
         /></v-toolbar-title>
         <v-app-bar-nav-icon @click="drawer = !drawer"
           ><v-icon>mdi-menu </v-icon></v-app-bar-nav-icon
@@ -18,7 +13,7 @@
         v-model="drawer"
         location="top"
         temporary
-        class="bg-info"
+        them="transparent"
       >
         <v-list lines="one">
           <v-list-item
@@ -29,7 +24,7 @@
               :to="item.to"
               style="text-decoration: none; font-family: 'Prompt', sans-serif"
               class="text-info"
-              ><h1 class="text-surface">{{ item.title }}</h1></NuxtLink
+              ><h1 class="text-black">{{ item.title }}</h1></NuxtLink
             ><v-divider :thickness="2"></v-divider
           ></v-list-item>
         </v-list>
@@ -38,8 +33,8 @@
     <v-app-bar
       v-if="xs || sm == false"
       app
-      :color="showNav ? 'info' : 'transparent'"
-      :elevation="0"
+      color=" transparent"
+      :elevation="showNav ? '15' : '0'"
       @scroll="handleScroll()"
     >
       <v-spacer></v-spacer>

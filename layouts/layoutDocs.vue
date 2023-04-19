@@ -71,7 +71,6 @@
             <v-navigation-drawer floating permanent>
               <v-list density="compact" active-color="scoll">
                 <v-list-item
-                  @click="scrolling(item)"
                   v-for="(item, index) in menu"
                   class="font"
                   :key="index"
@@ -79,6 +78,8 @@
                   :style="{
                     fontSize:
                       index == 0 || index == 4 || index == 8 ? '20px' : '16px',
+                    fontWeight:
+                      index == 0 || index == 4 || index == 8 ? 'bold' : '',
                   }"
                   >{{ item }}</v-list-item
                 >
@@ -169,6 +170,25 @@
             </v-list>
           </v-navigation-drawer>
         </div>
+        <v-card class="mx-auto my-5" width="95%" v-if="sm || xs">
+          <v-list v-model:opened="open">
+            <v-list-group value="On this page">
+              <template v-slot:activator="{ props }">
+                <v-list-item v-bind="props" title="On this page"></v-list-item>
+              </template>
+              <v-list active-color="scoll">
+                <v-list-item
+                  v-for="(item, index) in menu"
+                  class="font"
+                  :key="index"
+                  :value="index"
+                  @click="scrolling(item)"
+                  >{{ item }}</v-list-item
+                >
+              </v-list>
+            </v-list-group>
+          </v-list>
+        </v-card>
         <main @click="clickoutside()">
           <slot /></main
       ></v-main>
@@ -252,7 +272,7 @@ export default {
       if (menu == "Payment") {
         let e = document.getElementById("Payment");
         e.scrollIntoView({
-          block: "center",
+          block: "cenendter",
           behavior: "smooth",
           inline: "center",
         });
