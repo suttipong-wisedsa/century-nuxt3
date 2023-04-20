@@ -255,7 +255,6 @@ export default {
       }
     }
     async function login() {
-      console.log(inputNumber.value.length);
       Errormsg.value = "";
       // if (!userNumber.value.match(/^[0-9]{4}-[0-9]{3}-[0-9]{4}/)) {
       if (

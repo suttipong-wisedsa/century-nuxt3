@@ -167,26 +167,7 @@ export default {
     }
     async function callback($event) {
       let click = $event;
-
-      let payload = {
-        company_provider_wesmart_type: click.name,
-        company_provider_wesmart_name: click.numberid,
-        company_provider_wesmart_email: click.numberbank,
-        company_provider_wesmart_tel: click.email,
-        company_provider_wesmart_address: click.tel,
-        company_provider_wesmart_bank_number: click.address,
-        company_provider_wesmart_customer_id_card: click.country,
-        company_provider_wesmart_juristic_id: click.province,
-        company_provider_wesmart_province_id: click.district,
-        company_provider_wesmart_district_id: click.district2,
-        company_provider_wesmart_sub_district_id: click.district2,
-        company_provider_wesmart_zipcode_id: click.zipcode,
-        company_image_provider_wesmart_customer_id_card: "{{base64}}",
-        company_image_provider_wesmart_book_bank: "{{base64}}",
-        company_image_provider_wesmart_company_certificate: "{{base64}}",
-      };
-      console.log(payload);
-      await store.dispatch("createbusiness", payload);
+      await store.dispatch("createbusiness", click);
     }
     definePageMeta({
       layout: false,

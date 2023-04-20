@@ -154,7 +154,12 @@
           variant="outlined"
         ></v-file-input> -->
           <div class="d-flex" style="100%">
-            <label for="images" class="drop-container mr-10">
+            <label
+              for="images"
+              :class="[
+                checkinput ? 'drop-containerfail mr-5' : 'drop-container mr-5',
+              ]"
+            >
               <v-card width="70%" height="350px" class="card">
                 <div
                   class="d-flex justify-center align-center"
@@ -168,16 +173,16 @@
                   accept="image/*"
                   required
                   style="display: none"
-                  @input="inputFile"
+                  @input="input1"
                 />
               </v-card>
-
+              <!-- {{ filename }} -->
               <p style="color: #666666" class="text-center">
                 สำเนาบัตรประชาชน<br />
-                กรรมการผู้มีอำนาจลงนาม
+                กรรมการผู้มีอำนาจลงนาม1
               </p>
             </label>
-            <label for="images" class="drop-container">
+            <label for="images1" class="drop-container">
               <v-card width="70%" height="70%" class="card">
                 <div
                   class="d-flex justify-center align-center"
@@ -187,16 +192,16 @@
                 </div>
                 <input
                   type="file"
-                  id="images"
+                  id="images1"
                   accept="image/*"
                   required
                   style="display: none"
-                  @input="inputFile"
+                  @input="input2"
                 />
               </v-card>
-              {{ file }}
+              <!-- {{ filename }} -->
               <p style="color: #666666" class="text-center">
-                สำเนาบัญชีบุ้คแบงค์<br />
+                สำเนาบัญชีบุ้คแบงค์2<br />
               </p>
             </label>
           </div>
@@ -403,7 +408,7 @@
                   accept="image/*"
                   required
                   style="display: none"
-                  @input="inputFile"
+                  @input="cardbank"
                 />
               </v-card>
               {{ file }}
@@ -533,9 +538,14 @@ export default {
   setup(props, { emit }) {
     const form = ref(null);
     const radio = ref("radio-1");
-    const file = ref("");
+    const file = reactive({ card: "", bank: "" });
+    const filecard = ref("");
+    const filenumber = ref("");
+    const filename = ref("");
     const valid = ref(true);
     const slide = ref(true);
+    const checkinput = ref(false);
+    const img = ref("");
     const nameRules = ref([
       (v) => !!v || "required",
       (v) => (v && v.length <= 50) || "Name must be less than 50 characters",
@@ -565,26 +575,86 @@ export default {
       email: "",
       tel: "",
       address: "",
+      country: "",
       province: "",
       district: "",
       district2: "",
       zipcode: "",
     });
-    function cancle() {
-      emit("changeB", { name: "sdsdsd" });
+    async function input1(event) {
+      let n = 1;
+      inputFile(event, n);
     }
-    async function inputFile($event) {
-      file.value = $event.target.files[0].name;
+    async function input2(event) {
+      let n = 2;
+      inputFile(event, n);
+    }
+    async function inputFile(event, n) {
+      filename.value = event.target.files[0].name;
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const base64EncodedImage = reader.result;
+        base64(base64EncodedImage, n);
+      };
+    }
+    function base64(item, n) {
+      if (n === 1) {
+        filecard.value = item;
+      } else {
+        filenumber.value = item;
+      }
     }
     async function createForm() {
+      checkinput.value = false;
       form.value.validate();
-      if (valid.value) {
+      if (valid.value && filenumber.value && filecard.value) {
         submit.value = true;
-        emit("someEvent", register);
+        let payload = {
+          company_provider_wesmart_type: register.name,
+          company_provider_wesmart_name: register.numberid,
+          company_provider_wesmart_email: register.numberbank,
+          company_provider_wesmart_tel: register.email,
+          company_provider_wesmart_address: register.tel,
+          company_provider_wesmart_bank_number: register.address,
+          company_provider_wesmart_customer_id_card: "th",
+          company_provider_wesmart_juristic_id: register.province,
+          company_provider_wesmart_province_id: register.district,
+          company_provider_wesmart_district_id: register.district2,
+          company_provider_wesmart_sub_district_id: register.district2,
+          company_provider_wesmart_zipcode_id: register.zipcode,
+          company_image_provider_wesmart_customer_id_card: filecard.value,
+          company_image_provider_wesmart_book_bank: filenumber.value,
+          company_image_provider_wesmart_company_certificate: "",
+        };
+        //  let payload = {
+        //   company_provider_wesmart_type: 1,
+        //   company_provider_wesmart_name: "บ่าวกิต จำกัด ครั้งที่ 2",
+        //   company_provider_wesmart_email: "bawkrit@gmail.com",
+        //   company_provider_wesmart_tel: "893457218",
+        //   company_provider_wesmart_address: "The View Condo สวนหลวง",
+        //   company_provider_wesmart_bank_number: "1231231231123123",
+        //   company_provider_wesmart_customer_id_card: "th",
+        //   company_provider_wesmart_juristic_id: register.province,
+        //   company_provider_wesmart_province_id: register.district,
+        //   company_provider_wesmart_district_id: register.district2,
+        //   company_provider_wesmart_sub_district_id: register.district2,
+        //   company_provider_wesmart_zipcode_id: register.zipcode,
+        //   company_image_provider_wesmart_customer_id_card: filecard.value,
+        //   company_image_provider_wesmart_book_bank: filenumber.value,
+        //   company_image_provider_wesmart_company_certificate: "",
+        // };
+        await emit("someEvent", payload);
         router.push({ path: "/" });
         form.value.resetValidation();
+        filenumber.value = "";
+        filecard.value == "";
+        checkinput.value = false;
         form.value.reset();
         submit.value = false;
+      } else {
+        checkinput.value = true;
       }
     }
     return {
@@ -601,6 +671,11 @@ export default {
       valid,
       form,
       slide,
+      img,
+      filename,
+      input1,
+      input2,
+      checkinput,
     };
   },
 };
@@ -621,6 +696,22 @@ export default {
   padding: 20px;
   border-radius: 10px;
   border: 2px solid #d9d9d9;
+  color: #444;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
+}
+.drop-containerfail {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 30%;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid red;
   color: #444;
   cursor: pointer;
   transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
