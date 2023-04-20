@@ -222,6 +222,14 @@ export default {
       };
       loading.value = true;
       const res = await store.dispatch("OTPVerification", payload);
+      // try {
+      //   let response = await auth.loginWith("local", {
+      //     data: payload,
+      //   });
+      //   console.log(response);
+      // } catch (err) {
+      //   console.log(err);
+      // }
       if (res.msg == true) {
         localStorage.setItem("userInfo", JSON.stringify(res.data.token));
         router.push({ path: "/" });

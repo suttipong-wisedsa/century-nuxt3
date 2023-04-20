@@ -1,32 +1,45 @@
 <template>
   <div>
     <v-container>
-      <v-card v-show="slide">
+      <v-card>
         <div class="d-flex justify-space-between pa-5">
-          <h1>Business List</h1>
+          <h1 class="font">
+            {{ slide == false ? "Business List" : "Create Business" }}
+          </h1>
           <div>
-            <v-btn prepend-icon="mdi-pencil-outline" color="yellow">
+            <v-btn
+              :prepend-icon="
+                slide == false ? 'mdi-pencil-outline' : 'mdi-close'
+              "
+              :variant="slide == false ? 'flat' : 'outlined'"
+              :color="slide == false ? 'yellow' : 'red'"
+              @click="Create(0)"
+            >
               <template v-slot:prepend>
                 <v-icon color="black"></v-icon>
               </template>
 
-              Edit
+              {{ slide == false ? "Edit" : "Cancle" }}
 
               <template v-slot:append>
                 <v-icon color="warning"></v-icon>
               </template>
             </v-btn>
             <v-btn
-              prepend-icon="mdi-plus-circle-outline"
-              color="black"
+              :prepend-icon="
+                slide == false
+                  ? 'mdi-plus-circle-outline'
+                  : 'mdi-plus-circle-outline'
+              "
+              :color="slide == false ? 'black' : '#00BAFF'"
               class="ml-5"
-              @click="Create()"
+              @click="Create(1)"
             >
               <template v-slot:prepend>
                 <v-icon color="white"></v-icon>
               </template>
 
-              Create Business
+              {{ slide == false ? "Create Business" : "Create" }}
 
               <template v-slot:append>
                 <v-icon color="warning"></v-icon>
@@ -34,10 +47,14 @@
             </v-btn>
           </div>
         </div>
-        <div class="pa-5" style="font-size: 20px; font-weight: bold">
+        <div
+          class="pa-5 font"
+          style="font-size: 20px; font-weight: bold"
+          v-show="slide == false"
+        >
           {{ desserts.length }} Total
         </div>
-        <div id="app">
+        <div id="app" v-show="slide == false">
           <v-data-table
             :headers="headers"
             :items="desserts"
@@ -56,12 +73,12 @@
             </template>
           </v-data-table>
         </div>
-      </v-card>
-      <v-card>
-        <DashboardCreate
-          :slide="slide"
-          @changeB="cancle($event)"
-        ></DashboardCreate>
+        <div v-show="slide == true">
+          <DashboardCreate
+            :slide="slide"
+            @some-event="callback($event)"
+          ></DashboardCreate>
+        </div>
       </v-card>
     </v-container>
   </div>
@@ -77,7 +94,7 @@ export default {
     const drawer = ref(true);
     const itemsPerPage = ref(5);
     const selected = ref([]);
-    const slide = ref(true);
+    const slide = ref(false);
     const reveal = ref(false);
     const headers = ref([
       {
@@ -133,11 +150,17 @@ export default {
         glutenfree: true,
       },
     ]);
-    function Create() {
-      slide.value = false;
+    function Create($event) {
+      let click = $event;
+      if (click == 0) {
+        slide.value = false;
+      } else {
+        slide.value = true;
+      }
     }
-    function cancle(e) {
-      console.log(e);
+    function callback($event) {
+      let click = $event;
+      slide.value = click;
     }
     definePageMeta({
       layout: false,
@@ -156,8 +179,14 @@ export default {
       Create,
       slide,
       reveal,
-      cancle,
+      callback,
     };
   },
 };
 </script>
+
+<style scoped>
+.font {
+  font-family: "Prompt", sans-serif;
+}
+</style>

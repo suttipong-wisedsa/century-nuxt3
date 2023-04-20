@@ -64,11 +64,39 @@ export default defineNuxtConfig({
       apiBase: process.env.VUE_APP_API_URL,
     },
   },
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: "token",
+          global: true,
+          // required: true,
+          // type: 'Bearer'
+        },
+        user: {
+          property: "user",
+          // autoFetch: true
+        },
+        endpoints: {
+          login: {
+            url: "https://pre-v1-backend-v4.weserve.asia/api/v1/providerwesmart/verify_otp_provider_wesmart",
+            method: "post",
+          },
+          // logout: { url: '/api/auth/logout', method: 'post' },
+          // user: { url: '/api/auth/user', method: 'get' }
+        },
+      },
+    },
+  },
+  router: {
+    middleware: ["auth"],
+  },
   modules: [
     async (options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) =>
         config.plugins.push(vuetify())
-      );
+      ),
+        "@nuxtjs/auth-next";
     },
   ],
 });

@@ -5,9 +5,16 @@
         ><img src="../assets/images/Group 5723.png" style="width: 140px"
       /></v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-avatar color="cardyellow" size="35" style="border: 2px solid #fddf00">
-        <v-icon size="20" color="scoll">mdi-bell</v-icon></v-avatar
-      >
+      <v-badge content="9+">
+        <v-avatar
+          color="cardyellow"
+          size="35"
+          style="border: 2px solid #fddf00"
+        >
+          <v-icon size="20" color="scoll">mdi-bell</v-icon></v-avatar
+        >
+      </v-badge>
+
       <v-divider
         :thickness="3"
         color="getstartFont"
@@ -45,7 +52,7 @@
         </v-card>
       </v-menu>
     </v-app-bar>
-    <v-navigation-drawer :v-model="sm || xs ? false : true" color="#212121">
+    <v-navigation-drawer v-model="drawer" color="#212121">
       <v-list nav class="text-white" active-color="scoll" flat>
         <v-list-item
           v-for="(item, index) in menu"
@@ -67,6 +74,7 @@
 import { useDisplay } from "vuetify";
 import { useStore } from "vuex";
 export default {
+  middleware: "auth",
   setup() {
     const { xs, sm, md, lg, xl, xxl } = useDisplay();
     const store = useStore();
