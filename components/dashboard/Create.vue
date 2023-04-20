@@ -1,13 +1,15 @@
 <template>
-  <div class="pa-5">
-    <v-divider :thickness="3"></v-divider>
-    <h3 class="font">ประเภทธุรกิจ *</h3>
-    <v-radio-group v-model="radio" inline color="yellow">
-      <v-radio label="บุคคลธรรมดา" value="radio-1"></v-radio>
-      <v-radio label="นิติบุคคล" value="radio-2"></v-radio>
-    </v-radio-group>
-    <h3>ประเภทธุรกิจ</h3>
-    <v-form ref="form" v-model="valid" lazy-validation>
+  <div class="mt-5">
+    <v-divider :thickness="4" color="#F2F2F2"></v-divider>
+    <div class="my-5 px-5">
+      <h3 class="font">ประเภทธุรกิจ *</h3>
+      <v-radio-group v-model="radio" inline color="yellow">
+        <v-radio label="บุคคลธรรมดา" value="radio-1"></v-radio>
+        <v-radio label="นิติบุคคล" value="radio-2"></v-radio>
+      </v-radio-group>
+    </div>
+    <h3 class="px-5">ประเภทธุรกิจ</h3>
+    <v-form ref="form" v-model="valid" lazy-validation class="px-5">
       <div v-if="radio == 'radio-1'">
         <v-container>
           <v-row>
@@ -20,7 +22,7 @@
                 :rules="nameRules"
                 :loading="submit"
                 type="text"
-                label="Your Name"
+                placeholder="Your Name"
                 variant="outlined"
               ></v-text-field>
             </v-col>
@@ -31,11 +33,11 @@
                 >
               </p>
               <v-text-field
-                v-model="register.number"
+                v-model="register.numberid"
                 :rules="numberRules"
                 :loading="submit"
                 type="text"
-                label="Your Number"
+                placeholder="Your Number"
                 variant="outlined"
               ></v-text-field>
             </v-col>
@@ -44,11 +46,11 @@
                 หมายเลขบุ๊คแบงค์ธุรกิจ<span class="text-red">*</span>
               </p>
               <v-text-field
-                v-model="register.company"
+                v-model="register.numberbank"
                 :rules="textRules"
                 :loading="submit"
                 type="text"
-                label="Company Name"
+                placeholder="Company Name"
                 variant="outlined"
               ></v-text-field>
             </v-col>
@@ -61,7 +63,7 @@
                 :rules="emailRules"
                 :loading="submit"
                 type="email"
-                label="Company@email.com"
+                placeholder="Company@email.com"
                 variant="outlined"
               ></v-text-field>
             </v-col>
@@ -70,11 +72,11 @@
                 เบอร์โทร ธุรกิจ<span class="text-red">*</span>
               </p>
               <v-text-field
-                v-model="register.website"
+                v-model="register.tel"
                 :rules="textRules"
                 :loading="submit"
                 type="text"
-                label="Company Website"
+                placeholder="Company Website"
                 variant="outlined"
               ></v-text-field>
             </v-col>
@@ -83,11 +85,11 @@
         <v-col cols="12" sm="6"
           ><p class="text-black font">ที่อยู่<span class="text-red">*</span></p>
           <v-text-field
-            v-model="register.name"
+            v-model="register.address"
             :rules="nameRules"
             :loading="submit"
             type="text"
-            label="Your Name"
+            placeholder="Your Name"
             variant="outlined"
           ></v-text-field
         ></v-col>
@@ -98,11 +100,11 @@
                 จังหวัด<span class="text-red">*</span>
               </p>
               <v-text-field
-                v-model="register.name"
+                v-model="register.province"
                 :rules="nameRules"
                 :loading="submit"
                 type="text"
-                label="Your Name"
+                placeholder="Your Name"
                 variant="outlined"
               ></v-text-field>
             </v-col>
@@ -111,22 +113,22 @@
                 อำเภอ<span class="text-red">*</span>
               </p>
               <v-text-field
-                v-model="register.number"
+                v-model="register.district"
                 :rules="numberRules"
                 :loading="submit"
                 type="text"
-                label="Your Number"
+                placeholder="Your Number"
                 variant="outlined"
               ></v-text-field>
             </v-col>
             <v-col cols="12" sm="3">
               <p class="text-black font">ตำบล<span class="text-red">*</span></p>
               <v-text-field
-                v-model="register.company"
+                v-model="register.district2"
                 :rules="textRules"
                 :loading="submit"
                 type="text"
-                label="Company Name"
+                placeholder="Company Name"
                 variant="outlined"
               ></v-text-field>
             </v-col>
@@ -135,11 +137,11 @@
                 รหัสไปรษณีย์<span class="text-red">*</span>
               </p>
               <v-text-field
-                v-model="register.email"
+                v-model="register.zipcode"
                 :rules="emailRules"
                 :loading="submit"
                 type="email"
-                label="Company@email.com"
+                placeholder="Company@email.com"
                 variant="outlined"
               ></v-text-field>
             </v-col>
@@ -147,7 +149,7 @@
           <h3 class="font">Business files</h3>
           <!-- <v-file-input
           style="width: 300px; height: 300px"
-          label="File input"
+          placeholder="File input"
           prepend-icon="mdi-camera"
           variant="outlined"
         ></v-file-input> -->
@@ -228,7 +230,7 @@
               "
               :color="slide == false ? 'black' : '#00BAFF'"
               class="ml-5"
-              @click="$emit('someEvent', false)"
+              @click="createForm()"
             >
               <template v-slot:prepend>
                 <v-icon color="white"></v-icon>
@@ -255,7 +257,7 @@
                 :rules="nameRules"
                 :loading="submit"
                 type="text"
-                label="Your Name"
+                placeholder="Your Name"
                 variant="outlined"
               ></v-text-field>
             </v-col>
@@ -270,7 +272,7 @@
                 :rules="numberRules"
                 :loading="submit"
                 type="text"
-                label="Your Number"
+                placeholder="Your Number"
                 variant="outlined"
               ></v-text-field>
             </v-col>
@@ -283,7 +285,7 @@
                 :rules="textRules"
                 :loading="submit"
                 type="text"
-                label="Company Name"
+                placeholder="Company Name"
                 variant="outlined"
               ></v-text-field>
             </v-col>
@@ -296,7 +298,7 @@
                 :rules="emailRules"
                 :loading="submit"
                 type="email"
-                label="Company@email.com"
+                placeholder="Company@email.com"
                 variant="outlined"
               ></v-text-field>
             </v-col>
@@ -309,7 +311,7 @@
                 :rules="textRules"
                 :loading="submit"
                 type="text"
-                label="Company Website"
+                placeholder="Company Website"
                 variant="outlined"
               ></v-text-field>
             </v-col>
@@ -322,7 +324,7 @@
             :rules="nameRules"
             :loading="submit"
             type="text"
-            label="Your Name"
+            placeholder="Your Name"
             variant="outlined"
           ></v-text-field
         ></v-col>
@@ -337,7 +339,7 @@
                 :rules="nameRules"
                 :loading="submit"
                 type="text"
-                label="Your Name"
+                placeholder="Your Name"
                 variant="outlined"
               ></v-text-field>
             </v-col>
@@ -350,7 +352,7 @@
                 :rules="numberRules"
                 :loading="submit"
                 type="text"
-                label="Your Number"
+                placeholder="Your Number"
                 variant="outlined"
               ></v-text-field>
             </v-col>
@@ -361,7 +363,7 @@
                 :rules="textRules"
                 :loading="submit"
                 type="text"
-                label="Company Name"
+                placeholder="Company Name"
                 variant="outlined"
               ></v-text-field>
             </v-col>
@@ -374,7 +376,7 @@
                 :rules="emailRules"
                 :loading="submit"
                 type="email"
-                label="Company@email.com"
+                placeholder="Company@email.com"
                 variant="outlined"
               ></v-text-field>
             </v-col>
@@ -382,7 +384,7 @@
           <h3>Business files</h3>
           <!-- <v-file-input
           style="width: 300px; height: 300px"
-          label="File input"
+          placeholder="File input"
           prepend-icon="mdi-camera"
           variant="outlined"
         ></v-file-input> -->
@@ -527,11 +529,13 @@
 </template>
 <script>
 export default {
-  setup() {
+  emits: ["someEvent"],
+  setup(props, { emit }) {
     const form = ref(null);
     const radio = ref("radio-1");
     const file = ref("");
     const valid = ref(true);
+    const slide = ref(true);
     const nameRules = ref([
       (v) => !!v || "required",
       (v) => (v && v.length <= 50) || "Name must be less than 50 characters",
@@ -556,12 +560,15 @@ export default {
     const submit = ref(false);
     const register = reactive({
       name: "",
-      number: "",
-      company: "",
+      numberid: "",
+      numberbank: "",
       email: "",
-      website: "",
-      job: "",
-      country: "",
+      tel: "",
+      address: "",
+      province: "",
+      district: "",
+      district2: "",
+      zipcode: "",
     });
     function cancle() {
       emit("changeB", { name: "sdsdsd" });
@@ -573,11 +580,7 @@ export default {
       form.value.validate();
       if (valid.value) {
         submit.value = true;
-        // let payload = {
-
-        // };
-        alert("sss");
-        //await store.dispatch("register", payload);
+        emit("someEvent", register);
         router.push({ path: "/" });
         form.value.resetValidation();
         form.value.reset();
@@ -597,6 +600,7 @@ export default {
       createForm,
       valid,
       form,
+      slide,
     };
   },
 };

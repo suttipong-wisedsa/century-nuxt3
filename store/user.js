@@ -34,6 +34,13 @@ const user = {
       if (!data) return;
       return data;
     },
+    async createbusiness(context, payload) {
+      const runtimeConfig = useRuntimeConfig();
+      let api = `${runtimeConfig.public.apiBase}/api/v1/providerwesmart/register_provider_wesmart`;
+      let { data } = await axios.post(api, payload);
+      if (!data) return;
+      return data;
+    },
     async ResentOTPProviderWesmart(context, payload) {
       const runtimeConfig = useRuntimeConfig();
       let api = `${runtimeConfig.public.apiBase}/api/v1/providerwesmart/resent_otp_provider_wesmart`;

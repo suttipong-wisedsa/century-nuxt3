@@ -1,50 +1,57 @@
 <template>
-  <div>
+  <div style="background-color: #f7f7f7">
     <v-container>
-      <v-card>
-        <div class="d-flex justify-space-between pa-5">
+      <v-card
+        class="pa-5"
+        color="#FFFFFF"
+        elevation="3"
+        style="border-radius: 12px"
+      >
+        <div class="d-flex justify-space-between">
           <h1 class="font">
             {{ slide == false ? "Business List" : "Create Business" }}
           </h1>
-          <div>
-            <v-btn
-              :prepend-icon="
-                slide == false ? 'mdi-pencil-outline' : 'mdi-close'
-              "
-              :variant="slide == false ? 'flat' : 'outlined'"
-              :color="slide == false ? 'yellow' : 'red'"
-              @click="Create(0)"
-            >
-              <template v-slot:prepend>
-                <v-icon color="black"></v-icon>
-              </template>
+          <div style="display: flex; align-items: center">
+            <div>
+              <v-btn
+                :prepend-icon="
+                  slide == false ? 'mdi-pencil-outline' : 'mdi-close'
+                "
+                :variant="slide == false ? 'flat' : 'outlined'"
+                :color="slide == false ? 'yellow' : 'red'"
+                @click="Create(0)"
+              >
+                <template v-slot:prepend>
+                  <v-icon color="black"></v-icon>
+                </template>
 
-              {{ slide == false ? "Edit" : "Cancle" }}
+                {{ slide == false ? "Edit" : "Cancle" }}
 
-              <template v-slot:append>
-                <v-icon color="warning"></v-icon>
-              </template>
-            </v-btn>
-            <v-btn
-              :prepend-icon="
-                slide == false
-                  ? 'mdi-plus-circle-outline'
-                  : 'mdi-plus-circle-outline'
-              "
-              :color="slide == false ? 'black' : '#00BAFF'"
-              class="ml-5"
-              @click="Create(1)"
-            >
-              <template v-slot:prepend>
-                <v-icon color="white"></v-icon>
-              </template>
+                <template v-slot:append>
+                  <v-icon color="warning"></v-icon>
+                </template>
+              </v-btn>
+              <v-btn
+                :prepend-icon="
+                  slide == false
+                    ? 'mdi-plus-circle-outline'
+                    : 'mdi-plus-circle-outline'
+                "
+                :color="slide == false ? 'black' : '#00BAFF'"
+                class="ml-5"
+                @click="Create(1)"
+              >
+                <template v-slot:prepend>
+                  <v-icon color="white"></v-icon>
+                </template>
 
-              {{ slide == false ? "Create Business" : "Create" }}
+                {{ slide == false ? "Create Business" : "Create" }}
 
-              <template v-slot:append>
-                <v-icon color="warning"></v-icon>
-              </template>
-            </v-btn>
+                <template v-slot:append>
+                  <v-icon color="warning"></v-icon>
+                </template>
+              </v-btn>
+            </div>
           </div>
         </div>
         <div
@@ -158,9 +165,28 @@ export default {
         slide.value = true;
       }
     }
-    function callback($event) {
+    async function callback($event) {
       let click = $event;
-      slide.value = click;
+
+      let payload = {
+        company_provider_wesmart_type: click.name,
+        company_provider_wesmart_name: click.numberid,
+        company_provider_wesmart_email: click.numberbank,
+        company_provider_wesmart_tel: click.email,
+        company_provider_wesmart_address: click.tel,
+        company_provider_wesmart_bank_number: click.address,
+        company_provider_wesmart_customer_id_card: click.country,
+        company_provider_wesmart_juristic_id: click.province,
+        company_provider_wesmart_province_id: click.district,
+        company_provider_wesmart_district_id: click.district2,
+        company_provider_wesmart_sub_district_id: click.district2,
+        company_provider_wesmart_zipcode_id: click.zipcode,
+        company_image_provider_wesmart_customer_id_card: "{{base64}}",
+        company_image_provider_wesmart_book_bank: "{{base64}}",
+        company_image_provider_wesmart_company_certificate: "{{base64}}",
+      };
+      console.log(payload);
+      await store.dispatch("createbusiness", payload);
     }
     definePageMeta({
       layout: false,
