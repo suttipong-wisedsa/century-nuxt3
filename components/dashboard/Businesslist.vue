@@ -75,23 +75,26 @@
             v-model="selected"
             @update:options="options = $event"
           >
+          <template v-slot:item.create_at="{ item }">
+              <td> {{ moment(item.create_at).format("DD/MM/YYYY") }}</td>
+            </template>
             <template v-slot:item.glutenfree="{ item }">
               <v-btn
                 prepend-icon="mdi-magnify"
                 variant="outlined"
                 color="#00BAFF"
-                @click="seeMore(item.value.name)"
+                @click="seeMore(item.value.company_provider_wesmart_name)"
               >
                 See more
               </v-btn>
             </template>
-           
+
             <template v-slot:bottom>
-              <div >
+              <div>
                 <v-pagination
                   color="#000000"
                   v-model="page"
-                  :length="( Math.ceil( desserts.length / 10 ) )"
+                  :length="Math.ceil(desserts.length / 10)"
                 ></v-pagination>
               </div>
             </template>
@@ -111,6 +114,7 @@
 <script>
 import { useDisplay } from "vuetify";
 import { useStore } from "vuex";
+import moment from "moment"
 export default {
   setup() {
     const { xs, sm, md, lg, xl, xxl } = useDisplay();
@@ -128,152 +132,66 @@ export default {
         title: "Business Name",
         align: "center",
         sortable: false,
-        key: "name",
+        key: "company_provider_wesmart_name",
       },
       {
         title: "Services count",
-        key: "calories",
+        key: "service_count",
         align: "center",
         sortable: false,
       },
-      { title: "Date created", key: "fat", align: "center", sortable: false },
+      { title: "Date created", key: "create_at", align: "center", sortable: false },
       { title: "Action", key: "glutenfree", align: "center", sortable: false },
     ]);
     const desserts = ref([
+      // {
+      //   name: "Frozen Yogurt",
+      //   calories: 159,
+      //   fat: 6.0,
+      //   glutenfree: true,
+      // },
       {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
+        company_provider_wesmart_id: 3,
+        company_provider_wesmart_type: null,
+        company_provider_wesmart_name: "บ่าวกิต จำกัด",
+        company_provider_wesmart_email: "krit254001@gmail.com",
+        company_provider_wesmart_tel: null,
+        company_provider_wesmart_status: 1,
+        create_at: "2023-03-22 12:33:46.406951+00:00",
+        service_count: 1,
       },
       {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
+        company_provider_wesmart_id: 3,
+        company_provider_wesmart_type: null,
+        company_provider_wesmart_name: "บ่าวกิต จำกัด",
+        company_provider_wesmart_email: "krit254001@gmail.com",
+        company_provider_wesmart_tel: null,
+        company_provider_wesmart_status: 1,
+        create_at: "2023-03-22 12:33:46.406951+00:00",
+        service_count: 1,
       },
       {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
+        company_provider_wesmart_id: 3,
+        company_provider_wesmart_type: null,
+        company_provider_wesmart_name: "บ่าวกิต จำกัด",
+        company_provider_wesmart_email: "krit254001@gmail.com",
+        company_provider_wesmart_tel: null,
+        company_provider_wesmart_status: 1,
+        create_at: "2023-03-22 12:33:46.406951+00:00",
+        service_count: 1,
       },
       {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
-      },
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
-      },
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
-      },
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
-      },
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
-      },
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
-      },
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
-      },
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
-      },
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
-      },
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
-      },
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
-      },
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
-      },
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
-      },
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
-      },
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
-      },
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
-      },
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
-      },
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
-      },
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        glutenfree: true,
+        company_provider_wesmart_id: 3,
+        company_provider_wesmart_type: null,
+        company_provider_wesmart_name: "บ่าวกิต จำกัด",
+        company_provider_wesmart_email: "krit254001@gmail.com",
+        company_provider_wesmart_tel: null,
+        company_provider_wesmart_status: 1,
+        create_at: "2023-03-22 12:33:46.406951+00:00",
+        service_count: 1,
       },
     ]);
-    
+
     function Create($event) {
       let click = $event;
       if (click == 0) {
@@ -287,6 +205,7 @@ export default {
     }
     async function callback($event) {
       let click = $event;
+      console.log(click);
       await store.dispatch("createbusiness", click);
     }
     function cancle($event) {
@@ -298,6 +217,12 @@ export default {
     });
     useHead({
       title: "Dashboard",
+    });
+    async function bussinessList() {
+      await store.dispatch("businessList");
+    }
+    onMounted(() => {
+      bussinessList();
     });
     return {
       xs,
@@ -315,6 +240,7 @@ export default {
       seeMore,
       page,
       pageNext,
+      moment,
     };
   },
 };

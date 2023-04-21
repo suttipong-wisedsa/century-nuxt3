@@ -10,7 +10,7 @@
     </div>
     <h3 class="px-5">ประเภทธุรกิจ</h3>
     <v-form ref="form" v-model="valid" lazy-validation class="px-5">
-      <div v-if="radio == 1">
+      <div>
         <v-container>
           <v-row>
             <v-col cols="12" sm="4">
@@ -99,26 +99,14 @@
               <p class="text-black font">
                 จังหวัด<span class="text-red">*</span>
               </p>
-              <!-- <v-text-field
-                v-model.number="register.province"
-                :loading="submit"
-                type="text"
-                placeholder="Your Name"
-                variant="outlined"
-              ></v-text-field> -->
               <v-select
+                item-title="province_name_th"
+                item-value="province_id"
                 :rules="req"
-                v-model.number="register.province"
+                v-model.number="getprovince"
                 :loading="submit"
                 label="Select"
-                :items="[
-                  66,
-                  'Colorado',
-                  'Florida',
-                  'Georgia',
-                  'Texas',
-                  'Wyoming',
-                ]"
+                :items="province"
                 variant="solo"
               ></v-select>
             </v-col>
@@ -126,39 +114,22 @@
               <p class="text-black font">
                 อำเภอ<span class="text-red">*</span>
               </p>
-              <!-- <v-text-field
-                v-model.number="register.district"
-                :loading="submit"
-                type="text"
-                placeholder="Your Number"
-                variant="outlined"
-              ></v-text-field> -->
               <v-select
+                item-title="district_name_th"
+                item-value="district_id"
+                :disabled="getprovince ? false : true"
                 :rules="req"
                 v-model.number="register.district"
                 :loading="submit"
                 label="Select"
-                :items="[
-                  880,
-                  'Colorado',
-                  'Florida',
-                  'Georgia',
-                  'Texas',
-                  'Wyoming',
-                ]"
+                :items="getdistrict"
                 variant="solo"
               ></v-select>
             </v-col>
             <v-col cols="12" sm="3">
               <p class="text-black font">ตำบล<span class="text-red">*</span></p>
-              <!-- <v-text-field
-                v-model.number="register.districtsub"
-                :loading="submit"
-                type="text"
-                placeholder="Company Name"
-                variant="outlined"
-              ></v-text-field> -->
-              <v-select
+              <!-- <v-select
+                :disabled="getprovince ? false : true"
                 :rules="req"
                 v-model.number="register.districtsub"
                 :loading="submit"
@@ -171,6 +142,17 @@
                   'Texas',
                   'Wyoming',
                 ]"
+                variant="solo"
+              ></v-select> -->
+              <v-select
+                item-title="district_name_th"
+                item-value="district_id"
+                :disabled="getprovince ? false : true"
+                :rules="req"
+                v-model.number="register.districtsub"
+                :loading="submit"
+                label="Select"
+                :items="getdistrict"
                 variant="solo"
               ></v-select>
             </v-col>
@@ -213,7 +195,7 @@
                 />
               </v-card>
               <!-- {{ filename }} -->
-              <p style="color: #666666" class="text-center">
+              <p style="color: #666666" class="text-center font">
                 สำเนาบัตรประชาชน<br />
                 กรรมการผู้มีอำนาจลงนาม1
               </p>
@@ -241,9 +223,42 @@
                 />
               </v-card>
               <!-- {{ filename }} -->
-              <p style="color: #666666" class="text-center">
+              <p style="color: #666666" class="text-center font">
                 สำเนาบัญชีบุ้คแบงค์2<br />
               </p>
+            </label>
+            <label
+              for="images1"
+              :class="[
+                checkinput ? 'drop-containerfail mr-5' : 'drop-container mr-5',
+              ]"
+            >
+              <v-card width="70%" height="70%" class="card">
+                <div
+                  class="d-flex justify-center align-center"
+                  style="height: 100%"
+                >
+                  <v-icon size="x-large"> mdi-camera </v-icon>
+                </div>
+                <input
+                  type="file"
+                  id="images1"
+                  accept="image/*"
+                  required
+                  style="display: none"
+                  @input="input3"
+                />
+              </v-card>
+              <!-- {{ filename }} -->
+              <p style="color: #666666" class="text-center font">
+                หนังสือประชุมของ ทางบริษัท<br />
+              </p>
+              <div
+                class="bg-yellow font"
+                style="width: 100%; text-align: center"
+              >
+                ดารน์โหลด
+              </div>
             </label>
           </div>
         </v-container>
@@ -291,7 +306,7 @@
           </div>
         </div>
       </div>
-      <div v-else>
+      <!-- <div v-show="radio == 2">
         <v-container>
           <v-row>
             <v-col cols="12" sm="4">
@@ -380,42 +395,54 @@
               <p class="text-black font">
                 จังหวัด<span class="text-red">*</span>
               </p>
-              <v-text-field
-                v-model="register.name"
+              <v-select
+                item-title="province_name_th"
+                item-value="province_id"
+                :rules="req"
+                v-model.number="getprovince"
                 :loading="submit"
-                type="text"
-                placeholder="Your Name"
-                variant="outlined"
-              ></v-text-field>
+                label="Select"
+                :items="province"
+                variant="solo"
+              ></v-select>
             </v-col>
             <v-col cols="12" sm="3">
               <p class="text-black font">
                 อำเภอ<span class="text-red">*</span>
               </p>
-              <v-text-field
-                v-model="register.number"
+              <v-select
+                item-title="district_name_th"
+                item-value="district_id"
+                :disabled="getprovince ? false : true"
+                :rules="req"
+                v-model.number="register.district"
                 :loading="submit"
-                type="text"
-                placeholder="Your Number"
-                variant="outlined"
-              ></v-text-field>
+                label="Select"
+                :items="getdistrict"
+                variant="solo"
+              ></v-select>
             </v-col>
             <v-col cols="12" sm="3">
               <p class="text-black font">ตำบล<span class="text-red">*</span></p>
-              <v-text-field
-                v-model="register.company"
+              <v-select
+                item-title="district_name_th"
+                item-value="district_id"
+                :disabled="getprovince ? false : true"
+                :rules="req"
+                v-model.number="register.districtsub"
                 :loading="submit"
-                type="text"
-                placeholder="Company Name"
-                variant="outlined"
-              ></v-text-field>
+                label="Select"
+                :items="getdistrict"
+                variant="solo"
+              ></v-select>
             </v-col>
             <v-col cols="12" sm="3">
               <p class="text-black font">
                 รหัสไปรษณีย์<span class="text-red">*</span>
               </p>
               <v-text-field
-                v-model="register.email"
+                :rules="req"
+                v-model.number="register.zipcode"
                 :loading="submit"
                 type="email"
                 placeholder="Company@email.com"
@@ -559,19 +586,25 @@
             </v-btn>
           </div>
         </div>
-      </div>
+      </div> -->
     </v-form>
   </div>
 </template>
 <script>
+import { useDisplay } from "vuetify";
+import { useStore } from "vuex";
 export default {
   emits: ["someEvent", "someEvent1"],
   setup(props, { emit }) {
+    const { xs, sm, md, lg, xl, xxl } = useDisplay();
+    const store = useStore();
+    const route = useRoute();
     const form = ref(null);
     const radio = ref(1);
     const file = reactive({ card: "", bank: "" });
     const filecard = ref("");
     const filenumber = ref("");
+    const bookmeeting = ref("");
     const n1 = ref(1);
     const n2 = ref(2);
     const filename = ref("");
@@ -609,6 +642,7 @@ export default {
     ]);
     const req = ref([(v) => !!v || "required"]);
     const submit = ref(false);
+    const getprovince = ref(null);
     const register = reactive({
       name: "",
       numberid: "",
@@ -617,7 +651,6 @@ export default {
       tel: "",
       address: "",
       country: "",
-      province: null,
       district: null,
       districtsub: null,
       zipcode: null,
@@ -628,6 +661,10 @@ export default {
     }
     async function input2(event) {
       let n = 2;
+      inputFile(event, n);
+    }
+    async function input3(event) {
+      let n = 3;
       inputFile(event, n);
     }
     async function inputFile(event, n) {
@@ -643,8 +680,10 @@ export default {
     function base64(item, n) {
       if (n === 1) {
         filecard.value = item;
-      } else {
+      } else if (n === 2) {
         filenumber.value = item;
+      } else {
+        bookmeeting.value = item;
       }
     }
     async function cancle() {
@@ -705,13 +744,13 @@ export default {
           company_provider_wesmart_bank_number: "1231231231123123",
           company_provider_wesmart_customer_id_card: "123123123123123",
           company_provider_wesmart_juristic_id: "123123123123123",
-          company_provider_wesmart_province_id: 66,
+          company_provider_wesmart_province_id: getprovince.value,
           company_provider_wesmart_district_id: 880,
           company_provider_wesmart_sub_district_id: 7913,
           company_provider_wesmart_zipcode_id: 1004,
           company_image_provider_wesmart_customer_id_card: filecard.value,
           company_image_provider_wesmart_book_bank: filenumber.value,
-          company_image_provider_wesmart_company_certificate: filenumber.value,
+          company_image_provider_wesmart_company_certificate: bookmeeting.value,
         };
         emit("someEvent", payload);
         filenumber.value = "";
@@ -725,6 +764,21 @@ export default {
         checkinput.value = true;
       }
     }
+    watch(getprovince, () => {
+      store.dispatch("getDistrict", getprovince.value);
+    });
+    const province = computed(() => {
+      return store.state.bussiness.getProvince;
+    });
+    const getdistrict = computed(() => {
+      return store.state.bussiness.getDistrict;
+    });
+    async function GetProvince() {
+      await store.dispatch("getProvince");
+    }
+    onMounted(() => {
+      GetProvince();
+    });
     return {
       radio,
       register,
@@ -750,6 +804,13 @@ export default {
       zipRules,
       idCardRules,
       req,
+      province,
+      xs,
+      sm,
+      getprovince,
+      getdistrict,
+      input3,
+      bookmeeting,
     };
   },
 };
