@@ -52,7 +52,7 @@
         </v-card>
       </v-menu>
     </v-app-bar>
-    <v-navigation-drawer v-model="drawer" color="#212121"  >
+    <v-navigation-drawer v-model="drawer" color="#212121" >
         <v-list nav class="text-white" active-color="scoll" flat>
           <v-list-item
             v-for="(item, index) in menu"
@@ -80,6 +80,7 @@ export default {
     const store = useStore();
     const route = useRoute();
     const drawer = ref(true);
+    const drawermb = ref(false);
     const menu = ref([
       { title: "Dashboard", icon: "mdi-view-dashboard" },
       { title: "Business List", icon: "mdi-account" },
@@ -96,6 +97,7 @@ export default {
       sm,
       drawer,
       menu,
+      drawermb
     };
   },
 };

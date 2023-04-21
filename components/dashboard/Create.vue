@@ -172,94 +172,107 @@
           </v-row>
           <h3 class="font">Business files</h3>
           <div class="d-flex" style="100%">
-            <label
-              for="images"
-              :class="[
-                checkinput ? 'drop-containerfail mr-5' : 'drop-container mr-5',
-              ]"
-            >
-              <v-card width="70%" height="350px" class="card">
-                <div
-                  class="d-flex justify-center align-center"
-                  style="height: 100%"
+            <v-row>
+              <v-col cols="auto"
+                ><label style="width: 100%;"
+                  for="images"
+                  :class="[
+                    checkinput
+                      ? 'drop-containerfail mr-5'
+                      : 'drop-container mr-5',
+                  ]"
                 >
-                  <v-icon size="x-large"> mdi-camera </v-icon>
-                </div>
-                <input
-                  type="file"
-                  id="images"
-                  accept="image/*"
-                  required
-                  style="display: none"
-                  @input="input1"
-                />
-              </v-card>
-              <!-- {{ filename }} -->
-              <p style="color: #666666" class="text-center font">
-                สำเนาบัตรประชาชน<br />
-                กรรมการผู้มีอำนาจลงนาม1
-              </p>
-            </label>
-            <label
-              for="images1"
-              :class="[
-                checkinput ? 'drop-containerfail mr-5' : 'drop-container mr-5',
-              ]"
-            >
-              <v-card width="70%" height="70%" class="card">
-                <div
-                  class="d-flex justify-center align-center"
-                  style="height: 100%"
-                >
-                  <v-icon size="x-large"> mdi-camera </v-icon>
-                </div>
-                <input
-                  type="file"
-                  id="images1"
-                  accept="image/*"
-                  required
-                  style="display: none"
-                  @input="input2"
-                />
-              </v-card>
-              <!-- {{ filename }} -->
-              <p style="color: #666666" class="text-center font">
-                สำเนาบัญชีบุ้คแบงค์2<br />
-              </p>
-            </label>
-            <label
-              for="images1"
-              :class="[
-                checkinput ? 'drop-containerfail mr-5' : 'drop-container mr-5',
-              ]"
-            >
-              <v-card width="70%" height="70%" class="card">
-                <div
-                  class="d-flex justify-center align-center"
-                  style="height: 100%"
-                >
-                  <v-icon size="x-large"> mdi-camera </v-icon>
-                </div>
-                <input
-                  type="file"
-                  id="images1"
-                  accept="image/*"
-                  required
-                  style="display: none"
-                  @input="input3"
-                />
-              </v-card>
-              <!-- {{ filename }} -->
-              <p style="color: #666666" class="text-center font">
-                หนังสือประชุมของ ทางบริษัท<br />
-              </p>
-              <div
-                class="bg-yellow font"
-                style="width: 100%; text-align: center"
+                  <v-card width="70%" height="350px" class="card">
+                    <div
+                      class="d-flex justify-center align-center"
+                      style="height: 100%"
+                    >
+                      <v-icon size="x-large"> mdi-camera </v-icon>
+                    </div>
+                    <input
+                      type="file"
+                      id="images"
+                      accept="image/*"
+                      required
+                      style="display: none"
+                      @input="input1"
+                    />
+                  </v-card>
+                  <!-- {{ filename }} -->
+                  <p style="color: #666666" class="text-center font">
+                    สำเนาบัตรประชาชน<br />
+                    กรรมการผู้มีอำนาจลงนาม
+                  </p>
+                </label></v-col
               >
-                ดารน์โหลด
-              </div>
-            </label>
+              <v-col cols="auto"
+                ><label style="width: 100%;"
+                  for="images1"
+                  :class="[
+                    checkinput
+                      ? 'drop-containerfail mr-5'
+                      : 'drop-container mr-5',
+                  ]"
+                >
+                  <v-card width="70%" height="70%" class="card">
+                    <div
+                      class="d-flex justify-center align-center"
+                      style="height: 100%"
+                    >
+                      <v-icon size="x-large"> mdi-camera </v-icon>
+                    </div>
+                    <input
+                      type="file"
+                      id="images1"
+                      accept="image/*"
+                      required
+                      style="display: none"
+                      @input="input2"
+                    />
+                  </v-card>
+                  <!-- {{ filename }} -->
+                  <p style="color: #666666" class="text-center font">
+                    สำเนาบัญชีบุ้คแบงค์<br />
+                  </p> </label
+              ></v-col>
+              <v-col cols="auto"
+                ><label style="width: 100%;"
+                  for="images1"
+                  :class="[
+                    checkinput
+                      ? 'drop-containerfail mr-5'
+                      : 'drop-container mr-5',
+                  ]"
+                >
+                  <v-card width="70%" height="70%" class="card">
+                    <div
+                      class="d-flex justify-center align-center"
+                      style="height: 100%"
+                    >
+                      <v-icon size="x-large"> mdi-camera </v-icon>
+                    </div>
+                    <input
+                      type="file"
+                      id="images1"
+                      accept="image/*"
+                      required
+                      style="display: none"
+                      @input="input3"
+                    />
+                  </v-card>
+                  <!-- {{ filename }} -->
+                  <p style="color: #666666" class="text-center font">
+                    หนังสือประชุมของ ทางบริษัท<br />
+                  </p>
+                  <div
+                    class="bg-yellow font"
+                    style="width: 100%; text-align: center"
+                  >
+                    ดารน์โหลด
+                  </div>
+                </label></v-col
+              >
+            </v-row>
           </div>
         </v-container>
         <v-divider :thickness="3"></v-divider>
