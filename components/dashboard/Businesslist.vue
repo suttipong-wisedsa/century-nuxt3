@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color: #f7f7f7">
+  <div>
     <v-container>
       <v-card
         class="pa-5"
@@ -11,48 +11,52 @@
           <h1 class="font">
             {{ slide == false ? "Business List" : "Create Business" }}
           </h1>
-          <div style="display: flex; align-items: center">
-            <div>
-              <v-btn
-                :prepend-icon="
-                  slide == false ? 'mdi-pencil-outline' : 'mdi-close'
-                "
-                :variant="slide == false ? 'flat' : 'outlined'"
-                :color="slide == false ? 'yellow' : 'red'"
-                @click="Create(0)"
-              >
-                <template v-slot:prepend>
-                  <v-icon color="black"></v-icon>
-                </template>
+          <v-container>
+            <v-row align="center" justify="end">
+              <v-col cols="12" sm="3" class="text-end">
+                <v-btn
+                  :prepend-icon="
+                    slide == false ? 'mdi-pencil-outline' : 'mdi-close'
+                  "
+                  :variant="slide == false ? 'flat' : 'outlined'"
+                  :color="slide == false ? 'yellow' : 'red'"
+                  @click="Create(0)"
+                >
+                  <template v-slot:prepend>
+                    <v-icon color="black"></v-icon>
+                  </template>
 
-                {{ slide == false ? "Edit" : "Cancle" }}
+                  {{ slide == false ? "Edit" : "Cancle" }}
 
-                <template v-slot:append>
-                  <v-icon color="warning"></v-icon>
-                </template>
-              </v-btn>
-              <v-btn
-                :prepend-icon="
-                  slide == false
-                    ? 'mdi-plus-circle-outline'
-                    : 'mdi-plus-circle-outline'
-                "
-                :color="slide == false ? 'black' : '#00BAFF'"
-                class="ml-5"
-                @click="Create(1)"
-              >
-                <template v-slot:prepend>
-                  <v-icon color="white"></v-icon>
-                </template>
+                  <template v-slot:append>
+                    <v-icon color="warning"></v-icon>
+                  </template>
+                </v-btn>
+              </v-col>
+              <v-col cols="12" sm="3" class="text-start">
+                <v-btn
+                  :prepend-icon="
+                    slide == false
+                      ? 'mdi-plus-circle-outline'
+                      : 'mdi-plus-circle-outline'
+                  "
+                  :color="slide == false ? 'black' : '#00BAFF'"
+                  class="ml-5"
+                  @click="Create(1)"
+                >
+                  <template v-slot:prepend>
+                    <v-icon color="white"></v-icon>
+                  </template>
 
-                {{ slide == false ? "Create Business" : "Create" }}
+                  {{ slide == false ? "Create Business" : "Create" }}
 
-                <template v-slot:append>
-                  <v-icon color="warning"></v-icon>
-                </template>
-              </v-btn>
-            </div>
-          </div>
+                  <template v-slot:append>
+                    <v-icon color="warning"></v-icon>
+                  </template>
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-container>
         </div>
         <div
           class="pa-5 font"
@@ -63,20 +67,33 @@
         </div>
         <div id="app" v-show="slide == false">
           <v-data-table
+            v-model:page="page"
             :headers="headers"
             :items="desserts"
             class="elevation-1"
             show-select
             v-model="selected"
+            @update:options="options = $event"
           >
             <template v-slot:item.glutenfree="{ item }">
               <v-btn
                 prepend-icon="mdi-magnify"
                 variant="outlined"
                 color="#00BAFF"
+                @click="seeMore(item.value.name)"
               >
                 See more
               </v-btn>
+            </template>
+           
+            <template v-slot:bottom>
+              <div >
+                <v-pagination
+                  color="#000000"
+                  v-model="page"
+                  :length="( Math.ceil( desserts.length / 10 ) )"
+                ></v-pagination>
+              </div>
             </template>
           </v-data-table>
         </div>
@@ -84,6 +101,7 @@
           <DashboardCreate
             :slide="slide"
             @some-event="callback($event)"
+            @some-event1="cancle($event)"
           ></DashboardCreate>
         </div>
       </v-card>
@@ -100,6 +118,8 @@ export default {
     const route = useRoute();
     const drawer = ref(true);
     const itemsPerPage = ref(5);
+    const page = ref(1);
+    const pageNext = ref(1);
     const selected = ref([]);
     const slide = ref(false);
     const reveal = ref(false);
@@ -156,7 +176,104 @@ export default {
         fat: 6.0,
         glutenfree: true,
       },
+      {
+        name: "Frozen Yogurt",
+        calories: 159,
+        fat: 6.0,
+        glutenfree: true,
+      },
+      {
+        name: "Frozen Yogurt",
+        calories: 159,
+        fat: 6.0,
+        glutenfree: true,
+      },
+      {
+        name: "Frozen Yogurt",
+        calories: 159,
+        fat: 6.0,
+        glutenfree: true,
+      },
+      {
+        name: "Frozen Yogurt",
+        calories: 159,
+        fat: 6.0,
+        glutenfree: true,
+      },
+      {
+        name: "Frozen Yogurt",
+        calories: 159,
+        fat: 6.0,
+        glutenfree: true,
+      },
+      {
+        name: "Frozen Yogurt",
+        calories: 159,
+        fat: 6.0,
+        glutenfree: true,
+      },
+      {
+        name: "Frozen Yogurt",
+        calories: 159,
+        fat: 6.0,
+        glutenfree: true,
+      },
+      {
+        name: "Frozen Yogurt",
+        calories: 159,
+        fat: 6.0,
+        glutenfree: true,
+      },
+      {
+        name: "Frozen Yogurt",
+        calories: 159,
+        fat: 6.0,
+        glutenfree: true,
+      },
+      {
+        name: "Frozen Yogurt",
+        calories: 159,
+        fat: 6.0,
+        glutenfree: true,
+      },
+      {
+        name: "Frozen Yogurt",
+        calories: 159,
+        fat: 6.0,
+        glutenfree: true,
+      },
+      {
+        name: "Frozen Yogurt",
+        calories: 159,
+        fat: 6.0,
+        glutenfree: true,
+      },
+      {
+        name: "Frozen Yogurt",
+        calories: 159,
+        fat: 6.0,
+        glutenfree: true,
+      },
+      {
+        name: "Frozen Yogurt",
+        calories: 159,
+        fat: 6.0,
+        glutenfree: true,
+      },
+      {
+        name: "Frozen Yogurt",
+        calories: 159,
+        fat: 6.0,
+        glutenfree: true,
+      },
+      {
+        name: "Frozen Yogurt",
+        calories: 159,
+        fat: 6.0,
+        glutenfree: true,
+      },
     ]);
+    
     function Create($event) {
       let click = $event;
       if (click == 0) {
@@ -165,9 +282,16 @@ export default {
         slide.value = true;
       }
     }
+    async function seeMore(item) {
+      alert(item);
+    }
     async function callback($event) {
       let click = $event;
       await store.dispatch("createbusiness", click);
+    }
+    function cancle($event) {
+      let click = $event;
+      slide.value = click;
     }
     definePageMeta({
       layout: false,
@@ -187,6 +311,10 @@ export default {
       slide,
       reveal,
       callback,
+      cancle,
+      seeMore,
+      page,
+      pageNext,
     };
   },
 };

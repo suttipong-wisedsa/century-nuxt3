@@ -64,7 +64,7 @@
         ></v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-main>
+    <v-main style="height: 100vh;background-color: #f7f7f7;">
       <dashboard-businesslist></dashboard-businesslist>
     </v-main>
   </v-layout>

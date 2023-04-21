@@ -4,13 +4,13 @@
     <div class="my-5 px-5">
       <h3 class="font">ประเภทธุรกิจ *</h3>
       <v-radio-group v-model="radio" inline color="yellow">
-        <v-radio label="บุคคลธรรมดา" value="radio-1"></v-radio>
-        <v-radio label="นิติบุคคล" value="radio-2"></v-radio>
+        <v-radio label="บุคคลธรรมดา" :value="n1"></v-radio>
+        <v-radio label="นิติบุคคล" :value="n2"></v-radio>
       </v-radio-group>
     </div>
     <h3 class="px-5">ประเภทธุรกิจ</h3>
     <v-form ref="form" v-model="valid" lazy-validation class="px-5">
-      <div v-if="radio == 'radio-1'">
+      <div v-if="radio == 1">
         <v-container>
           <v-row>
             <v-col cols="12" sm="4">
@@ -19,7 +19,7 @@
               </p>
               <v-text-field
                 v-model="register.name"
-                :rules="nameRules"
+                :rules="textRules"
                 :loading="submit"
                 type="text"
                 placeholder="Your Name"
@@ -34,7 +34,7 @@
               </p>
               <v-text-field
                 v-model="register.numberid"
-                :rules="numberRules"
+                :rules="idCardRules"
                 :loading="submit"
                 type="text"
                 placeholder="Your Number"
@@ -47,7 +47,7 @@
               </p>
               <v-text-field
                 v-model="register.numberbank"
-                :rules="textRules"
+                :rules="idCardRules"
                 :loading="submit"
                 type="text"
                 placeholder="Company Name"
@@ -73,7 +73,7 @@
               </p>
               <v-text-field
                 v-model="register.tel"
-                :rules="textRules"
+                :rules="numberRules"
                 :loading="submit"
                 type="text"
                 placeholder="Company Website"
@@ -86,7 +86,7 @@
           ><p class="text-black font">ที่อยู่<span class="text-red">*</span></p>
           <v-text-field
             v-model="register.address"
-            :rules="nameRules"
+            :rules="textRules"
             :loading="submit"
             type="text"
             placeholder="Your Name"
@@ -99,46 +99,88 @@
               <p class="text-black font">
                 จังหวัด<span class="text-red">*</span>
               </p>
-              <v-text-field
-                v-model="register.province"
-                :rules="nameRules"
+              <!-- <v-text-field
+                v-model.number="register.province"
                 :loading="submit"
                 type="text"
                 placeholder="Your Name"
                 variant="outlined"
-              ></v-text-field>
+              ></v-text-field> -->
+              <v-select
+                :rules="req"
+                v-model.number="register.province"
+                :loading="submit"
+                label="Select"
+                :items="[
+                  66,
+                  'Colorado',
+                  'Florida',
+                  'Georgia',
+                  'Texas',
+                  'Wyoming',
+                ]"
+                variant="solo"
+              ></v-select>
             </v-col>
             <v-col cols="12" sm="3">
               <p class="text-black font">
                 อำเภอ<span class="text-red">*</span>
               </p>
-              <v-text-field
-                v-model="register.district"
-                :rules="numberRules"
+              <!-- <v-text-field
+                v-model.number="register.district"
                 :loading="submit"
                 type="text"
                 placeholder="Your Number"
                 variant="outlined"
-              ></v-text-field>
+              ></v-text-field> -->
+              <v-select
+                :rules="req"
+                v-model.number="register.district"
+                :loading="submit"
+                label="Select"
+                :items="[
+                  880,
+                  'Colorado',
+                  'Florida',
+                  'Georgia',
+                  'Texas',
+                  'Wyoming',
+                ]"
+                variant="solo"
+              ></v-select>
             </v-col>
             <v-col cols="12" sm="3">
               <p class="text-black font">ตำบล<span class="text-red">*</span></p>
-              <v-text-field
-                v-model="register.district2"
-                :rules="textRules"
+              <!-- <v-text-field
+                v-model.number="register.districtsub"
                 :loading="submit"
                 type="text"
                 placeholder="Company Name"
                 variant="outlined"
-              ></v-text-field>
+              ></v-text-field> -->
+              <v-select
+                :rules="req"
+                v-model.number="register.districtsub"
+                :loading="submit"
+                label="Select"
+                :items="[
+                  7913,
+                  'Colorado',
+                  'Florida',
+                  'Georgia',
+                  'Texas',
+                  'Wyoming',
+                ]"
+                variant="solo"
+              ></v-select>
             </v-col>
             <v-col cols="12" sm="3">
               <p class="text-black font">
                 รหัสไปรษณีย์<span class="text-red">*</span>
               </p>
               <v-text-field
-                v-model="register.zipcode"
-                :rules="emailRules"
+                :rules="req"
+                v-model.number="register.zipcode"
                 :loading="submit"
                 type="email"
                 placeholder="Company@email.com"
@@ -147,12 +189,6 @@
             </v-col>
           </v-row>
           <h3 class="font">Business files</h3>
-          <!-- <v-file-input
-          style="width: 300px; height: 300px"
-          placeholder="File input"
-          prepend-icon="mdi-camera"
-          variant="outlined"
-        ></v-file-input> -->
           <div class="d-flex" style="100%">
             <label
               for="images"
@@ -182,7 +218,12 @@
                 กรรมการผู้มีอำนาจลงนาม1
               </p>
             </label>
-            <label for="images1" class="drop-container">
+            <label
+              for="images1"
+              :class="[
+                checkinput ? 'drop-containerfail mr-5' : 'drop-container mr-5',
+              ]"
+            >
               <v-card width="70%" height="70%" class="card">
                 <div
                   class="d-flex justify-center align-center"
@@ -215,7 +256,7 @@
               "
               :variant="slide == false ? 'flat' : 'outlined'"
               :color="slide == false ? 'yellow' : 'red'"
-              @click="Create(0)"
+              @click="cancle()"
             >
               <template v-slot:prepend>
                 <v-icon color="black"></v-icon>
@@ -341,7 +382,6 @@
               </p>
               <v-text-field
                 v-model="register.name"
-                :rules="nameRules"
                 :loading="submit"
                 type="text"
                 placeholder="Your Name"
@@ -354,7 +394,6 @@
               </p>
               <v-text-field
                 v-model="register.number"
-                :rules="numberRules"
                 :loading="submit"
                 type="text"
                 placeholder="Your Number"
@@ -365,7 +404,6 @@
               <p class="text-black font">ตำบล<span class="text-red">*</span></p>
               <v-text-field
                 v-model="register.company"
-                :rules="textRules"
                 :loading="submit"
                 type="text"
                 placeholder="Company Name"
@@ -378,7 +416,6 @@
               </p>
               <v-text-field
                 v-model="register.email"
-                :rules="emailRules"
                 :loading="submit"
                 type="email"
                 placeholder="Company@email.com"
@@ -387,12 +424,6 @@
             </v-col>
           </v-row>
           <h3>Business files</h3>
-          <!-- <v-file-input
-          style="width: 300px; height: 300px"
-          placeholder="File input"
-          prepend-icon="mdi-camera"
-          variant="outlined"
-        ></v-file-input> -->
           <div class="d-flex justify-space-between" style="100%">
             <label for="images" class="drop-container">
               <v-card width="70%" height="70%" class="card">
@@ -494,7 +525,7 @@
               "
               :variant="slide == false ? 'flat' : 'outlined'"
               :color="slide == false ? 'yellow' : 'red'"
-              @click="Create(0)"
+              @click="cancle()"
             >
               <template v-slot:prepend>
                 <v-icon color="black"></v-icon>
@@ -534,13 +565,15 @@
 </template>
 <script>
 export default {
-  emits: ["someEvent"],
+  emits: ["someEvent", "someEvent1"],
   setup(props, { emit }) {
     const form = ref(null);
-    const radio = ref("radio-1");
+    const radio = ref(1);
     const file = reactive({ card: "", bank: "" });
     const filecard = ref("");
     const filenumber = ref("");
+    const n1 = ref(1);
+    const n2 = ref(2);
     const filename = ref("");
     const valid = ref(true);
     const slide = ref(true);
@@ -557,16 +590,24 @@ export default {
     ]);
     const numberRules = ref([
       (v) => !!v || "required",
-      (v) => (v && v.length <= 12) || "Number must be less than 12 characters",
-      (v) =>
-        /((\+66|0)(\d{1,2}\-?\d{3}\-?\d{3,4}))|((\+๖๖|๐)([๐-๙]{1,2}\-?[๐-๙]{3}\-?[๐-๙]{3,4}))/.test(
-          v
-        ) || "Tel required",
+      (v) => (v && v.length <= 10) || "Phone number not true",
+      (v) => /((\+66|0)(\d{1,2}\-?\d{3}\-?\d{4,5}))/.test(v) || "Tel required",
     ]);
     const textRules = ref([
       (v) => !!v || "required",
       (v) => (v && v.length <= 50) || "Number must be less than 50 characters",
     ]);
+    const zipRules = ref([
+      (v) => !!v || "required",
+      (v) => (v && v.length == 5) || "zip must be 5 characters",
+      (v) => /^[0-9]*$/.test(v) || "Can't use Text",
+    ]);
+    const idCardRules = ref([
+      (v) => !!v || "required",
+      (v) => (v && v.length == 13) || "zip must be 13 characters",
+      (v) => /^[0-9]*$/.test(v) || "Can't use Text",
+    ]);
+    const req = ref([(v) => !!v || "required"]);
     const submit = ref(false);
     const register = reactive({
       name: "",
@@ -576,10 +617,10 @@ export default {
       tel: "",
       address: "",
       country: "",
-      province: "",
-      district: "",
-      district2: "",
-      zipcode: "",
+      province: null,
+      district: null,
+      districtsub: null,
+      zipcode: null,
     });
     async function input1(event) {
       let n = 1;
@@ -606,53 +647,80 @@ export default {
         filenumber.value = item;
       }
     }
+    async function cancle() {
+      form.value.resetValidation();
+      checkinput.value = false;
+      form.value.reset();
+      filenumber.value == "";
+      filecard.value == "";
+      emit("someEvent1", false);
+    }
     async function createForm() {
+      // let payload = {
+      //     company_provider_wesmart_type: 1,
+      //     company_provider_wesmart_name: "บ่าวกิต จำกัด ครั้งที่ 2",
+      //     company_provider_wesmart_email: "bawkrit@gmail.com",
+      //     company_provider_wesmart_tel: "893457218",
+      //     company_provider_wesmart_address: "The View Condo สวนหลวง",
+      //     company_provider_wesmart_bank_number: "1231231231123123",
+      //     company_provider_wesmart_customer_id_card: "123123123123123",
+      //     company_provider_wesmart_juristic_id: "123123123123123",
+      //     company_provider_wesmart_province_id: 66,
+      //     company_provider_wesmart_district_id: 880,
+      //     company_provider_wesmart_sub_district_id: 7913,
+      //     company_provider_wesmart_zipcode_id: 1004,
+      //     company_image_provider_wesmart_customer_id_card: filecard.value,
+      //     company_image_provider_wesmart_book_bank: filenumber.value,
+      //     company_image_provider_wesmart_company_certificate: filenumber.value,
+      //   };
+      //   console.log(payload)
+      //   emit("someEvent", payload);
       checkinput.value = false;
       form.value.validate();
       if (valid.value && filenumber.value && filecard.value) {
         submit.value = true;
-        let payload = {
-          company_provider_wesmart_type: register.name,
-          company_provider_wesmart_name: register.numberid,
-          company_provider_wesmart_email: register.numberbank,
-          company_provider_wesmart_tel: register.email,
-          company_provider_wesmart_address: register.tel,
-          company_provider_wesmart_bank_number: register.address,
-          company_provider_wesmart_customer_id_card: "th",
-          company_provider_wesmart_juristic_id: register.province,
-          company_provider_wesmart_province_id: register.district,
-          company_provider_wesmart_district_id: register.district2,
-          company_provider_wesmart_sub_district_id: register.district2,
-          company_provider_wesmart_zipcode_id: register.zipcode,
-          company_image_provider_wesmart_customer_id_card: filecard.value,
-          company_image_provider_wesmart_book_bank: filenumber.value,
-          company_image_provider_wesmart_company_certificate: "",
-        };
-        //  let payload = {
-        //   company_provider_wesmart_type: 1,
-        //   company_provider_wesmart_name: "บ่าวกิต จำกัด ครั้งที่ 2",
-        //   company_provider_wesmart_email: "bawkrit@gmail.com",
-        //   company_provider_wesmart_tel: "893457218",
-        //   company_provider_wesmart_address: "The View Condo สวนหลวง",
-        //   company_provider_wesmart_bank_number: "1231231231123123",
-        //   company_provider_wesmart_customer_id_card: "th",
-        //   company_provider_wesmart_juristic_id: register.province,
-        //   company_provider_wesmart_province_id: register.district,
-        //   company_provider_wesmart_district_id: register.district2,
-        //   company_provider_wesmart_sub_district_id: register.district2,
+        // let payload = {
+        //   company_provider_wesmart_type: radio.value,
+        //   company_provider_wesmart_name: register.name,
+        //   company_provider_wesmart_email: register.email,
+        //   company_provider_wesmart_tel: register.tel,
+        //   company_provider_wesmart_address: register.address,
+        //   company_provider_wesmart_bank_number: register.numberbank,
+        //   company_provider_wesmart_customer_id_card: register.numberid,
+        //   company_provider_wesmart_juristic_id: "12122312233",
+        //   company_provider_wesmart_province_id: register.province,
+        //   company_provider_wesmart_district_id: register.district,
+        //   company_provider_wesmart_sub_district_id: register.districtsub,
         //   company_provider_wesmart_zipcode_id: register.zipcode,
         //   company_image_provider_wesmart_customer_id_card: filecard.value,
         //   company_image_provider_wesmart_book_bank: filenumber.value,
         //   company_image_provider_wesmart_company_certificate: "",
         // };
-        await emit("someEvent", payload);
-        router.push({ path: "/" });
-        form.value.resetValidation();
+        let payload = {
+          company_provider_wesmart_type: 1,
+          company_provider_wesmart_name: "บ่าวกิต จำกัด ครั้งที่ 2",
+          company_provider_wesmart_email: "bawkrit@gmail.com",
+          company_provider_wesmart_tel: "893457218",
+          company_provider_wesmart_address: "The View Condo สวนหลวง",
+          company_provider_wesmart_bank_number: "1231231231123123",
+          company_provider_wesmart_customer_id_card: "123123123123123",
+          company_provider_wesmart_juristic_id: "123123123123123",
+          company_provider_wesmart_province_id: 66,
+          company_provider_wesmart_district_id: 880,
+          company_provider_wesmart_sub_district_id: 7913,
+          company_provider_wesmart_zipcode_id: 1004,
+          company_image_provider_wesmart_customer_id_card: filecard.value,
+          company_image_provider_wesmart_book_bank: filenumber.value,
+          company_image_provider_wesmart_company_certificate: filenumber.value,
+        };
+        emit("someEvent", payload);
         filenumber.value = "";
         filecard.value == "";
         checkinput.value = false;
-        form.value.reset();
         submit.value = false;
+        form.value.resetValidation();
+        form.value.reset();
+        emit("someEvent1", false);
       } else {
         checkinput.value = true;
       }
@@ -676,6 +744,12 @@ export default {
       input1,
       input2,
       checkinput,
+      cancle,
+      n1,
+      n2,
+      zipRules,
+      idCardRules,
+      req,
     };
   },
 };
