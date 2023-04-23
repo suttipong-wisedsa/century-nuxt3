@@ -44,9 +44,9 @@
                   </template>
                 </v-btn>
               </v-col>
-              <v-col cols="12" sm="3" class="text-start">
+              <v-col cols="12" sm="5" class="text-start">
                 <v-btn
-                  :style="{ width: sm || xs ? '150px' : null }"
+                 
                   :prepend-icon="
                     slide == false
                       ? 'mdi-plus-circle-outline'

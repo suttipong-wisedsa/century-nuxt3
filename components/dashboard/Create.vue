@@ -182,7 +182,7 @@
                       : 'drop-container mr-5',
                   ]"
                 >
-                  <v-card width="70%" height="350px" class="card">
+                  <v-card width="200px" height="70%" class="card">
                     <div
                       class="d-flex justify-center align-center"
                       style="height: 100%"
@@ -198,7 +198,7 @@
                       @input="input1"
                     />
                   </v-card>
-                  <!-- {{ filename }} -->
+                  {{ filename }}
                   <p style="color: #666666" class="text-center font">
                     สำเนาบัตรประชาชน<br />
                     กรรมการผู้มีอำนาจลงนาม
@@ -214,7 +214,7 @@
                       : 'drop-container mr-5',
                   ]"
                 >
-                  <v-card width="70%" height="70%" class="card">
+                  <v-card width="200px" height="70%" class="card">
                     <div
                       class="d-flex justify-center align-center"
                       style="height: 100%"
@@ -230,21 +230,21 @@
                       @input="input2"
                     />
                   </v-card>
-                  <!-- {{ filename }} -->
+                  {{ filename2 }}
                   <p style="color: #666666" class="text-center font">
                     สำเนาบัญชีบุ้คแบงค์<br />
                   </p> </label
               ></v-col>
               <v-col cols="auto"
                 ><label style="width: 100%;"
-                  for="images1"
+                  for="images2"
                   :class="[
                     checkinput
                       ? 'drop-containerfail mr-5'
                       : 'drop-container mr-5',
                   ]"
                 >
-                  <v-card width="70%" height="70%" class="card">
+                  <v-card width="200px" height="70%" class="card">
                     <div
                       class="d-flex justify-center align-center"
                       style="height: 100%"
@@ -253,14 +253,14 @@
                     </div>
                     <input
                       type="file"
-                      id="images1"
+                      id="images2"
                       accept="image/*"
                       required
                       style="display: none"
                       @input="input3"
                     />
                   </v-card>
-                  <!-- {{ filename }} -->
+                  {{ filename3 }}
                   <p style="color: #666666" class="text-center font">
                     หนังสือประชุมของ ทางบริษัท<br />
                   </p>
@@ -621,6 +621,8 @@ export default {
     const n1 = ref(1);
     const n2 = ref(2);
     const filename = ref("");
+    const filename2 = ref("");
+    const filename3 = ref("");
     const valid = ref(true);
     const slide = ref(true);
     const checkinput = ref(false);
@@ -682,6 +684,13 @@ export default {
     }
     async function inputFile(event, n) {
       filename.value = event.target.files[0].name;
+      if(n == 1){
+        filename.value = event.target.files[0].name;
+      }else if(n == 2){
+        filename2.value = event.target.files[0].name;
+      } else if(n == 3){
+        filename3.value = event.target.files[0].name;
+      }
       const file = event.target.files[0];
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -695,7 +704,7 @@ export default {
         filecard.value = item;
       } else if (n === 2) {
         filenumber.value = item;
-      } else {
+      } else if(n === 3){
         bookmeeting.value = item;
       }
     }
@@ -765,7 +774,7 @@ export default {
           company_image_provider_wesmart_book_bank: filenumber.value,
           company_image_provider_wesmart_company_certificate: bookmeeting.value,
         };
-        emit("someEvent", payload);
+       emit("someEvent", payload);
         filenumber.value = "";
         filecard.value == "";
         checkinput.value = false;
@@ -824,6 +833,8 @@ export default {
       getdistrict,
       input3,
       bookmeeting,
+      filename2,
+      filename3
     };
   },
 };
