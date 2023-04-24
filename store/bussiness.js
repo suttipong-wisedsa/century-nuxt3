@@ -1,4 +1,5 @@
 import axios from "axios";
+
 const user = {
   state() {
     return {
@@ -20,9 +21,22 @@ const user = {
   },
   actions: {
     async businessList(context) {
+      const userData = JSON.parse(localStorage.getItem("token_access"));
+      // const axiosConfig = {
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: userData,
+      //   },
+      // };
       const runtimeConfig = useRuntimeConfig();
       let api = `${runtimeConfig.public.apiBase}/api/v1/providerwesmart/get_list_company_provider_wesmart`;
-      let { data } = await axios.get(api);
+      let { data } = await axios.get(api, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: userData,
+        },
+      });
+      console.log(data);
       if (!data) return;
       context.commit("getListBusiness", data.data);
     },

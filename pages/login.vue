@@ -231,7 +231,10 @@ export default {
       //   console.log(err);
       // }
       if (res.msg == true) {
-        localStorage.setItem("userInfo", JSON.stringify(res.data.token));
+        localStorage.setItem(
+          "userInfo",
+          JSON.stringify(res.data.token.token_access)
+        );
         router.push({ path: "/" });
         loading.value = false;
       } else {

@@ -13,7 +13,7 @@
             :style="{
               fontSize: sm || xs ? '25px' : '',
               fontWeight: sm || xs ? 'bold' : '',
-              width: sm || xs ? '' : '100%'
+              width: sm || xs ? '' : '100%',
             }"
           >
             {{ slide == false ? "Business List" : "Create Business" }}
@@ -46,7 +46,6 @@
               </v-col>
               <v-col cols="12" sm="5" class="text-start">
                 <v-btn
-                 
                   :prepend-icon="
                     slide == false
                       ? 'mdi-plus-circle-outline'
@@ -87,9 +86,9 @@
             v-model="selected"
             @update:options="options = $event"
           >
-            <template v-slot:item.create_at="{ item }">
-              <td>{{ moment(item.create_at).format("DD/MM/YYYY") }}</td>
-            </template>
+            <!-- <template v-slot:item.create_at="{ item }">
+              <td>{{ $moment(item.create_at).format("DD/MM/YYYY") }}</td>
+            </template> -->
             <template v-slot:item.glutenfree="{ item }">
               <v-btn
                 prepend-icon="mdi-magnify"
@@ -126,7 +125,6 @@
 <script>
 import { useDisplay } from "vuetify";
 import { useStore } from "vuex";
-import moment from "moment";
 export default {
   setup() {
     const { xs, sm, md, lg, xl, xxl } = useDisplay();
@@ -257,7 +255,6 @@ export default {
       seeMore,
       page,
       pageNext,
-      moment,
     };
   },
 };

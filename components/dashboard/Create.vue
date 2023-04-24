@@ -161,7 +161,7 @@
                 รหัสไปรษณีย์<span class="text-red">*</span>
               </p>
               <v-text-field
-                :rules="req"
+                :rules="zipRules"
                 v-model.number="register.zipcode"
                 :loading="submit"
                 type="email"
@@ -174,7 +174,8 @@
           <div class="d-flex" style="100%">
             <v-row>
               <v-col cols="auto"
-                ><label style="width: 100%;"
+                ><label
+                  style="width: 100%"
                   for="images"
                   :class="[
                     checkinput
@@ -206,7 +207,8 @@
                 </label></v-col
               >
               <v-col cols="auto"
-                ><label style="width: 100%;"
+                ><label
+                  style="width: 100%"
                   for="images1"
                   :class="[
                     checkinput
@@ -236,7 +238,8 @@
                   </p> </label
               ></v-col>
               <v-col cols="auto"
-                ><label style="width: 100%;"
+                ><label
+                  style="width: 100%"
                   for="images2"
                   :class="[
                     checkinput
@@ -647,7 +650,6 @@ export default {
     ]);
     const zipRules = ref([
       (v) => !!v || "required",
-      (v) => (v && v.length == 5) || "zip must be 5 characters",
       (v) => /^[0-9]*$/.test(v) || "Can't use Text",
     ]);
     const idCardRules = ref([
@@ -684,11 +686,11 @@ export default {
     }
     async function inputFile(event, n) {
       filename.value = event.target.files[0].name;
-      if(n == 1){
+      if (n == 1) {
         filename.value = event.target.files[0].name;
-      }else if(n == 2){
+      } else if (n == 2) {
         filename2.value = event.target.files[0].name;
-      } else if(n == 3){
+      } else if (n == 3) {
         filename3.value = event.target.files[0].name;
       }
       const file = event.target.files[0];
@@ -704,7 +706,7 @@ export default {
         filecard.value = item;
       } else if (n === 2) {
         filenumber.value = item;
-      } else if(n === 3){
+      } else if (n === 3) {
         bookmeeting.value = item;
       }
     }
@@ -717,64 +719,47 @@ export default {
       emit("someEvent1", false);
     }
     async function createForm() {
-      // let payload = {
-      //     company_provider_wesmart_type: 1,
-      //     company_provider_wesmart_name: "บ่าวกิต จำกัด ครั้งที่ 2",
-      //     company_provider_wesmart_email: "bawkrit@gmail.com",
-      //     company_provider_wesmart_tel: "893457218",
-      //     company_provider_wesmart_address: "The View Condo สวนหลวง",
-      //     company_provider_wesmart_bank_number: "1231231231123123",
-      //     company_provider_wesmart_customer_id_card: "123123123123123",
-      //     company_provider_wesmart_juristic_id: "123123123123123",
-      //     company_provider_wesmart_province_id: 66,
-      //     company_provider_wesmart_district_id: 880,
-      //     company_provider_wesmart_sub_district_id: 7913,
-      //     company_provider_wesmart_zipcode_id: 1004,
-      //     company_image_provider_wesmart_customer_id_card: filecard.value,
-      //     company_image_provider_wesmart_book_bank: filenumber.value,
-      //     company_image_provider_wesmart_company_certificate: filenumber.value,
-      //   };
-      //   console.log(payload)
-      //   emit("someEvent", payload);
+      const userData = JSON.parse(localStorage.getItem("userInfo"));
+      console.log(userData);
       checkinput.value = false;
       form.value.validate();
       if (valid.value && filenumber.value && filecard.value) {
         submit.value = true;
-        // let payload = {
-        //   company_provider_wesmart_type: radio.value,
-        //   company_provider_wesmart_name: register.name,
-        //   company_provider_wesmart_email: register.email,
-        //   company_provider_wesmart_tel: register.tel,
-        //   company_provider_wesmart_address: register.address,
-        //   company_provider_wesmart_bank_number: register.numberbank,
-        //   company_provider_wesmart_customer_id_card: register.numberid,
-        //   company_provider_wesmart_juristic_id: "12122312233",
-        //   company_provider_wesmart_province_id: register.province,
-        //   company_provider_wesmart_district_id: register.district,
-        //   company_provider_wesmart_sub_district_id: register.districtsub,
-        //   company_provider_wesmart_zipcode_id: register.zipcode,
-        //   company_image_provider_wesmart_customer_id_card: filecard.value,
-        //   company_image_provider_wesmart_book_bank: filenumber.value,
-        //   company_image_provider_wesmart_company_certificate: "",
-        // };
         let payload = {
-          company_provider_wesmart_type: 1,
-          company_provider_wesmart_name: "บ่าวกิต จำกัด ครั้งที่ 2",
-          company_provider_wesmart_email: "bawkrit@gmail.com",
-          company_provider_wesmart_tel: "893457218",
-          company_provider_wesmart_address: "The View Condo สวนหลวง",
-          company_provider_wesmart_bank_number: "1231231231123123",
-          company_provider_wesmart_customer_id_card: "123123123123123",
-          company_provider_wesmart_juristic_id: "123123123123123",
+          company_provider_wesmart_type: radio.value,
+          company_provider_wesmart_name: register.name,
+          company_provider_wesmart_email: register.email,
+          company_provider_wesmart_tel: register.tel,
+          company_provider_wesmart_address: register.address,
+          company_provider_wesmart_bank_number: register.numberbank,
+          company_provider_wesmart_customer_id_card: register.numberid,
+          company_provider_wesmart_juristic_id: "12122312233",
           company_provider_wesmart_province_id: getprovince.value,
-          company_provider_wesmart_district_id: 880,
-          company_provider_wesmart_sub_district_id: 7913,
-          company_provider_wesmart_zipcode_id: 1004,
+          company_provider_wesmart_district_id: register.district,
+          company_provider_wesmart_sub_district_id: register.districtsub,
+          company_provider_wesmart_zipcode_id: register.zipcode,
           company_image_provider_wesmart_customer_id_card: filecard.value,
           company_image_provider_wesmart_book_bank: filenumber.value,
           company_image_provider_wesmart_company_certificate: bookmeeting.value,
         };
-       emit("someEvent", payload);
+        // let payload = {
+        //   company_provider_wesmart_type: 1,
+        //   company_provider_wesmart_name: "บ่าวกิต จำกัด ครั้งที่ 2",
+        //   company_provider_wesmart_email: "bawkrit@gmail.com",
+        //   company_provider_wesmart_tel: "893457218",
+        //   company_provider_wesmart_address: "The View Condo สวนหลวง",
+        //   company_provider_wesmart_bank_number: "1231231231123123",
+        //   company_provider_wesmart_customer_id_card: "123123123123123",
+        //   company_provider_wesmart_juristic_id: "123123123123123",
+        //   company_provider_wesmart_province_id: 66,
+        //   company_provider_wesmart_district_id: 880,
+        //   company_provider_wesmart_sub_district_id: 7913,
+        //   company_provider_wesmart_zipcode_id: 1004,
+        //   company_image_provider_wesmart_customer_id_card: filecard.value,
+        //   company_image_provider_wesmart_book_bank: filenumber.value,
+        //   company_image_provider_wesmart_company_certificate: bookmeeting.value,
+        // };
+        emit("someEvent", payload);
         filenumber.value = "";
         filecard.value == "";
         checkinput.value = false;
@@ -834,7 +819,7 @@ export default {
       input3,
       bookmeeting,
       filename2,
-      filename3
+      filename3,
     };
   },
 };

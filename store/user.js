@@ -36,7 +36,7 @@ const user = {
     },
     async createbusiness(context, payload) {
       const runtimeConfig = useRuntimeConfig();
-       let api = `${runtimeConfig.public.apiBase}/api/v1/providerwesmart/create_company_provider`;
+      let api = `${runtimeConfig.public.apiBase}/api/v1/providerwesmart/create_company_provider`;
       let { data } = await axios.post(api, payload);
     },
     async ResentOTPProviderWesmart(context, payload) {

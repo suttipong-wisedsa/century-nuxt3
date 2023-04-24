@@ -96,7 +96,8 @@ export default defineNuxtConfig({
       nuxt.hooks.hook("vite:extendConfig", (config) =>
         config.plugins.push(vuetify())
       ),
-        "@nuxtjs/auth-next";
+        "@nuxtjs/auth-next",
+        "@nuxtjs/moment";
     },
   ],
 });
