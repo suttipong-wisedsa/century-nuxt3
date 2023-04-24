@@ -159,49 +159,6 @@ export default {
       },
       { title: "Action", key: "glutenfree", align: "center", sortable: false },
     ]);
-    // const desserts = ref([
-    //   {
-    //     company_provider_wesmart_id: 3,
-    //     company_provider_wesmart_type: null,
-    //     company_provider_wesmart_name: "บ่าวกิต จำกัด",
-    //     company_provider_wesmart_email: "krit254001@gmail.com",
-    //     company_provider_wesmart_tel: null,
-    //     company_provider_wesmart_status: 1,
-    //     create_at: "2023-03-22 12:33:46.406951+00:00",
-    //     service_count: 1,
-    //   },
-    //   {
-    //     company_provider_wesmart_id: 3,
-    //     company_provider_wesmart_type: null,
-    //     company_provider_wesmart_name: "บ่าวกิต จำกัด",
-    //     company_provider_wesmart_email: "krit254001@gmail.com",
-    //     company_provider_wesmart_tel: null,
-    //     company_provider_wesmart_status: 1,
-    //     create_at: "2023-03-22 12:33:46.406951+00:00",
-    //     service_count: 1,
-    //   },
-    //   {
-    //     company_provider_wesmart_id: 3,
-    //     company_provider_wesmart_type: null,
-    //     company_provider_wesmart_name: "บ่าวกิต จำกัด",
-    //     company_provider_wesmart_email: "krit254001@gmail.com",
-    //     company_provider_wesmart_tel: null,
-    //     company_provider_wesmart_status: 1,
-    //     create_at: "2023-03-22 12:33:46.406951+00:00",
-    //     service_count: 1,
-    //   },
-    //   {
-    //     company_provider_wesmart_id: 3,
-    //     company_provider_wesmart_type: null,
-    //     company_provider_wesmart_name: "บ่าวกิต จำกัด",
-    //     company_provider_wesmart_email: "krit254001@gmail.com",
-    //     company_provider_wesmart_tel: null,
-    //     company_provider_wesmart_status: 1,
-    //     create_at: "2023-03-22 12:33:46.406951+00:00",
-    //     service_count: 1,
-    //   },
-    // ]);
-
     function Create($event) {
       let click = $event;
       if (click == 0) {
@@ -217,6 +174,7 @@ export default {
       let click = $event;
       console.log(click);
       await store.dispatch("createbusiness", click);
+      await bussinessList();
     }
     function cancle($event) {
       let click = $event;

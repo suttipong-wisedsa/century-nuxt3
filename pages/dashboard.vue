@@ -1,7 +1,10 @@
 <template>
   <v-layout>
     <v-app-bar>
-      <v-app-bar-nav-icon @click="drawer = !drawer" v-if="sm || xs"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        @click="drawer = !drawer"
+        v-if="sm || xs"
+      ></v-app-bar-nav-icon>
       <v-toolbar-title
         ><img src="../assets/images/Group 5723.png" style="width: 140px"
       /></v-toolbar-title>
@@ -52,19 +55,20 @@
         </v-card>
       </v-menu>
     </v-app-bar>
-    <v-navigation-drawer v-model="drawer" color="#212121" >
-        <v-list nav class="text-white" active-color="scoll" flat>
-          <v-list-item
-            v-for="(item, index) in menu"
-            :key="index"
-            color="yellow"
-            :prepend-icon="item.icon"
-            :title="item.title"
-            :value="index"
-          ></v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-    <v-main style="height: 100vh;background-color: #f7f7f7;">
+    <v-navigation-drawer v-model="drawer" color="#212121">
+      <v-list nav class="text-white" active-color="scoll" flat>
+        <v-list-item
+          :to="item.to"
+          v-for="(item, index) in menu"
+          :key="index"
+          color="yellow"
+          :prepend-icon="item.icon"
+          :title="item.title"
+          :value="index"
+        ></v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    <v-main style="height: 100vh; background-color: #f7f7f7">
       <dashboard-businesslist></dashboard-businesslist>
     </v-main>
   </v-layout>
@@ -82,9 +86,9 @@ export default {
     const drawer = ref(true);
     const drawermb = ref(false);
     const menu = ref([
-      { title: "Dashboard", icon: "mdi-view-dashboard" },
-      { title: "Business List", icon: "mdi-account" },
-      { title: "Document", icon: "mdi-file-document" },
+      { title: "Dashboard", icon: "mdi-view-dashboard", to: "dashboardlist" },
+      { title: "Business List", icon: "mdi-account", to: "dashboardlist" },
+      { title: "Document", icon: "mdi-file-document", to: "dashboardlist" },
     ]);
     definePageMeta({
       layout: false,
@@ -97,7 +101,7 @@ export default {
       sm,
       drawer,
       menu,
-      drawermb
+      drawermb,
     };
   },
 };

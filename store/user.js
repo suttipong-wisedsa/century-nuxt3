@@ -35,9 +35,16 @@ const user = {
       return data;
     },
     async createbusiness(context, payload) {
+      console.log("create");
+      const userData = JSON.parse(localStorage.getItem("userInfo"));
       const runtimeConfig = useRuntimeConfig();
       let api = `${runtimeConfig.public.apiBase}/api/v1/providerwesmart/create_company_provider`;
-      let { data } = await axios.post(api, payload);
+      let { data } = await axios.post(api, payload, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: userData,
+        },
+      });
     },
     async ResentOTPProviderWesmart(context, payload) {
       const runtimeConfig = useRuntimeConfig();
