@@ -1,5 +1,5 @@
 <template>
-  <div>สวัสดี</div>
+  <div>My Template</div>
 </template>
 <script>
 import { useStore } from "vuex";
