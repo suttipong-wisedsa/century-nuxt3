@@ -129,7 +129,7 @@
                 }"
               >
                 <NuxtLink class="text-surface" style="text-decoration: none"
-                  >Continue</NuxtLink
+                  >continue</NuxtLink
                 >
               </v-btn>
             </div>
