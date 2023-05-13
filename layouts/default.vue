@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <Navbar></Navbar>
+    <!-- <Navbar></Navbar>
     <main>
       <slot />
     </main>
-    <Footer></Footer>
+    <Footer></Footer> -->
   </v-app>
 </template>
 <script>
