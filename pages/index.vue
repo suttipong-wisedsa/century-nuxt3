@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <div><content></content></div>
-  </div>
+  <div>My Template</div>
 </template>
 <script>
 import { useStore } from "vuex";
